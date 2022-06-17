@@ -8,8 +8,8 @@
 @endsection
 @section('content')
 @component('components.breadcrumb')
-@slot('li_1') Reservasi @endslot
-@slot('title') Riwayat Reservasi @endslot
+@slot('li_1') Data Master @endslot
+@slot('title') Data Hotel @endslot
 @endcomponent
 
 <div class="row">
@@ -30,29 +30,26 @@
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                     <thead>
                         <tr>
-                            <th>Tanggal Reservasi</th>
-                            <th>Jenis Perjalanan</th>
-                            <th>Leader</th>
-                            <th>GAED</th>
-                            <th>Status Perjalanan</th>
-                            <th>Bukti Pembayaran</th>
+                            <th>No</th>
+                            <th>Nama Hotel</th>
+                            <th>Nama Wilayah</th>
+                            <th>Bintang</th>
                             <th>Rating</th>
                         </tr>
                     </thead>
-
-
                     <tbody>
-                        <td>17 Juni 2022 15:30</td>
-                        <td>Darat</td>
-                        <td>Nanda PTIPD</td>
-                        <td>Erno PTIPD</td>
-                        <td>Selesai</td>
-                        <td> <a href="#" class="btn btn-info">
-                          <span class="">Lihat Bukti Pembayaran</span>
-                        </td>
-                        <td><button type="button" data-bs-toggle="modal" data-bs-target="#rating" class="btn btn-success">
-                            Beri Rating
-                        </td>
+                        <td>1</td>
+                        <td>Premiere</td>
+                        <td>Aceh</td>
+                        <td><p class="text-muted mb-0">
+                            <i class="bx bxs-star text-warning"></i>
+                            <i class="bx bxs-star text-warning"></i>
+                            <i class="bx bxs-star text-warning"></i>
+                            <i class="bx bxs-star text-warning"></i>
+                            <i class="bx bxs-star text-warning"></i>
+                        </p></td>
+                        <td><p class="text-muted mb-0">
+                            <i class="bx bxs-star text-warning"></i>5.0</td>
                     </tr>
                     </tbody>
                 </table>

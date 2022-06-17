@@ -10,7 +10,7 @@
                 <li class="menu-title" data-key="t-menu">@lang('translation.Menu')</li>
 
                 <li>
-                    <a href="index">    
+                    <a href="index">
                         <i data-feather="home"></i>
                         <span class="badge rounded-pill bg-soft-success text-success float-end">9+</span>
                         <span data-key="t-dashboard">@lang('translation.Dashboards')</span>
@@ -46,6 +46,27 @@
                     <a href="apps-contacts-list3">
                         <i data-feather="message-square"></i>
                         <span data-key="t-chat">Data Customer</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="tables-datatable3">
+                        <i data-feather="message-square"></i>
+                        <span data-key="t-chat">Data Kendaraan</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="tables-datatable4">
+                        <i data-feather="message-square"></i>
+                        <span data-key="t-chat">Data Wilayah</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="tables-datatable5">
+                        <i data-feather="message-square"></i>
+                        <span data-key="t-chat">Data Hotel</span>
                     </a>
                 </li>
 
