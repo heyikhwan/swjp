@@ -49,6 +49,33 @@ unset($__errorArgs, $__bag); ?>
                                     </div>
 
                                     <div class="form-floating form-floating-custom mb-4">
+                                        <input type="text" class="form-control <?php $__errorArgs = ['nik'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" name="nik" value="<?php echo e(old('nik')); ?>" id="input-nik" placeholder="Enter NIK" required>
+                                        <?php $__errorArgs = ['nik'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong><?php echo e($message); ?></strong>
+                                            </span>
+                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                        <label for="input-nik">NIK</label>
+                                        <div class="form-floating-icon">
+                                            <i class="bx bx-id-card" style="font-size: 20px"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-floating form-floating-custom mb-4">
                                         <input type="email" class="form-control <?php $__errorArgs = ['email'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -96,7 +123,7 @@ $message = $__bag->first($__errorArgs[0]); ?>
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                                        <label for="input-name">Full Name</label>
+                                        <label for="input-name">Nama Lengkap</label>
                                         <div class="form-floating-icon">
                                            <i data-feather="users"></i>
                                         </div>
@@ -139,7 +166,7 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="password_confirmation"  id="input-password" placeholder="Enter Password" required>
 
-                                        <label for="input-password">Confirm Password</label>
+                                        <label for="input-password">Konfirmasi Password</label>
                                         <div class="form-floating-icon">
                                             <i data-feather="lock"></i>
                                         </div>

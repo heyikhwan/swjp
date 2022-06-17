@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Customer;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -52,6 +53,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'min:5', 'max:255', 'unique:users'],
+            'nik' => ['required', 'numeric', 'unique:customers'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
             'avatar' => ['image' ,'mimes:jpg,jpeg,png','max:1024'],
@@ -76,12 +78,21 @@ class RegisterController extends Controller
             $avatarName = null;
         }
 
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'avatar' => $avatarName,
         ])->assignRole('customer');
+
+        $user_id = User::where('username', $data['username'])->first()->id;
+
+        Customer::create([
+            'user_id' => $user_id,
+            'nik' => $data['nik'],
+        ]);
+
+        return $user;
     }
 }

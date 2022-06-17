@@ -36,6 +36,19 @@
                                     </div>
 
                                     <div class="form-floating form-floating-custom mb-4">
+                                        <input type="text" class="form-control @error('nik') is-invalid @enderror" name="nik" value="{{ old('nik') }}" id="input-nik" placeholder="Enter NIK" required>
+                                        @error('nik')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <label for="input-nik">NIK</label>
+                                        <div class="form-floating-icon">
+                                            <i class="bx bx-id-card" style="font-size: 20px"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-floating form-floating-custom mb-4">
                                         <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" id="input-email" placeholder="Enter Email" required>
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
@@ -55,7 +68,7 @@
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
-                                        <label for="input-name">Full Name</label>
+                                        <label for="input-name">Nama Lengkap</label>
                                         <div class="form-floating-icon">
                                            <i data-feather="users"></i>
                                         </div>
@@ -77,7 +90,7 @@
                                     <div class="form-floating form-floating-custom mb-4">
                                         <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation"  id="input-password" placeholder="Enter Password" required>
 
-                                        <label for="input-password">Confirm Password</label>
+                                        <label for="input-password">Konfirmasi Password</label>
                                         <div class="form-floating-icon">
                                             <i data-feather="lock"></i>
                                         </div>
