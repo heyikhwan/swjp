@@ -8,7 +8,7 @@
 @section('content')
 @component('components.breadcrumb')
 @slot('li_1') Master Data @endslot
-@slot('title') Data Leader @endslot
+@slot('title') Data GAED @endslot
 @endcomponent
 <div class="row">
     <div class="col-lg-12">
@@ -17,7 +17,7 @@
                  <div class="row align-items-center">
                      <div class="col-md-6">
                          <div class="mb-3">
-                             <h5 class="card-title">Data Leader <span class="text-muted fw-normal ms-2">(1)</span></h5>
+                             <h5 class="card-title">Data GAED <span class="text-muted fw-normal ms-2">(1)</span></h5>
                          </div>
                      </div>
 
