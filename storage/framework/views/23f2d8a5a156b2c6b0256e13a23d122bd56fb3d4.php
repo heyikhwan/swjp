@@ -7,16 +7,6 @@
         <div id="sidebar-menu">
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
-                <li class="menu-title" data-key="t-menu">Menu</li>
-                <li>
-                    <a href="<?php echo e(route('user.index')); ?>">
-                        <i data-feather="users"></i>
-                        <span data-key="t-contacts">Data User</span>
-                    </a>
-                </li>
-
-                
-
                 <li class="menu-title" data-key="t-menu"><?php echo app('translator')->get('translation.Menu'); ?></li>
 
                 <li>
@@ -25,6 +15,57 @@
                         <span class="badge rounded-pill bg-soft-success text-success float-end">9+</span>
                         <span data-key="t-dashboard"><?php echo app('translator')->get('translation.Dashboards'); ?></span>
                     </a>
+                </li>
+
+                <li class="menu-title" data-key="t-menu">Admin/Manager/GAED/Leader</li>
+
+                <li>
+                    <a href="<?php echo e(route('reservasi.data')); ?>">
+                        <i data-feather="message-square"></i>
+                        <span data-key="t-chat">Daftar Reservasi</span>
+                    </a>
+                </li>
+
+                <li class="menu-title" data-key="t-menu">Master Data</li>
+
+                <li>
+                    <a href="<?php echo e(route('user.index')); ?>">
+                        <i data-feather="users"></i>
+                        <span data-key="t-chat">Data User</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="<?php echo e(route('kendaraan.index')); ?>">
+                        <i data-feather="message-square"></i>
+                        <span data-key="t-chat">Data Kendaraan</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="<?php echo e(route('wilayah.index')); ?>">
+                        <i data-feather="message-square"></i>
+                        <span data-key="t-chat">Data Wilayah</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="<?php echo e(route('hotel.index')); ?>">
+                        <i data-feather="message-square"></i>
+                        <span data-key="t-chat">Data Hotel</span>
+                    </a>
+                </li>
+
+                <li class="menu-title" data-key="t-menu">Customer</li>
+
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i data-feather="shopping-cart"></i>
+                        <span data-key="t-ecommerce">Reservasi</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="<?php echo e(route('reservasi.riwayat')); ?>" data-key="t-product-detail">Riwayat Reservasi</a></li>
+                    </ul>
                 </li>
 
                 <li class="menu-title" data-key="t-apps"><?php echo app('translator')->get('translation.Apps'); ?></li>
