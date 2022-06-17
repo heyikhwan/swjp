@@ -20,7 +20,7 @@
                 <li class="menu-title" data-key="t-menu">Admin/Manager/GAED/Leader</li>
 
                 <li>
-                    <a href="tables-datatable">
+                    <a href="{{ route('reservasi.data') }}">
                         <i data-feather="message-square"></i>
                         <span data-key="t-chat">Daftar Reservasi</span>
                     </a>
@@ -29,42 +29,28 @@
                 <li class="menu-title" data-key="t-menu">Master Data</li>
 
                 <li>
-                    <a href="apps-contacts-list">
-                        <i data-feather="message-square"></i>
-                        <span data-key="t-chat">Data Leader</span>
+                    <a href="{{ route('user.index') }}">
+                        <i data-feather="users"></i>
+                        <span data-key="t-chat">Data User</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="apps-contacts-list2">
-                        <i data-feather="message-square"></i>
-                        <span data-key="t-chat">Data GAED</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="apps-contacts-list3">
-                        <i data-feather="message-square"></i>
-                        <span data-key="t-chat">Data Customer</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="tables-datatable3">
+                    <a href="{{ route('kendaraan.index') }}">
                         <i data-feather="message-square"></i>
                         <span data-key="t-chat">Data Kendaraan</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="tables-datatable4">
+                    <a href="{{ route('wilayah.index') }}">
                         <i data-feather="message-square"></i>
                         <span data-key="t-chat">Data Wilayah</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="tables-datatable5">
+                    <a href="{{ route('hotel.index') }}">
                         <i data-feather="message-square"></i>
                         <span data-key="t-chat">Data Hotel</span>
                     </a>
@@ -78,8 +64,7 @@
                         <span data-key="t-ecommerce">Reservasi</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="ecommerce-products" key="t-products">Buat Reservasi</a></li>
-                        <li><a href="tables-datatable2" data-key="t-product-detail">Riwayat Reservasi</a></li>
+                        <li><a href="{{ route('reservasi.riwayat') }}" data-key="t-product-detail">Riwayat Reservasi</a></li>
                     </ul>
                 </li>
 

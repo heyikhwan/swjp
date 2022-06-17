@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Backend\WilayahController;
+use App\Http\Controllers\Backend\HotelController;
+use App\Http\Controllers\Backend\KendaraanController;
+use App\Http\Controllers\Backend\ReservasiController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,5 +29,20 @@ Route::delete('user/admin-delete/{user}', [UserController::class, 'destroy'])->n
 //Update User Details
 Route::post('/update-profile/{id}', [App\Http\Controllers\HomeController::class, 'updateProfile'])->name('updateProfile');
 Route::post('/update-password/{id}', [App\Http\Controllers\HomeController::class, 'updatePassword'])->name('updatePassword');
+
+// Wilayah
+Route::get('wilayah', [WilayahController::class, 'index'])->name('wilayah.index');
+
+// Hotel
+Route::get('hotel', [HotelController::class, 'index'])->name('hotel.index');
+Route::get('hotel/tambah', [HotelController::class, 'create'])->name('hotel.create');
+
+// Kendaraan
+Route::get('kendaraan', [KendaraanController::class, 'index'])->name('kendaraan.index');
+
+// Reservasi
+Route::get('reservasi/data', [ReservasiController::class, 'data'])->name('reservasi.data');
+Route::get('reservasi/riwayat', [ReservasiController::class, 'riwayat'])->name('reservasi.riwayat');
+
 
 Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
