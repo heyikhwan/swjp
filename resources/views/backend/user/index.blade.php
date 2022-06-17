@@ -89,18 +89,95 @@
                                     </div>
                                 </td>
                                 <td class="d-flex gap-2 align-items-center">
+                                    <div>
+                                        <button type="button" class="btn btn-soft-secondary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#detail-{{ $item->id }}">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                    
+                                        <!-- Modal Detail user -->
+                                        <div id="detail-{{ $item->id }}" class="modal fade" tabindex="-1" aria-labelledby="detailLabel" aria-hidden="true" data-bs-scroll="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="detailLabel">Detail User</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="mb-4">
+                                                            <div class="d-flex gap-3 align-items-center">
+                                                                <img class="rounded-circle" width="80" src="{{ $item->avatar ? asset('storage/avatar/' . $item->avatar) : asset('images/avatar-1.png') }}">
+    
+                                                                <div class="d-flex flex-column">
+                                                                    <div class="d-flex gap-1">
+                                                                        <h5>{{ $item->name }}</h5> - <i>{{ $item->username }}</i>
+                                                                    </div>
+                                                                <a href="#" class="badge py-1
+                                                                @if($item->getRoleNames()[0] == 'admin') badge-soft-success @endif
+                                                                @if($item->getRoleNames()[0] == 'manager') badge-soft-primary @endif
+                                                                @if($item->getRoleNames()[0] == 'leader') badge-soft-danger @endif
+                                                                @if($item->getRoleNames()[0] == 'guide') badge-soft-info @endif
+                                                                @if($item->getRoleNames()[0] == 'customer') badge-soft-secondary @endif
+                                                                ">{{ Str::ucfirst($item->getRoleNames()[0]) }}</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div>
+                                                            <table>
+                                                                <tr>
+                                                                    <th>Email</th>
+                                                                    <td class="px-2">:</td>
+                                                                    <td>{{ $item->email }}</td>
+                                                                </tr>
+
+                                                                @if ($item->getRoleNames()[0] == 'customer')
+                                                                <tr>
+                                                                    <th>NIK</th>
+                                                                    <td class="px-2">:</td>
+                                                                    <td>{{ $item->customer->nik }}</td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <th>Tempat Lahir</th>
+                                                                    <td class="px-2">:</td>
+                                                                    <td>{{ $item->customer->tempat_lahir }}</td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <th>Tanggal Lahir</th>
+                                                                    <td class="px-2">:</td>
+                                                                    <td>{{ $item->customer->tanggal_lahir }}</td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <th>No. Passport</th>
+                                                                    <td class="px-2">:</td>
+                                                                    <td>{{ $item->customer->no_passport }}</td>
+                                                                </tr>
+                                                                @endif
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Tutup</button>
+                                                    </div>
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                        </div><!-- /.modal -->
+                                    </div> <!-- end preview-->
+
                                     <a href="
                                     @if($item->getRoleNames()[0] == 'admin') {{ route('user.admin.edit', $item->id) }} @endif
                                     @if($item->getRoleNames()[0] == 'manager') {{ route('user.manager.edit', $item->id) }} @endif
                                     @if($item->getRoleNames()[0] == 'customer') {{ route('user.customer.edit', $item->id) }} @endif
-                                    " class="btn btn-sm btn-soft-warning waves-effect waves-light">
-                                        <i data-feather="edit-3"></i>
+                                    " class="btn btn-soft-warning waves-effect waves-light">
+                                        <i class="fas fa-edit"></i>
                                     </a>
 
                                     @if ($item->id != Auth::user()->id)
-                                    <button type="button" class="btn btn-soft-danger btn-sm waves-effect waves-light"
+                                    <button type="button" class="btn btn-soft-danger waves-effect waves-light"
                                         id="sa-warning" onclick="swal({{ $item->id }})">
-                                        <i data-feather="trash"></i>
+                                        <i class="fas fa-trash"></i>
 
                                         <form action="{{ route('user.destroy', $item->id) }}" method="post" id="delete-{{ $item->id }}">
                                             @csrf
@@ -130,13 +207,14 @@
 <script>
     function swal(id) {
         Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
+                title: "Yakin ingin menghapus?",
+                text: "Data yang dihapus tidak dapat dikembalikan!",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#1c84ee",
                 cancelButtonColor: "#fd625e",
-                confirmButtonText: "Yes, delete it!"
+                confirmButtonText: "Ya, Hapus!",
+                cancelButtonText: 'Tidak, Batalkan!',
             }).then(function (result) {
                 if (result.value) {
                     $(`#delete-${id}`).submit();

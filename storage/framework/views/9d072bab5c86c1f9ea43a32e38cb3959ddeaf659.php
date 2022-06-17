@@ -112,7 +112,7 @@
 
 <script>
     function uploadImg(id) {
-        document.querySelector('#upload-' + id).addEventListener('change', function() {
+        document.querySelector('#avatar-' + id).addEventListener('change', function() {
             if (this.files && this.files[0]) {
                 const img = document.querySelector('#myImg-' + id);
                 img.onload = () => {
