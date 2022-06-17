@@ -49,7 +49,7 @@
                         <td>Darat</td>
                         <td>fadilmartias26@gmail.com</td>
                         <td>082152127374</td> 
-                        <td><span class="badge badge-soft-success">Sudah Dibayar</span></td>
+                        <td class="badge badge-pill badge-primary">Sudah Dibayar</td>
                         <td> <a href="#" class="btn btn-success">
                             <span class="">✔</span>
                         </a>
@@ -76,10 +76,10 @@
                             </form>
                         </button>
                         </td>
-                        <td><button type ="button" data-bs-toggle="modal" data-bs-target="#leader" class="btn btn-success">
+                        <td><button type ="button" data-toggle="modal" data-target="#leader" class="btn btn-success">
                             Pilih Leader
                         </button></td>
-                        <td><button type ="button" data-bs-toggle="modal" data-bs-target="#gaed" class="btn btn-success">
+                        <td><button type ="button" data-toggle="modal" data-target="#gaed" class="btn btn-success">
                             Pilih GAED
                         </button></td>
                         <td>Sedang di Perjalanan</td>
@@ -92,42 +92,46 @@
 </div> <!-- end row -->
 
 <!-- Modal -->
-<div class="modal fade" id="leader" tabindex="-1" aria-labelledby="leaderLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="leaderLabel">Pilih Leader</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+<div class="modal fade" id="leader" tabindex="-1" role="dialog" aria-labelledby="leaderLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="leaderLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 <!-- Modal -->
-<div class="modal fade" id="gaed" tabindex="-1" aria-labelledby="gaedLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="gaedLabel">Pilih GAED</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+<div class="modal fade" id="gaed" tabindex="-1" role="dialog" aria-labelledby="gaedLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="gaedLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 @endsection
 @section('script')

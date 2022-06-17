@@ -7,24 +7,59 @@
         <div id="sidebar-menu">
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
-                <li class="menu-title" data-key="t-menu">Menu</li>
-                <li>
-                    <a href="{{ route('user.index') }}">
-                        <i data-feather="users"></i>
-                        <span data-key="t-contacts">Data User</span>
-                    </a>
-                </li>
-
-                {{-- /////////////////////////////////////////////// --}}
-
                 <li class="menu-title" data-key="t-menu">@lang('translation.Menu')</li>
 
                 <li>
-                    <a href="index">
+                    <a href="index">    
                         <i data-feather="home"></i>
                         <span class="badge rounded-pill bg-soft-success text-success float-end">9+</span>
                         <span data-key="t-dashboard">@lang('translation.Dashboards')</span>
                     </a>
+                </li>
+
+                <li class="menu-title" data-key="t-menu">Admin/Manager/GAED/Leader</li>
+
+                <li>
+                    <a href="tables-datatable">
+                        <i data-feather="message-square"></i>
+                        <span data-key="t-chat">Daftar Reservasi</span>
+                    </a>
+                </li>
+
+                <li class="menu-title" data-key="t-menu">Master Data</li>
+
+                <li>
+                    <a href="apps-contacts-list">
+                        <i data-feather="message-square"></i>
+                        <span data-key="t-chat">Data Leader</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="apps-contacts-list2">
+                        <i data-feather="message-square"></i>
+                        <span data-key="t-chat">Data GAED</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="apps-contacts-list3">
+                        <i data-feather="message-square"></i>
+                        <span data-key="t-chat">Data Customer</span>
+                    </a>
+                </li>
+
+                <li class="menu-title" data-key="t-menu">Customer</li>
+
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i data-feather="shopping-cart"></i>
+                        <span data-key="t-ecommerce">Reservasi</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="ecommerce-products" key="t-products">Buat Reservasi</a></li>
+                        <li><a href="tables-datatable2" data-key="t-product-detail">Riwayat Reservasi</a></li>
+                    </ul>
                 </li>
 
                 <li class="menu-title" data-key="t-apps">@lang('translation.Apps')</li>
