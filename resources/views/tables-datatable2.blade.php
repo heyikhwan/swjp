@@ -9,7 +9,7 @@
 @section('content')
 @component('components.breadcrumb')
 @slot('li_1') Reservasi @endslot
-@slot('title') Daftar Reservasi @endslot
+@slot('title') Riwayat Reservasi @endslot
 @endcomponent
 
 <div class="row">
@@ -30,62 +30,29 @@
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                     <thead>
                         <tr>
-                            <th>Nama Customer</th>
                             <th>Tanggal Reservasi</th>
                             <th>Jenis Perjalanan</th>
-                            <th>Email</th>
-                            <th>No.Telp</th>
-                            <th>Status Pembayaran</th>
-                            <th>Konfirmasi Reservasi</th>
-                            <th>Konfirmasi Pembayaran</th>
                             <th>Leader</th>
                             <th>GAED</th>
                             <th>Status Perjalanan</th>
+                            <th>Bukti Pembayaran</th>
+                            <th>Rating</th>
                         </tr>
                     </thead>
 
 
                     <tbody>
-                    <tr>
-                        <td>PADEL</td>
                         <td>17 Juni 2022 15:30</td>
                         <td>Darat</td>
-                        <td>fadilmartias26@gmail.com</td>
-                        <td>082152127374</td>
-                        <td><span class="badge badge-soft-success">Sudah Dibayar</span></td>
-                        <td> <a href="#" class="btn btn-success">
-                            <span class="">✔</span>
-                        </a>
-                        <button type="submit" class="btn btn-danger"
-                            onclick="#">
-                            ✘
-                            <form id="form"
-                                action="#" method="POST">
-                                @csrf
-                                @method('delete')
-                            </form>
-                        </button>
+                        <td>Nanda PTIPD</td>
+                        <td>Erno PTIPD</td>
+                        <td>Selesai</td>
+                        <td> <a href="#" class="btn btn-info">
+                          <span class="">Lihat Bukti Pembayaran</span>
                         </td>
-                        <td> <a href="#" class="btn btn-success">
-                            <span class="">✔</span>
-                        </a>
-                        <button type="submit" class="btn btn-danger"
-                            onclick="#">
-                            ✘
-                            <form id="form"
-                                action="#" method="POST">
-                                @csrf
-                                @method('delete')
-                            </form>
-                        </button>
+                        <td><button type="button" data-bs-toggle="modal" data-bs-target="#rating" class="btn btn-success">
+                            Beri Rating
                         </td>
-                        <td><button type ="button" data-bs-toggle="modal" data-bs-target="#leader" class="btn btn-success">
-                            Pilih Leader
-                        </button></td>
-                        <td><button type ="button" data-bs-toggle="modal" data-bs-target="#gaed" class="btn btn-success">
-                            Pilih GAED
-                        </button></td>
-                        <td>Sedang di Perjalanan</td>
                     </tr>
                     </tbody>
                 </table>
@@ -95,30 +62,11 @@
 </div> <!-- end row -->
 
 <!-- Modal -->
-<div class="modal fade" id="leader" tabindex="-1" aria-labelledby="leaderLabel" aria-hidden="true">
+<div class="modal fade" id="rating" tabindex="-1" aria-labelledby="ratingLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="leaderLabel">Pilih Leader</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="gaed" tabindex="-1" aria-labelledby="gaedLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="gaedLabel">Pilih GAED</h5>
+        <h5 class="modal-title" id="ratingLabel">Beri Rating</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">

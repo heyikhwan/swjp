@@ -1,16 +1,16 @@
-@extends('layouts.master')
-@section('title') @lang('translation.Dashboards') @endsection
-@section('css')
 
-<link href="{{ URL::asset('/assets/libs/admin-resources/admin-resources.min.css') }}" rel="stylesheet">
+<?php $__env->startSection('title'); ?> <?php echo app('translator')->get('translation.Dashboards'); ?> <?php $__env->stopSection(); ?>
+<?php $__env->startSection('css'); ?>
 
-@endsection
-@section('content')
+<link href="<?php echo e(URL::asset('/assets/libs/admin-resources/admin-resources.min.css')); ?>" rel="stylesheet">
 
-@component('components.breadcrumb')
-@slot('li_1') Dashboard @endslot
-@slot('title') Welcome ! @endslot
-@endcomponent
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
+
+<?php $__env->startComponent('components.breadcrumb'); ?>
+<?php $__env->slot('li_1'); ?> Dashboard <?php $__env->endSlot(); ?>
+<?php $__env->slot('title'); ?> Welcome ! <?php $__env->endSlot(); ?>
+<?php echo $__env->renderComponent(); ?>
 
 <div class="row">
     <div class="col-xl-3 col-md-6">
@@ -125,7 +125,7 @@
                 <div class="px-3" data-simplebar style="max-height: 386px;">
                     <div class="d-flex align-items-center pb-4">
                         <div class="avatar-md me-4">
-                            <img src="{{ URL::asset('./assets/images/users/avatar-2.jpg') }}" class="img-fluid rounded-circle" alt="">
+                            <img src="<?php echo e(URL::asset('./assets/images/users/avatar-2.jpg')); ?>" class="img-fluid rounded-circle" alt="">
                         </div>
                         <div class="flex-grow-1">
                             <h5 class="font-size-15 mb-1"><a href="" class="text-dark">Randy Matthews</a></h5>
@@ -180,7 +180,7 @@
                                 <tr>
                                     <td style="width: 50px;">
                                         <div class="avatar-md me-4">
-                                            <img src="{{ URL::asset('./assets/images/product/img-1.png') }}" class="img-fluid" alt="">
+                                            <img src="<?php echo e(URL::asset('./assets/images/product/img-1.png')); ?>" class="img-fluid" alt="">
                                         </div>
                                     </td>
 
@@ -218,13 +218,15 @@
         <!-- end card -->
     </div>
     <!-- end col -->
-@endsection
-@section('script')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
 <!-- apexcharts -->
-<script src="{{ URL::asset('/assets/libs/apexcharts/apexcharts.min.js') }}"></script>
-<script src="{{ URL::asset('/assets/libs/admin-resources/admin-resources.min.js') }}"></script>
+<script src="<?php echo e(URL::asset('/assets/libs/apexcharts/apexcharts.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('/assets/libs/admin-resources/admin-resources.min.js')); ?>"></script>
 
 <!-- dashboard init -->
-<script src="{{ URL::asset('/assets/js/pages/dashboard.init.js') }}"></script>
-<script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
-@endsection
+<script src="<?php echo e(URL::asset('/assets/js/pages/dashboard.init.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\swjp\resources\views/index.blade.php ENDPATH**/ ?>
