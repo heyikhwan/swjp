@@ -10,7 +10,7 @@
     <div class="col">
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="{{ route('user.admin.store') }}" class="needs-validation" novalidate
+                <form method="POST" action="{{ route('user.admin.store') }}" class="needs-validation"
                     enctype="multipart/form-data">
                     @csrf
 
@@ -20,7 +20,7 @@
                         <div class="col">
                             <div class="mb-3">
                                 <label class="form-label" for="name">Nama Lengkap</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Nama Lengkap">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Nama Lengkap" required>
 
                                 @error('name')
                                 <div class="invalid-feedback">

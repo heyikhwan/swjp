@@ -38,7 +38,7 @@ Route::get('hotel', [HotelController::class, 'index'])->name('hotel.index');
 Route::get('hotel/tambah', [HotelController::class, 'create'])->name('hotel.create');
 
 // Kendaraan
-Route::get('kendaraan', [KendaraanController::class, 'index'])->name('kendaraan.index');
+Route::resource('kendaraan', KendaraanController::class);
 
 // Reservasi
 Route::get('reservasi/data', [ReservasiController::class, 'data'])->name('reservasi.data');

@@ -37,7 +37,7 @@
 
                 <li>
                     <a href="<?php echo e(route('kendaraan.index')); ?>">
-                        <i data-feather="message-square"></i>
+                        <i class="bx bx-car"></i>
                         <span data-key="t-chat">Data Kendaraan</span>
                     </a>
                 </li>

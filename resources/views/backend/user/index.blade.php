@@ -60,6 +60,7 @@
                         style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
                         <thead>
                             <tr>
+                                <th scope="col">#</th>
                                 <th scope="col">Nama</th>
                                 <th scope="col">Username</th>
                                 <th scope="col">Email</th>
@@ -70,6 +71,7 @@
                         <tbody>
                             @foreach ($users as $item)
                             <tr>
+                                <td>{{ $loop->index + 1 }}</td>
                                 <td>
                                     <img src="{{ !is_null($item->avatar) ? URL::asset('storage/avatar/' . $item->avatar) : URL::asset('images/avatar-1.png') }}"
                                         alt="" class="avatar-sm rounded-circle me-2">
