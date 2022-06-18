@@ -20,14 +20,15 @@
                     <div class="col-md-12">
                         <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
                             <div>
-                                <a href="#" class="btn btn-light"><i class="bx bx-plus me-1"></i> Add New</a>
+                                <a href="{{ route('kendaraan.create') }}" class="btn btn-light"><i class="bx bx-plus me-1"></i> Tambah Kendaraan</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- end row -->
 
-                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                <table id="wilayah" class="table align-middle dt-responsive table-check nowrap"
+                style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -38,8 +39,8 @@
                         </tr>
                     </thead>
 
-
                     <tbody>
+                    <tr>
                         <td>1</td>
                         <td>Darat</td>
                         <td>Avanza</td>

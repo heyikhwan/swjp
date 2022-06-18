@@ -13,11 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('wilayahs', function (Blueprint $table) {
+        Schema::create('hotels', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('level');
-            $table->string('induk')->nullable();
+            $table->foreignId('wilayah_id')->constrained()->onDelete('cascade');
+            $table->string('name');
+            $table->integer('bintang');
+            $table->float('rating')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wilayahs');
+        Schema::dropIfExists('hotels');
     }
 };

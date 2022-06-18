@@ -11,4 +11,9 @@ class KendaraanController extends Controller
     {
         return view('backend.kendaraan.index');
     }
+
+    public function create()
+    {
+        return view('backend.kendaraan.create');
+    }
 }

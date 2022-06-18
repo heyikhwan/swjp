@@ -32,6 +32,12 @@ Route::post('/update-password/{id}', [App\Http\Controllers\HomeController::class
 
 // Wilayah
 Route::get('wilayah', [WilayahController::class, 'index'])->name('wilayah.index');
+Route::get('wilayah/tambah', [WilayahController::class, 'create'])->name('wilayah.create');
+Route::post('wilayah/tambah', [WilayahController::class, 'store'])->name('wilayah.store');
+Route::get('wilayah/data', [WilayahController::class, 'data'])->name('wilayah.data');
+Route::get('wilayah/edit/{id}', [WilayahController::class, 'edit'])->name('wilayah.edit');
+Route::put('wilayah/update/{id}', [WilayahController::class, 'update'])->name('wilayah.update');
+Route::delete('wilayah/destroy/{id}', [WilayahController::class, 'destroy'])->name('wilayah.destroy');
 
 // Hotel
 Route::get('hotel', [HotelController::class, 'index'])->name('hotel.index');
@@ -39,6 +45,7 @@ Route::get('hotel/tambah', [HotelController::class, 'create'])->name('hotel.crea
 
 // Kendaraan
 Route::get('kendaraan', [KendaraanController::class, 'index'])->name('kendaraan.index');
+Route::get('kendaraan/tambah', [KendaraanController::class, 'create'])->name('kendaraan.create');
 
 // Reservasi
 Route::get('reservasi/data', [ReservasiController::class, 'data'])->name('reservasi.data');
