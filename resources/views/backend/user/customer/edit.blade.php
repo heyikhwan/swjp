@@ -10,7 +10,7 @@
     <div class="col">
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="{{ route('user.customer.update', $user->id) }}" class="needs-validation" novalidate enctype="multipart/form-data">
+                <form method="POST" action="{{ route('user.customer.update', $user->id) }}" class="needs-validation" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -18,22 +18,36 @@
                         <div class="col">
                             <div class="mb-3">
                                 <label class="form-label" for="name">Nama Lengkap</label>
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Nama Lengkap" value="{{ old('name') ?? $user->name }}" required>
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Nama Lengkap" value="{{ old('name') ?? $user->name }}" required>
+                                @error('name')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label" for="username">Username</label>
-                                <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="{{ old('username') ?? $user->username }}" required>
+                                <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" placeholder="Username" value="{{ old('username') ?? $user->username }}" required>
+                                @error('username')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label" for="email">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{ old('email') ?? $user->email }}" required>
+                                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Email" value="{{ old('email') ?? $user->email }}" required>
+                                @error('email')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -42,7 +56,13 @@
                         <div class="col">
                             <div class="mb-3">
                                 <label class="form-label" for="nik">NIK</label>
-                                <input type="text" class="form-control" id="nik" name="nik" placeholder="NIK" value="{{ old('nik') ?? $user->customer->nik }}" required>
+                                <input type="text" class="form-control @error('nik') is-invalid @enderror" id="nik" name="nik" placeholder="NIK"
+                                    value="{{ old('nik') ?? $user->customer->nik }}" required>
+                                @error('nik')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -51,7 +71,12 @@
                         <div class="col">
                             <div class="mb-3">
                                 <label class="form-label" for="password">Password</label>
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password">
+                                @error('password')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -60,22 +85,43 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label" for="tempat_lahir">Tempat Lahir</label>
-                                <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" placeholder="Tempat Lahir" value="{{ old('tempat_lahir') ?? $user->customer->tempat_lahir }}">
+                                <input type="text" class="form-control @error('tempat_lahir') is-invalid @enderror" id="tempat_lahir" name="tempat_lahir"
+                                    placeholder="Tempat Lahir"
+                                    value="{{ old('tempat_lahir') ?? $user->customer->tempat_lahir }}">
+                                @error('tempat_lahir')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label" for="tanggal_lahir">Tanggal Lahir</label>
-                                <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" placeholder="Tanggal Lahir" value="{{ old('tanggal_lahir') ?? $user->customer->tanggal_lahir }}">
+                                <input type="date" class="form-control @error('tanggal_lahir') is-invalid @enderror" id="tanggal_lahir" name="tanggal_lahir"
+                                    placeholder="Tanggal Lahir"
+                                    value="{{ old('tanggal_lahir') ?? $user->customer->tanggal_lahir }}">
+                                @error('tanggal_lahir')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
                         </div>
                     </div>
-
+                    
                     <div class="row">
                         <div class="col">
                             <div class="mb-3">
                                 <label class="form-label" for="no_passport">No. Passport</label>
-                                <input type="text" class="form-control" id="no_passport" name="no_passport" placeholder="No. Passport" value="{{ old('no_passport') ?? $user->customer->no_passport }}">
+                                <input type="text" class="form-control @error('no_passport') is-invalid @enderror" id="no_passport" name="no_passport"
+                                    placeholder="No. Passport"
+                                    value="{{ old('no_passport') ?? $user->customer->no_passport }}">
+                                @error('no_passport')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -84,7 +130,12 @@
                         <div class="col-12">
                             <div class="mb-3">
                                 <label for="avatar" class="form-label">Avatar</label>
-                                <input class="form-control" type="file" id="avatar-1" name="avatar" onclick="uploadImg(1)">
+                                <input class="form-control @error('avatar') is-invalid @enderror" type="file" id="avatar-1" name="avatar" onclick="uploadImg(1)">
+                                @error('avatar')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                               </div>
                         </div>
                         <div class="col-12">
@@ -95,7 +146,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="d-flex justify-content-end gap-2">
                         <a class="btn btn-secondary" href="{{ route('user.index') }}">Kembali</a>
                         <button class="btn btn-primary" type="submit">Submit</button>

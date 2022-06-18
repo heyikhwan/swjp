@@ -44,8 +44,12 @@ Route::get('hotel', [HotelController::class, 'index'])->name('hotel.index');
 Route::get('hotel/tambah', [HotelController::class, 'create'])->name('hotel.create');
 
 // Kendaraan
+<<<<<<< HEAD
 Route::get('kendaraan', [KendaraanController::class, 'index'])->name('kendaraan.index');
 Route::get('kendaraan/tambah', [KendaraanController::class, 'create'])->name('kendaraan.create');
+=======
+Route::resource('kendaraan', KendaraanController::class);
+>>>>>>> b28d0b9891daf7a59ded67b99c95bdbd75ef0140
 
 // Reservasi
 Route::get('reservasi/data', [ReservasiController::class, 'data'])->name('reservasi.data');

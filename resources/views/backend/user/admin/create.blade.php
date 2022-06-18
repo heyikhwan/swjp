@@ -10,7 +10,7 @@
     <div class="col">
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="{{ route('user.admin.store') }}" class="needs-validation" novalidate
+                <form method="POST" action="{{ route('user.admin.store') }}" class="needs-validation"
                     enctype="multipart/form-data">
                     @csrf
 
@@ -20,11 +20,13 @@
                         <div class="col">
                             <div class="mb-3">
                                 <label class="form-label" for="name">Nama Lengkap</label>
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Nama Lengkap"
-                                    required>
-                            </div>
-                            <div class="invalid-feedback">
-                                Please choose a username.
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Nama Lengkap" required>
+
+                                @error('name')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -32,15 +34,25 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label" for="username">Username</label>
-                                <input type="text" class="form-control" id="username" name="username"
+                                <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username"
                                     placeholder="Username" required>
+                                @error('username')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label" for="email">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Email"
+                                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Email"
                                     required>
+                                @error('email')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -48,8 +60,13 @@
                         <div class="col">
                             <div class="mb-3">
                                 <label class="form-label" for="password">Password</label>
-                                <input type="password" class="form-control" id="password" name="password"
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password"
                                     placeholder="Password" required>
+                                @error('password')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -58,8 +75,13 @@
                         <div class="col-12">
                             <div class="mb-3">
                                 <label for="avatar" class="form-label">Avatar</label>
-                                <input class="form-control" type="file" id="avatar-1" name="avatar"
-                                    onclick="uploadImg(1)">
+                                <input class="form-control @error('avatar') is-invalid @enderror" type="file" id="avatar-1" name="avatar"
+                                    onclick="uploadImg(1)" accept="image/*">
+                                @error('avatar')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-12">

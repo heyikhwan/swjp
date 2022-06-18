@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserAdminRequest;
+use App\Http\Requests\UserRequest;
 use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -29,7 +31,7 @@ class UserController extends Controller
         return view('backend.user.manager.create');
     }
 
-    public function storeUser(Request $request)
+    public function storeUser(UserRequest $request)
     {
         $data = $request->all();
 
@@ -80,7 +82,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function updateUser(Request $request, $id)
+    public function updateUser(UserRequest $request, $id)
     {
         $data = $request->all();
         $user = User::findOrFail($id);
@@ -116,7 +118,7 @@ class UserController extends Controller
         return redirect()->route('user.index')->with('success', 'Data user berhasil diperbarui.');
     }
 
-    public function updateCustomer(Request $request, $id)
+    public function updateCustomer(UserRequest $request, $id)
     {
         $data = $request->all();
         $user = User::findOrFail($id);
