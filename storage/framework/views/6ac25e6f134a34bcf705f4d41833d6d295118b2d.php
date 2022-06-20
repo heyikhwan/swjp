@@ -2,7 +2,7 @@
 <?php $__env->startSection('title'); ?> Tambah Kendaraan <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
 <?php $__env->startComponent('components.breadcrumb'); ?>
-<?php $__env->slot('li_1'); ?> Data User <?php $__env->endSlot(); ?>
+<?php $__env->slot('li_1'); ?> Data Kendaraan <?php $__env->endSlot(); ?>
 <?php $__env->slot('title'); ?> Tambah Kendaraan <?php $__env->endSlot(); ?>
 <?php echo $__env->renderComponent(); ?>
 
@@ -10,8 +10,22 @@
     <div class="col">
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="<?php echo e(route('kendaraan.store')); ?>" class="needs-validation" novalidate
+<<<<<<< HEAD
+                <form method="POST" action="<?php echo e(route('user.admin.store')); ?>" class="needs-validation" novalidate
                     enctype="multipart/form-data">
+                    <?php echo csrf_field(); ?>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label class="form-label" for="name">Nama Kendaraan</label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Nama Kendaraan"
+                                    required>
+                            </div>
+                            <div class="invalid-feedback">
+                                Please choose a username.
+=======
+                <form method="POST" action="<?php echo e(route('kendaraan.store')); ?>" class="needs-validation">
                     <?php echo csrf_field(); ?>
 
                     <div class="row">
@@ -70,12 +84,27 @@ $message = $__bag->first($__errorArgs[0]); ?>
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+>>>>>>> b28d0b9891daf7a59ded67b99c95bdbd75ef0140
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
                             <div class="mb-3">
+<<<<<<< HEAD
+                                <label class="form-label" for="jenis">Jenis Transportasi</label>
+                                <input type="text" class="form-control" id="jenis" name="jenis"
+                                    placeholder="Jenis Transportasi" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label class="form-label" for="pemilik">Pemilik Kendaraan</label>
+                                <input type="text" class="form-control" id="pemilik" name="pemilik" placeholder="Pemilik Kendaraan"
+                                    required>
+=======
                                 <label class="form-label" for="pemilik">Nama Pemilik</label>
                                 <input type="teks" class="form-control <?php $__errorArgs = ['pemilik'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -99,6 +128,7 @@ $message = $__bag->first($__errorArgs[0]); ?>
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+>>>>>>> b28d0b9891daf7a59ded67b99c95bdbd75ef0140
                             </div>
                         </div>
                     </div>
@@ -116,5 +146,10 @@ unset($__errorArgs, $__bag); ?>
 
 <?php $__env->startSection('script'); ?>
 <script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
+<<<<<<< HEAD
 <?php $__env->stopSection(); ?>
+=======
+<?php $__env->stopSection(); ?>
+>>>>>>> b28d0b9891daf7a59ded67b99c95bdbd75ef0140
+
 <?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Project\swjp\resources\views/backend/kendaraan/create.blade.php ENDPATH**/ ?>

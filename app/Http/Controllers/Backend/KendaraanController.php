@@ -67,9 +67,4 @@ class KendaraanController extends Controller
 
         return redirect()->route('kendaraan.index')->with('success', 'Kendaraan berhasil dihapus');
     }
-
-    public function create()
-    {
-        return view('backend.kendaraan.create');
-    }
 }

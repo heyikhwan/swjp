@@ -27,17 +27,9 @@
         <div class="card mb-0">
             <div class="card-body">
                 <div class="row align-items-center">
-<<<<<<< HEAD
-                    <div class="col-md-12">
-                        <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
-                            <div>
-                                <a href="{{ route('kendaraan.create') }}" class="btn btn-light"><i class="bx bx-plus me-1"></i> Tambah Kendaraan</a>
-                            </div>
-=======
                     <div class="col-md-6">
                         <div class="mb-3">
                             {{-- --}}
->>>>>>> b28d0b9891daf7a59ded67b99c95bdbd75ef0140
                         </div>
                     </div>
 
@@ -52,33 +44,6 @@
                 </div>
                 <!-- end row -->
 
-<<<<<<< HEAD
-                <table id="wilayah" class="table align-middle dt-responsive table-check nowrap"
-                style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Jenis Transportasi</th>
-                            <th>Nama Kendaraan</th>
-                            <th>Pemilik Kendaraan</th>
-                            <th>Rating</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Darat</td>
-                        <td>Avanza</td>
-                        <td>Bang Padel</td>
-                        <td> <p class="text-muted mb-0">
-                            <i class="bx bxs-star text-warning"></i>
-                            5.0
-                        </p></td>
-                    </tr>
-                    </tbody>
-                </table>
-=======
                 <div class="table-responsive mb-4">
                     <table class="table align-middle datatable dt-responsive table-check nowrap"
                         style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
@@ -127,7 +92,6 @@
                     <!-- end table -->
                 </div>
                 <!-- end table responsive -->
->>>>>>> b28d0b9891daf7a59ded67b99c95bdbd75ef0140
             </div>
         </div>
     </div>
