@@ -75,21 +75,71 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-12 col-lg-4">
+                    {{-- <div class="row">
+                        <div class="col-12 col-md-6 col-lg-3">
                             <div class="mb-3">
                                 <label for="choices-single-default"
                                     class="form-label font-size-13 text-muted">Provinsi</label>
                                 <select class="form-control" data-trigger name="choices-single-default"
                                     id="choices-single-default" placeholder="Provinsi">
                                     <option value="">Pilih Provinsi</option>
-                                    <option value="Choice 1">Choice 1</option>
-                                    <option value="Choice 2">Choice 2</option>
-                                    <option value="Choice 3">Choice 3</option>
+                                    @foreach ($wilayah as $item)
+                                        @if ($item->level == 1)
+                                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                        @endif
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
-                    </div>
+
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="mb-3">
+                                <label for="choices-single-default"
+                                    class="form-label font-size-13 text-muted">Kabupaten/Kota</label>
+                                <select class="form-control" data-trigger name="choices-single-default"
+                                    id="choices-single-default" placeholder="Kab/Kota">
+                                    <option value="">Pilih Kab/Kota</option>
+                                    @foreach ($wilayah as $item)
+                                        @if ($item->level == 2)
+                                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="mb-3">
+                                <label for="choices-single-default"
+                                    class="form-label font-size-13 text-muted">Kecamatan</label>
+                                <select class="form-control" data-trigger name="choices-single-default"
+                                    id="choices-single-default" placeholder="Kecamatan">
+                                    <option value="">Pilih Kecamatan</option>
+                                    @foreach ($wilayah as $item)
+                                        @if ($item->level == 3)
+                                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="mb-3">
+                                <label for="choices-single-default"
+                                    class="form-label font-size-13 text-muted">Desa</label>
+                                <select class="form-control" data-trigger name="choices-single-default"
+                                    id="choices-single-default" placeholder="Desa">
+                                    <option value="">Pilih Desa</option>
+                                    @foreach ($wilayah as $item)
+                                        @if ($item->level == 4)
+                                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div> --}}
 
                     <div class="row">
                         <div class="col-12">

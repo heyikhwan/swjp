@@ -135,21 +135,7 @@ unset($__errorArgs, $__bag); ?>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-12 col-lg-4">
-                            <div class="mb-3">
-                                <label for="choices-single-default"
-                                    class="form-label font-size-13 text-muted">Provinsi</label>
-                                <select class="form-control" data-trigger name="choices-single-default"
-                                    id="choices-single-default" placeholder="Provinsi">
-                                    <option value="">Pilih Provinsi</option>
-                                    <option value="Choice 1">Choice 1</option>
-                                    <option value="Choice 2">Choice 2</option>
-                                    <option value="Choice 3">Choice 3</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+                    
 
                     <div class="row">
                         <div class="col-12">

@@ -2,7 +2,8 @@
 <?php $__env->startSection('title'); ?> Data Wilayah <?php $__env->stopSection(); ?>
 <?php $__env->startSection('css'); ?>
 <link href="<?php echo e(URL::asset('/assets/libs/datatables.net-bs4/datatables.net-bs4.min.css')); ?>" rel="stylesheet">
-<link href="<?php echo e(URL::asset('assets/libs/datatables.net-responsive-bs4/datatables.net-responsive-bs4.min.css')); ?>" rel="stylesheet" type="text/css" />
+<link href="<?php echo e(URL::asset('assets/libs/datatables.net-responsive-bs4/datatables.net-responsive-bs4.min.css')); ?>"
+    rel="stylesheet" type="text/css" />
 <link href="<?php echo e(URL::asset('assets/libs/sweetalert2/sweetalert2.min.css')); ?>" rel="stylesheet">
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
@@ -36,9 +37,10 @@
 
                     <div class="col-md-6">
                         <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
-                            <a href="<?php echo e(route('kendaraan.create')); ?>" class="btn btn-light shadow-none">
-                                <i class="bx bx-plus me-1"></i> Tambah Wilayah
-                            </a>
+                            <div>
+                                <a href="<?php echo e(route('wilayah.create')); ?>" class="btn btn-light"><i
+                                        class="bx bx-plus me-1"></i> Tambah Wilayah</a>
+                            </div>
                         </div>
 
                     </div>
@@ -62,18 +64,19 @@
                                 <td><?php echo e($loop->index + 1); ?></td>
                                 <td><?php echo e($item->nama); ?></td>
                                 <td>
-                                  <?php if($item->level == 1): ?>
+                                    <?php if($item->level == 1): ?>
                                     Provinsi
-                                  <?php elseif($item->level == 2): ?>
+                                    <?php elseif($item->level == 2): ?>
                                     Kabupaten/Kota
-                                  <?php elseif($item->level == 2): ?>
+                                    <?php elseif($item->level == 2): ?>
                                     Kecamatan
-                                  <?php else: ?>
+                                    <?php else: ?>
                                     Desa
-                                  <?php endif; ?>
+                                    <?php endif; ?>
                                 </td>
                                 <td class="d-flex gap-2 align-items-center">
-                                    <a href="<?php echo e(route('kendaraan.edit', $item->id)); ?>" class="btn btn-soft-warning waves-effect waves-light">
+                                    <a href="<?php echo e(route('kendaraan.edit', $item->id)); ?>"
+                                        class="btn btn-soft-warning waves-effect waves-light">
                                         <i class="fas fa-edit"></i>
                                     </a>
 
@@ -81,7 +84,8 @@
                                         id="sa-warning" onclick="swal(<?php echo e($item->id); ?>)">
                                         <i class="fas fa-trash"></i>
 
-                                        <form action="<?php echo e(route('kendaraan.destroy', $item->id)); ?>" method="post" id="delete-<?php echo e($item->id); ?>">
+                                        <form action="<?php echo e(route('kendaraan.destroy', $item->id)); ?>" method="post"
+                                            id="delete-<?php echo e($item->id); ?>">
                                             <?php echo csrf_field(); ?>
                                             <?php echo method_field('delete'); ?>
                                         </form>
@@ -103,8 +107,34 @@
 <script src="<?php echo e(URL::asset('assets/libs/datatables.net/datatables.net.min.js')); ?>"></script>
 <script src="<?php echo e(URL::asset('assets/libs/datatables.net-bs4/datatables.net-bs4.min.js')); ?>"></script>
 <script src="<?php echo e(URL::asset('assets/libs/datatables.net-responsive/datatables.net-responsive.min.js')); ?>"></script>
-
+<script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/js/pages/datatable-pages.init.js')); ?>"></script>
 <script src="<?php echo e(URL::asset('assets/libs/sweetalert2/sweetalert2.min.js')); ?>"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#wilayah').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '<?php echo e(route('wilayah.data')); ?>',
+            columns: [
+                {
+                    data: null,
+                    orderable: false,
+                    searchable: false,
+                    render: function (data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }
+                },
+                { data: 'nama', name: 'nama' },
+                { data: 'level', name: 'level' },
+                { data: 'induk', name: 'induk' },
+                { data: 'aksi', name: 'aksi' },
+            ]
+        });
+    });
+</script>
+
 <script>
     function swal(id) {
         Swal.fire({
@@ -125,8 +155,5 @@
             });
     }
 </script>
-
-<script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
-<script src="<?php echo e(URL::asset('assets/js/pages/datatable-pages.init.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Project\swjp\resources\views/backend/wilayah/index.blade.php ENDPATH**/ ?>

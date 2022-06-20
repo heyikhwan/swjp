@@ -21,7 +21,7 @@
 
                 <li>
                     <a href="<?php echo e(route('reservasi.data')); ?>">
-                        <i data-feather="message-square"></i>
+                        <i class=" bx bx-file"></i>
                         <span data-key="t-chat">Daftar Reservasi</span>
                     </a>
                 </li>
@@ -44,14 +44,14 @@
 
                 <li>
                     <a href="<?php echo e(route('wilayah.index')); ?>">
-                        <i data-feather="message-square"></i>
+                        <i class=" bx bx-map""></i>
                         <span data-key="t-chat">Data Wilayah</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="<?php echo e(route('hotel.index')); ?>">
-                        <i data-feather="message-square"></i>
+                        <i class=" bx bx-building-house"></i>
                         <span data-key="t-chat">Data Hotel</span>
                     </a>
                 </li>

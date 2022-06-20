@@ -7,6 +7,7 @@ use App\Http\Requests\UserAdminRequest;
 use App\Http\Requests\UserRequest;
 use App\Models\Customer;
 use App\Models\User;
+use App\Models\Wilayah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -33,7 +34,17 @@ class UserController extends Controller
 
     public function createLeader()
     {
-        return view('backend.user.leader.create');
+        $provinsi = Wilayah::where('induk', 1)->get();
+        $kota = Wilayah::where('induk', 2)->get();
+        $kecamatan = Wilayah::where('induk', 3)->get();
+        $desa = Wilayah::where('induk', 4)->get();
+
+        return view('backend.user.leader.create', [
+            'provinsi,' => $provinsi,
+            'kota,' => $kota,
+            'kecamatan,' => $kecamatan,
+            'desa,' => $desa,
+        ]);
     }
 
     public function storeUser(UserRequest $request)
@@ -99,7 +110,7 @@ class UserController extends Controller
             $avatar->move($avatarPath, $avatarName);
 
             if ($user->avatar) {
-                if(file_exists(public_path('storage/avatar/') . $user->avatar)) {
+                if (file_exists(public_path('storage/avatar/') . $user->avatar)) {
                     unlink(public_path('storage/avatar/') . $user->avatar);
                 }
             }
@@ -136,7 +147,7 @@ class UserController extends Controller
             $avatar->move($avatarPath, $avatarName);
 
             if ($user->avatar) {
-                if(file_exists(public_path('storage/avatar/') . $user->avatar)) {
+                if (file_exists(public_path('storage/avatar/') . $user->avatar)) {
                     unlink(public_path('storage/avatar/') . $user->avatar);
                 }
             }
@@ -172,7 +183,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         if ($user->avatar) {
-            if(file_exists(public_path('storage/avatar/') . $user->avatar)) {
+            if (file_exists(public_path('storage/avatar/') . $user->avatar)) {
                 unlink(public_path('storage/avatar/') . $user->avatar);
             }
         }

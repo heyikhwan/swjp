@@ -34,8 +34,6 @@ class WilayahController extends Controller
         ->make(true);
     }
 
-
-
     public function create()
     {
         return view('backend.wilayah.create');

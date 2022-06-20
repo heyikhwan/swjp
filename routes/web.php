@@ -33,6 +33,7 @@ Route::post('/update-password/{id}', [App\Http\Controllers\HomeController::class
 
 // Wilayah
 Route::resource('wilayah', WilayahController::class);
+Route::get('wilayah-data', [WilayahController::class, 'data'])->name('wilayah.data');
 
 // Hotel
 Route::get('hotel', [HotelController::class, 'index'])->name('hotel.index');
