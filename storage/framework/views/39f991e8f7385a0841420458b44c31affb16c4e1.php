@@ -46,7 +46,7 @@
                                     <li><a class="dropdown-item" href="<?php echo e(route('user.admin.create')); ?>">Admin</a></li>
                                     <li><a class="dropdown-item" href="<?php echo e(route('user.manager.create')); ?>">Manager</a>
                                     </li>
-                                    <li><a class="dropdown-item" href="#">Leader</a></li>
+                                    <li><a class="dropdown-item" href="<?php echo e(route('user.leader.create')); ?>">Leader</a></li>
                                     <li><a class="dropdown-item" href="#">Guide</a></li>
                                 </ul>
                             </div>
@@ -61,6 +61,7 @@
                         style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
                         <thead>
                             <tr>
+                                <th scope="col">#</th>
                                 <th scope="col">Nama</th>
                                 <th scope="col">Username</th>
                                 <th scope="col">Email</th>
@@ -71,6 +72,7 @@
                         <tbody>
                             <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr>
+                                <td><?php echo e($loop->index + 1); ?></td>
                                 <td>
                                     <img src="<?php echo e(!is_null($item->avatar) ? URL::asset('storage/avatar/' . $item->avatar) : URL::asset('images/avatar-1.png')); ?>"
                                         alt="" class="avatar-sm rounded-circle me-2">
