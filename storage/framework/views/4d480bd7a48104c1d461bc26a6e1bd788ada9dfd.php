@@ -15,15 +15,6 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <div class="row align-items-center">
-                    <div class="col-md-12">
-                        <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
-                            <div>
-                                <a href="#" class="btn btn-light"><i class="bx bx-plus me-1"></i> Add New</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <!-- end row -->
 
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">

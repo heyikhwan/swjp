@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Kendaraan extends Model
 {
     use HasFactory;
+<<<<<<< HEAD
+=======
 
     protected $fillable = [
         'jenis_transport',
@@ -15,4 +17,5 @@ class Kendaraan extends Model
         'pemilik',
         'rating',
     ];
+>>>>>>> b28d0b9891daf7a59ded67b99c95bdbd75ef0140
 }

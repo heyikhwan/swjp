@@ -12,6 +12,19 @@
 @endcomponent
 
 @if ($message = Session::get('success'))
+<<<<<<< HEAD
+=======
+<div class="row">
+    <div class="col">
+        <div class="alert alert-success alert-border-left alert-dismissible fade show" role="alert">
+            <i class="mdi mdi-check-all me-3 align-middle"></i><strong>Success</strong> - {{ $message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+@endif
+
+>>>>>>> ccc80ca383ea44398502434cc7cd9cb235835c85
 <div class="row">
     <div class="col">
         <div class="alert alert-success alert-border-left alert-dismissible fade show" role="alert">
@@ -35,9 +48,9 @@
 
                     <div class="col-md-6">
                         <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
-                            <a href="{{ route('kendaraan.create') }}" class="btn btn-light shadow-none">
-                                <i class="bx bx-plus me-1"></i> Tambah Wilayah
-                            </a>
+                            <div>
+                                <a href="{{ route('wilayah.create') }}" class="btn btn-light"><i class="bx bx-plus me-1"></i> Tambah Wilayah</a>
+                            </div>
                         </div>
 
                     </div>
@@ -102,8 +115,39 @@
 <script src="{{ URL::asset('assets/libs/datatables.net/datatables.net.min.js') }}"></script>
 <script src="{{ URL::asset('assets/libs/datatables.net-bs4/datatables.net-bs4.min.js') }}"></script>
 <script src="{{ URL::asset('assets/libs/datatables.net-responsive/datatables.net-responsive.min.js') }}"></script>
+<<<<<<< HEAD
 
 <script src="{{ URL::asset('assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
+=======
+<script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
+<script src="{{ URL::asset('assets/js/pages/datatable-pages.init.js') }}"></script>
+<script src="{{ URL::asset('assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#wilayah').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '{{ route('wilayah.data') }}',
+            columns: [
+                {
+                    data: null,
+                    orderable: false,
+                    searchable: false,
+                    render: function (data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }
+                },
+                { data: 'nama', name: 'nama' },
+                { data: 'level', name: 'level' },
+                { data: 'induk', name: 'induk' },
+                { data: 'aksi', name: 'aksi' },
+            ]
+        });
+    });
+</script>
+
+>>>>>>> ccc80ca383ea44398502434cc7cd9cb235835c85
 <script>
     function swal(id) {
         Swal.fire({
@@ -124,7 +168,11 @@
             });
     }
 </script>
+<<<<<<< HEAD
 
 <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
 <script src="{{ URL::asset('assets/js/pages/datatable-pages.init.js') }}"></script>
 @endsection
+=======
+@endsection
+>>>>>>> ccc80ca383ea44398502434cc7cd9cb235835c85

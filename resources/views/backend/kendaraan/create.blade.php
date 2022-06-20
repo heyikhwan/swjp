@@ -10,6 +10,21 @@
     <div class="col">
         <div class="card">
             <div class="card-body">
+<<<<<<< HEAD
+                <form method="POST" action="{{ route('user.admin.store') }}" class="needs-validation" novalidate
+                    enctype="multipart/form-data">
+                    @csrf
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label class="form-label" for="name">Nama Kendaraan</label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Nama Kendaraan"
+                                    required>
+                            </div>
+                            <div class="invalid-feedback">
+                                Please choose a username.
+=======
                 <form method="POST" action="{{ route('kendaraan.store') }}" class="needs-validation">
                     @csrf
 
@@ -39,12 +54,27 @@
                                     {{ $message }}
                                 </div>
                                 @enderror
+>>>>>>> b28d0b9891daf7a59ded67b99c95bdbd75ef0140
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
                             <div class="mb-3">
+<<<<<<< HEAD
+                                <label class="form-label" for="jenis">Jenis Transportasi</label>
+                                <input type="text" class="form-control" id="jenis" name="jenis"
+                                    placeholder="Jenis Transportasi" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label class="form-label" for="pemilik">Pemilik Kendaraan</label>
+                                <input type="text" class="form-control" id="pemilik" name="pemilik" placeholder="Pemilik Kendaraan"
+                                    required>
+=======
                                 <label class="form-label" for="pemilik">Nama Pemilik</label>
                                 <input type="teks" class="form-control @error('pemilik') is-invalid @enderror" id="pemilik" name="pemilik"
                                     placeholder="Nama Pemilik Kendaraan" required>
@@ -53,6 +83,7 @@
                                     {{ $message }}
                                 </div>
                                 @enderror
+>>>>>>> b28d0b9891daf7a59ded67b99c95bdbd75ef0140
                             </div>
                         </div>
                     </div>
@@ -70,4 +101,8 @@
 
 @section('script')
 <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
+<<<<<<< HEAD
 @endsection
+=======
+@endsection
+>>>>>>> b28d0b9891daf7a59ded67b99c95bdbd75ef0140
