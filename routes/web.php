@@ -18,6 +18,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'root'])->name('roo
 Route::get('user', [UserController::class, 'index'])->name('user.index');
 Route::get('user/admin/create', [UserController::class, 'createAdmin'])->name('user.admin.create');
 Route::get('user/manager/create', [UserController::class, 'createManager'])->name('user.manager.create');
+Route::get('user/leader/create', [UserController::class, 'createLeader'])->name('user.leader.create');
 Route::post('user/admin', [UserController::class, 'storeUser'])->name('user.admin.store');
 Route::get('user/admin/edit/{user}', [UserController::class, 'editAdmin'])->name('user.admin.edit');
 Route::get('user/manager/edit/{user}', [UserController::class, 'editManager'])->name('user.manager.edit');
@@ -31,7 +32,7 @@ Route::post('/update-profile/{id}', [App\Http\Controllers\HomeController::class,
 Route::post('/update-password/{id}', [App\Http\Controllers\HomeController::class, 'updatePassword'])->name('updatePassword');
 
 // Wilayah
-Route::get('wilayah', [WilayahController::class, 'index'])->name('wilayah.index');
+Route::resource('wilayah', WilayahController::class);
 
 // Hotel
 Route::get('hotel', [HotelController::class, 'index'])->name('hotel.index');

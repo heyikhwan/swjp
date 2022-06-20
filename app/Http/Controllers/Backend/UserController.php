@@ -31,6 +31,11 @@ class UserController extends Controller
         return view('backend.user.manager.create');
     }
 
+    public function createLeader()
+    {
+        return view('backend.user.leader.create');
+    }
+
     public function storeUser(UserRequest $request)
     {
         $data = $request->all();

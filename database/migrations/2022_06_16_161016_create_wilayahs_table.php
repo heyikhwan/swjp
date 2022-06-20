@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('wilayahs', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('level');
-            $table->string('induk');
+            $table->string('level')->nullable();
+            $table->string('induk')->nullable();
             $table->timestamps();
         });
     }

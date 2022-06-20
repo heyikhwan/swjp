@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('wilayah_id')->constrained()->onDelete('restrict');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->integer('rating');
+            $table->integer('rating')->default(0);
             $table->timestamps();
         });
     }
