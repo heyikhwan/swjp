@@ -20,14 +20,15 @@
                     <div class="col-md-12">
                         <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
                             <div>
-                                <a href="<?php echo e(route('hotel.create')); ?>" class="btn btn-light"><i class="bx bx-plus me-1"></i> Add New</a>
+                                <a href="<?php echo e(route('hotel.create')); ?>" class="btn btn-light"><i class="bx bx-plus me-1"></i> Tambah Hotel</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- end row -->
 
-                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                 <table id="wilayah" class="table align-middle dt-responsive table-check nowrap"
+                style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -35,6 +36,7 @@
                             <th>Nama Wilayah</th>
                             <th>Bintang</th>
                             <th>Rating</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -49,7 +51,7 @@
                             <i class="bx bxs-star text-warning"></i>
                         </p></td>
                         <td><p class="text-muted mb-0">
-                            <i class="bx bxs-star text-warning"></i>5.0</td>
+                            <i class="bx bxs-star text-warning"></i> 5.0</p></td>
                     </tr>
                     </tbody>
                 </table>
@@ -83,8 +85,6 @@
 <script src="<?php echo e(URL::asset('assets/libs/datatables.net-bs4/datatables.net-bs4.min.js')); ?>"></script>
 <script src="<?php echo e(URL::asset('assets/libs/datatables.net-buttons/datatables.net-buttons.min.js')); ?>"></script>
 <script src="<?php echo e(URL::asset('assets/libs/datatables.net-buttons-bs4/datatables.net-buttons-bs4.min.js')); ?>"></script>
-<script src="<?php echo e(URL::asset('assets/libs/jszip/jszip.min.js')); ?>"></script>
-<script src="<?php echo e(URL::asset('assets/libs/pdfmake/pdfmake.min.js')); ?>"></script>
 <script src="<?php echo e(URL::asset('assets/libs/datatables.net-responsive/datatables.net-responsive.min.js')); ?>"></script>
 <script src="<?php echo e(URL::asset('assets/libs/datatables.net-responsive-bs4/datatables.net-responsive-bs4.min.js')); ?>"></script>
 <script src="<?php echo e(URL::asset('assets/js/pages/datatables.init.js')); ?>"></script>

@@ -1,12 +1,12 @@
 
-<?php $__env->startSection('title'); ?> Tambah Leader <?php $__env->stopSection(); ?>
+<?php $__env->startSection('title'); ?> Tambah Guide <?php $__env->stopSection(); ?>
 <?php $__env->startSection('css'); ?>
 <link href="<?php echo e(URL::asset('assets/libs/choices.js/choices.js.min.css')); ?>" rel="stylesheet">
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
 <?php $__env->startComponent('components.breadcrumb'); ?>
 <?php $__env->slot('li_1'); ?> Data User <?php $__env->endSlot(); ?>
-<?php $__env->slot('title'); ?> Tambah Leader <?php $__env->endSlot(); ?>
+<?php $__env->slot('title'); ?> Tambah Guide <?php $__env->endSlot(); ?>
 <?php echo $__env->renderComponent(); ?>
 
 <div class="row">
@@ -135,7 +135,32 @@ unset($__errorArgs, $__bag); ?>
                         </div>
                     </div>
 
-                    
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="mb-3">
+                                <label for="provinsi"
+                                    class="form-label font-size-13 text-muted">Provinsi</label>
+                                <select class="form-control" data-trigger name="provinsi"
+                                    id="provinsi" placeholder="Provinsi">
+                                    <option value="">Pilih Provinsi</option>
+                                    <?php $__currentLoopData = $provinsi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($item->id); ?>"><?php echo e($item->nama); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="mb-3">
+                                <label for="kabupaten"
+                                    class="form-label font-size-13 text-muted">Kabupaten/Kota</label>
+                                <select class="form-control" data-trigger name="kabupaten"
+                                    id="kabupaten" placeholder="Kab/Kota">
+                                    <option value="">Pilih Kabupaten/Kota</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="row">
                         <div class="col-12">
@@ -207,5 +232,48 @@ unset($__errorArgs, $__bag); ?>
         });
     }
 </script>
+
+<script>
+    const provinsi = document.querySelector('#provinsi');
+    const kabupaten = document.querySelector('#kabupaten');
+
+    let provinsiId;
+
+    async function getData(url) {
+        try {
+            let res = await fetch(url);
+            return await res.json();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    provinsi.addEventListener('change', () => {
+        provinsiId = provinsi.options[provinsi.selectedIndex].value;
+
+        console.log(provinsiId);
+
+        const url = '/data/kota/' + provinsiId;
+
+        let kota = await getData(url);
+
+        console.log(kota);
+        
+        // fetch(url)
+        //     .then(data => {
+        //     return data.json();
+        // })
+        // .then(res => {            
+        //     res.map((item) => {
+        //         let opt = document.createElement('option');
+        //         opt.value = item.id;
+        //         opt.innerHTML = item.nama;
+        //         kabupaten.appendChild(opt);
+        //     });
+        // });
+   });
+
+</script>
+
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Project\swjp\resources\views/backend/user/leader/create.blade.php ENDPATH**/ ?>

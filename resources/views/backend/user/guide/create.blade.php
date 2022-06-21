@@ -1,9 +1,9 @@
 @extends('layouts.master')
-@section('title') Tambah Leader @endsection
+@section('title') Tambah Guide @endsection
 @section('content')
 @component('components.breadcrumb')
 @slot('li_1') Data User @endslot
-@slot('title') Tambah Leader @endslot
+@slot('title') Tambah Guide @endslot
 @endcomponent
 
 <div class="row">
@@ -14,7 +14,7 @@
                     enctype="multipart/form-data">
                     @csrf
 
-                    <input type="hidden" name="role" value="leader">
+                    <input type="hidden" name="role" value="guide">
 
                     <div class="row">
                         <div class="col">

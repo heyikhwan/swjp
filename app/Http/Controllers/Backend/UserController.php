@@ -34,16 +34,25 @@ class UserController extends Controller
 
     public function createLeader()
     {
-        $provinsi = Wilayah::where('induk', 1)->get();
-        $kota = Wilayah::where('induk', 2)->get();
-        $kecamatan = Wilayah::where('induk', 3)->get();
-        $desa = Wilayah::where('induk', 4)->get();
+        $provinsi = Wilayah::where('level', 1)->get();
+        $kota = Wilayah::where('level', 2)->get();
+        $kecamatan = Wilayah::where('level', 3)->get();
+        $desa = Wilayah::where('level', 4)->get();
 
         return view('backend.user.leader.create', [
-            'provinsi,' => $provinsi,
-            'kota,' => $kota,
-            'kecamatan,' => $kecamatan,
-            'desa,' => $desa,
+            'provinsi' => $provinsi,
+            'kota' => $kota,
+            'kecamatan' => $kecamatan,
+            'desa' => $desa,
+        ]);
+    }
+
+    public function createGuide()
+    {
+        $provinsi = Wilayah::where('level', 1)->get();
+
+        return view('backend.user.guide.create', [
+            'provinsi' => $provinsi,
         ]);
     }
 

@@ -128,4 +128,5 @@
 <script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
 <script src="<?php echo e(URL::asset('assets/js/pages/datatable-pages.init.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Project\swjp\resources\views/backend/kendaraan/index.blade.php ENDPATH**/ ?>

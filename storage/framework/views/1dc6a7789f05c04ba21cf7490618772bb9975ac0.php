@@ -10,7 +10,7 @@
     <div class="col">
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="<?php echo e(route('user.admin.store')); ?>" class="needs-validation" novalidate enctype="multipart/form-data">
+                <form method="POST" action="<?php echo e(route('user.admin.store')); ?>" class="needs-validation" enctype="multipart/form-data">
                     <?php echo csrf_field(); ?>
 
                     <input type="hidden" name="role" value="manager">
@@ -26,7 +26,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id="name" name="name" placeholder="Nama Lengkap">
+unset($__errorArgs, $__bag); ?>" id="name" name="name" placeholder="Nama Lengkap" required>
 
                                 <?php $__errorArgs = ['name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');

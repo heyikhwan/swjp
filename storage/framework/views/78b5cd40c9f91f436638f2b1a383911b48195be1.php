@@ -27,7 +27,8 @@
                 </div>
                 <!-- end row -->
 
-                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                <table id="wilayah" class="table align-middle dt-responsive table-check nowrap"
+                style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
                     <thead>
                         <tr>
                             <th>Tanggal Reservasi</th>

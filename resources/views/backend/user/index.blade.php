@@ -46,7 +46,7 @@
                                     <li><a class="dropdown-item" href="{{ route('user.manager.create') }}">Manager</a>
                                     </li>
                                     <li><a class="dropdown-item" href="{{ route('user.leader.create') }}">Leader</a></li>
-                                    <li><a class="dropdown-item" href="#">Guide</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('user.guide.create') }}">Guide</a></li>
                                 </ul>
                             </div>
                         </div>

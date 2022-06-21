@@ -47,7 +47,7 @@
                                     <li><a class="dropdown-item" href="<?php echo e(route('user.manager.create')); ?>">Manager</a>
                                     </li>
                                     <li><a class="dropdown-item" href="<?php echo e(route('user.leader.create')); ?>">Leader</a></li>
-                                    <li><a class="dropdown-item" href="#">Guide</a></li>
+                                    <li><a class="dropdown-item" href="<?php echo e(route('user.guide.create')); ?>">Guide</a></li>
                                 </ul>
                             </div>
                         </div>
