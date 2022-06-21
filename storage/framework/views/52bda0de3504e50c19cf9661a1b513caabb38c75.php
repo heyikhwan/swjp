@@ -1,18 +1,23 @@
 
-<?php $__env->startSection('title'); ?> Edit Admin <?php $__env->stopSection(); ?>
+<?php $__env->startSection('title'); ?> Tambah Leader <?php $__env->stopSection(); ?>
+<?php $__env->startSection('css'); ?>
+<link href="<?php echo e(URL::asset('assets/libs/choices.js/choices.js.min.css')); ?>" rel="stylesheet">
+<?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
 <?php $__env->startComponent('components.breadcrumb'); ?>
 <?php $__env->slot('li_1'); ?> Data User <?php $__env->endSlot(); ?>
-<?php $__env->slot('title'); ?> Edit Admin <?php $__env->endSlot(); ?>
+<?php $__env->slot('title'); ?> Tambah Leader <?php $__env->endSlot(); ?>
 <?php echo $__env->renderComponent(); ?>
 
 <div class="row">
     <div class="col">
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="<?php echo e(route('user.admin.update', $user->id)); ?>" class="needs-validation" enctype="multipart/form-data">
+                <form method="POST" action="<?php echo e(route('user.admin.store')); ?>" class="needs-validation"
+                    enctype="multipart/form-data">
                     <?php echo csrf_field(); ?>
-                    <?php echo method_field('PUT'); ?>
+
+                    <input type="hidden" name="role" value="leader">
 
                     <div class="row">
                         <div class="col">
@@ -25,7 +30,9 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id="name" name="name" placeholder="Nama Lengkap" value="<?php echo e(old('name') ?? $user->name); ?>" required>
+unset($__errorArgs, $__bag); ?>" id="name"
+                                    name="name" placeholder="Nama Lengkap" required>
+
                                 <?php $__errorArgs = ['name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -53,7 +60,8 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id="username" name="username" placeholder="Username" value="<?php echo e(old('username') ?? $user->username); ?>" required>
+unset($__errorArgs, $__bag); ?>"
+                                    id="username" name="username" placeholder="Username" required>
                                 <?php $__errorArgs = ['username'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -79,7 +87,8 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id="email" name="email" placeholder="Email" value="<?php echo e(old('email') ?? $user->email); ?>" required>
+unset($__errorArgs, $__bag); ?>" id="email"
+                                    name="email" placeholder="Email" required>
                                 <?php $__errorArgs = ['email'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -107,7 +116,8 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id="password" name="password" placeholder="Password">
+unset($__errorArgs, $__bag); ?>"
+                                    id="password" name="password" placeholder="Password" required>
                                 <?php $__errorArgs = ['password'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -125,6 +135,8 @@ unset($__errorArgs, $__bag); ?>
                         </div>
                     </div>
 
+                    
+
                     <div class="row">
                         <div class="col-12">
                             <div class="mb-3">
@@ -136,7 +148,8 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" type="file" id="avatar-1" name="avatar" onclick="uploadImg(1)">
+unset($__errorArgs, $__bag); ?>" type="file"
+                                    id="avatar-1" name="avatar" onclick="uploadImg(1)" accept="image/*">
                                 <?php $__errorArgs = ['avatar'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -150,17 +163,16 @@ $message = $__bag->first($__errorArgs[0]); ?>
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                              </div>
+                            </div>
                         </div>
                         <div class="col-12">
                             <div class="mb-3">
-                                <img id="myImg-1"
-                                    class="<?php echo e($user->avatar ? '' : 'd-none'); ?> border p-1 rounded img-fluid img-thumbnail" width="120" height="120"
-                                    src="<?php echo e($user->avatar ? url('storage/avatar', $user->avatar) : '#'); ?>">
+                                <img id="myImg-1" class="d-none border p-1 rounded img-fluid img-thumbnail" src="#"
+                                    width="120" height="120">
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="d-flex justify-content-end gap-2">
                         <a class="btn btn-secondary" href="<?php echo e(route('user.index')); ?>">Kembali</a>
                         <button class="btn btn-primary" type="submit">Submit</button>
@@ -173,6 +185,8 @@ unset($__errorArgs, $__bag); ?>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('script'); ?>
+<script src="<?php echo e(URL::asset('assets/libs/choices.js/choices.js.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/js/pages/form-advanced.init.js')); ?>"></script>
 <script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
 
 <script>
@@ -194,4 +208,4 @@ unset($__errorArgs, $__bag); ?>
     }
 </script>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\swjp\resources\views/backend/user/admin/edit.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\swjp\resources\views/backend/user/leader/create.blade.php ENDPATH**/ ?>
