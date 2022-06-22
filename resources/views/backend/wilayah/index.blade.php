@@ -47,8 +47,8 @@
                 <!-- end row -->
 
                 <div class="table-responsive mb-4">
-                    <table class="table align-middle datatable dt-responsive table-check nowrap"
-                        style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
+                    <table class="table align-middle dt-responsive table-check nowrap"
+                        style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;" id="wilayah">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
@@ -57,7 +57,7 @@
                                 <th style="width: 80px; min-width: 80px;">Action</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        {{-- <tbody>
                             @foreach ($wilayah as $item)
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
@@ -92,7 +92,7 @@
                                 </td>
                             </tr>
                             @endforeach
-                        </tbody>
+                        </tbody> --}}
                     </table>
                     <!-- end table -->
                 </div>
@@ -127,7 +127,6 @@
                 },
                 { data: 'nama', name: 'nama' },
                 { data: 'level', name: 'level' },
-                { data: 'induk', name: 'induk' },
                 { data: 'aksi', name: 'aksi' },
             ]
         });
