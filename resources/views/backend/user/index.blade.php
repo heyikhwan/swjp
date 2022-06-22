@@ -180,6 +180,7 @@
                                     @if($item->getRoleNames()[0] == 'admin') {{ route('user.admin.edit', $item->id) }} @endif
                                     @if($item->getRoleNames()[0] == 'manager') {{ route('user.manager.edit', $item->id) }} @endif
                                     @if($item->getRoleNames()[0] == 'customer') {{ route('user.customer.edit', $item->id) }} @endif
+                                    @if($item->getRoleNames()[0] == 'leader') {{ route('user.leader.edit', $item->id) }} @endif
                                     " class="btn btn-soft-warning waves-effect waves-light">
                                         <i class="fas fa-edit"></i>
                                     </a>

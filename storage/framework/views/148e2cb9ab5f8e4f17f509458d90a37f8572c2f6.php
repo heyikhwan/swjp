@@ -181,6 +181,7 @@
                                     <?php if($item->getRoleNames()[0] == 'admin'): ?> <?php echo e(route('user.admin.edit', $item->id)); ?> <?php endif; ?>
                                     <?php if($item->getRoleNames()[0] == 'manager'): ?> <?php echo e(route('user.manager.edit', $item->id)); ?> <?php endif; ?>
                                     <?php if($item->getRoleNames()[0] == 'customer'): ?> <?php echo e(route('user.customer.edit', $item->id)); ?> <?php endif; ?>
+                                    <?php if($item->getRoleNames()[0] == 'leader'): ?> <?php echo e(route('user.leader.edit', $item->id)); ?> <?php endif; ?>
                                     " class="btn btn-soft-warning waves-effect waves-light">
                                         <i class="fas fa-edit"></i>
                                     </a>

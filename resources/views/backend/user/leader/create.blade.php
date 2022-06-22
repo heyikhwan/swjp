@@ -10,7 +10,7 @@
     <div class="col">
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="{{ route('user.leader.store') }}" class="needs-validation"
+                <form method="POST" action="{{ route('user.leader.store') }}" class="needs-validation" novalidate
                     enctype="multipart/form-data">
                     @csrf
 
@@ -21,7 +21,7 @@
                             <div class="mb-3">
                                 <label class="form-label" for="name">Nama Lengkap</label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
-                                    name="name" placeholder="Nama Lengkap" required>
+                                    name="name" placeholder="Nama Lengkap" value="{{ old('name') }}" required>
 
                                 @error('name')
                                 <div class="invalid-feedback">
@@ -36,7 +36,7 @@
                             <div class="mb-3">
                                 <label class="form-label" for="username">Username</label>
                                 <input type="text" class="form-control @error('username') is-invalid @enderror"
-                                    id="username" name="username" placeholder="Username" required>
+                                    id="username" name="username" placeholder="Username" value="{{ old('username') }}" required>
                                 @error('username')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -48,7 +48,7 @@
                             <div class="mb-3">
                                 <label class="form-label" for="email">Email</label>
                                 <input type="email" class="form-control @error('email') is-invalid @enderror" id="email"
-                                    name="email" placeholder="Email" required>
+                                    name="email" placeholder="Email" value="{{ old('email') }}" required>
                                 @error('email')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -76,43 +76,63 @@
                         <div class="col-12 col-md-6 col-lg-3">
                             <div class="mb-3">
                                 <label for="provinsi" class="form-label font-size-13 text-muted">Provinsi</label>
-                                <select class="form-select" name="provinsi" id="provinsi"
-                                    placeholder="Provinsi">
+                                <select class="form-select @error('provinsi') is-invalid @enderror" name="provinsi" id="provinsi"
+                                    placeholder="Provinsi" required>
                                     <option value="">Pilih Provinsi</option>
                                     @foreach ($provinsi as $item)
-                                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                    <option value="{{ $item->id }}" {{ old('provinsi') == $item->id ? 'selected' : '' }}>{{ $item->nama }}</option>
                                     @endforeach
                                 </select>
+                                @error('provinsi')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="col-12 col-md-6 col-lg-3">
                             <div class="mb-3">
                                 <label for="kabupaten" class="form-label font-size-13 text-muted">Kabupaten/Kota</label>
-                                <select class="form-select" name="kabupaten" id="kabupaten"
-                                    placeholder="Kab/Kota">
+                                <select class="form-select @error('kabupaten') is-invalid @enderror" name="kabupaten" id="kabupaten"
+                                    placeholder="Kab/Kota" required>
                                     <option value="">Pilih Kabupaten/Kota</option>
                                 </select>
+                                @error('kabupaten')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="col-12 col-md-6 col-lg-3">
                             <div class="mb-3">
                                 <label for="kecamatan" class="form-label font-size-13 text-muted">Kecamatan</label>
-                                <select class="form-select" name="kecamatan" id="kecamatan"
-                                    placeholder="Kecamatan">
+                                <select class="form-select @error('kecamatan') is-invalid @enderror" name="kecamatan" id="kecamatan"
+                                    placeholder="Kecamatan" required>
                                     <option value="">Pilih Kecamatan</option>
                                 </select>
+                                @error('kecamatan')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="col-12 col-md-6 col-lg-3">
                             <div class="mb-3">
                                 <label for="desa" class="form-label font-size-13 text-muted">Desa</label>
-                                <select class="form-select" name="desa" id="desa"
-                                    placeholder="Desa">
+                                <select class="form-select @error('desa') is-invalid @enderror" name="desa" id="desa"
+                                    placeholder="Desa" required>
                                     <option value="">Pilih Desa</option>
                                 </select>
+                                @error('desa')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -181,27 +201,49 @@
     let kabupatenId;
     let kecamatanId;
 
-    provinsi.addEventListener('change', () => {
-        provinsiId = provinsi.options[provinsi.selectedIndex].value;
+    const provinsiValue = provinsi.options[provinsi.selectedIndex].value;
+    const kabupatenValue = kabupaten.options[kabupaten.selectedIndex].value;
+    const kecamatanValue = kecamatan.options[kecamatan.selectedIndex].value;
 
-        const url = '/data/kota/' + provinsiId;
-
-        const lastOpt = kabupaten.children;
-
-        for (let i = lastOpt.length - 1; i >= 1; --i) {
-            lastOpt[i].remove();
-        }
-
+    const fetchData = (level, url) => {
         let fetchRes = fetch(url);
         fetchRes.then(res =>
         res.json()).then(d => {
             d.forEach(e => {
                 var option = document.createElement("option");
                 option.text = e.nama;
-                option.value = e.id 
-                kabupaten.add(option);
+                option.value = e.id;
+                level.add(option);
             });
         });
+    }
+
+    const removeChildren = (child) => {
+        for (let i = child.length - 1; i >= 1; --i) {
+            child[i].remove();
+        }
+    }
+
+    if (provinsiValue) {
+        const url = '/data/kota/' + provinsiValue;
+
+        fetchData(kabupaten, url);
+    }
+    
+    provinsi.addEventListener('change', () => {
+        provinsiId = provinsi.options[provinsi.selectedIndex].value;
+
+        const url = '/data/kota/' + provinsiId;
+
+        const lastOptKabupaten = kabupaten.children;
+        const lastOptKecamatan = kecamatan.children;
+        const lastOptDesa = desa.children;
+
+        removeChildren(lastOptKabupaten);
+        removeChildren(lastOptKecamatan);
+        removeChildren(lastOptDesa);
+
+        fetchData(kabupaten, url);
     });
 
     kabupaten.addEventListener('change', () => {
@@ -209,22 +251,13 @@
 
         const url = '/data/kecamatan/' + kabupatenId;
 
-        const lastOpt = kecamatan.children;
+        const lastOptKecamatan = kecamatan.children;
+        const lastOptDesa = desa.children;
 
-        for (let i = lastOpt.length - 1; i >= 1; --i) {
-            lastOpt[i].remove();
-        }
+        removeChildren(lastOptKecamatan);
+        removeChildren(lastOptDesa);
 
-        let fetchRes = fetch(url);
-        fetchRes.then(res =>
-        res.json()).then(d => {
-            d.forEach(e => {
-                var option = document.createElement("option");
-                option.text = e.nama;
-                option.value = e.id;
-                kecamatan.add(option);
-            });
-        });
+        fetchData(kecamatan, url);
     });
 
     kecamatan.addEventListener('change', () => {
@@ -232,22 +265,11 @@
 
         const url = '/data/desa/' + kecamatanId;
 
-        const lastOpt = desa.children;
+        const lastOptDesa = desa.children;
 
-        for (let i = lastOpt.length - 1; i >= 1; --i) {
-            lastOpt[i].remove();
-        }
+        removeChildren(lastOptDesa);
 
-        let fetchRes = fetch(url);
-        fetchRes.then(res =>
-        res.json()).then(d => {
-            d.forEach(e => {
-                var option = document.createElement("option");
-                option.text = e.nama;
-                option.value = e.id;
-                desa.add(option);
-            });
-        });
+        fetchData(desa, url);
     });
 </script>
 @endsection

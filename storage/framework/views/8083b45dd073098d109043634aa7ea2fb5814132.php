@@ -273,6 +273,7 @@ unset($__errorArgs, $__bag); ?>
             d.forEach(e => {
                 var option = document.createElement("option");
                 option.text = e.nama;
+                option.value = e.id;
                 kabupaten.add(option);
             });
         });
@@ -295,6 +296,7 @@ unset($__errorArgs, $__bag); ?>
             d.forEach(e => {
                 var option = document.createElement("option");
                 option.text = e.nama;
+                option.value = e.id;
                 kecamatan.add(option);
             });
         });
@@ -317,6 +319,7 @@ unset($__errorArgs, $__bag); ?>
             d.forEach(e => {
                 var option = document.createElement("option");
                 option.text = e.nama;
+                option.value = e.id;
                 desa.add(option);
             });
         });

@@ -30,6 +30,7 @@ Route::get('user/customer/edit/{user}', [UserController::class, 'editCustomer'])
 Route::get('user/leader/edit/{user}', [UserController::class, 'editLeader'])->name('user.leader.edit');
 Route::put('user/admin-update/{user}', [UserController::class, 'updateUser'])->name('user.admin.update');
 Route::put('user/customer-update/{user}', [UserController::class, 'updateCustomer'])->name('user.customer.update');
+Route::put('user/leader-update/{user}', [UserController::class, 'updateLeader'])->name('user.leader.update');
 Route::delete('user/admin-delete/{user}', [UserController::class, 'destroy'])->name('user.destroy');
 
 //Update User Details

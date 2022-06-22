@@ -35,16 +35,10 @@ class UserController extends Controller
 
     public function createLeader()
     {
-        $provinsi = Wilayah::where('level', 1)->get();
-        $kota = Wilayah::where('level', 2)->get();
-        $kecamatan = Wilayah::where('level', 3)->get();
-        $desa = Wilayah::where('level', 4)->get();
+        $provinsi = Wilayah::where('level', 1)->orderBy('nama', 'asc')->get();
 
         return view('backend.user.leader.create', [
-            'provinsi' => $provinsi,
-            'kota' => $kota,
-            'kecamatan' => $kecamatan,
-            'desa' => $desa,
+            'provinsi' => $provinsi
         ]);
     }
 
@@ -143,8 +137,26 @@ class UserController extends Controller
     {
         $user = User::with('fasilitator')->findOrFail($id);
 
-        return view('backend.user.customer.edit', [
-            'user' => $user
+        $kecamatanId = Wilayah::findOrFail($user->fasilitator->wilayah->induk);
+        $desa = Wilayah::where('level', 4)->where('induk', $kecamatanId->id)->get();
+
+        $kabupatenId = Wilayah::findOrFail($kecamatanId->induk);
+        $kecamatan = Wilayah::where('level', 3)->where('induk', $kabupatenId->id)->get();
+
+        $provinsiId = Wilayah::findOrFail($kabupatenId->induk);
+        $kabupaten = Wilayah::where('level', 2)->where('induk', $provinsiId->id)->get();
+
+        $provinsi = Wilayah::where('level', 1)->orderBy('nama', 'asc')->get();
+
+        return view('backend.user.leader.edit', [
+            'user' => $user,
+            'desa' => $desa,
+            'kecamatanId' => $kecamatanId,
+            'kecamatan' => $kecamatan,
+            'kabupaten' => $kabupaten,
+            'kabupatenId' => $kabupatenId,
+            'provinsi' => $provinsi,
+            'provinsiId' => $provinsiId,
         ]);
     }
 
@@ -223,6 +235,48 @@ class UserController extends Controller
             'tempat_lahir' => $data['tempat_lahir'],
             'tanggal_lahir' => $data['tanggal_lahir'],
             'no_passport' => $data['no_passport'],
+        ]);
+
+        return redirect()->route('user.index')->with('success', 'Data user berhasil diperbarui.');
+    }
+
+    public function updateLeader(UserRequest $request, $id)
+    {
+        $data = $request->all();
+        $user = User::findOrFail($id);
+
+        if (request()->has('avatar')) {
+            $avatar = request()->file('avatar');
+            $avatarName = time() . '.' . $avatar->getClientOriginalExtension();
+            $avatarPath = public_path('storage/avatar');
+            $avatar->move($avatarPath, $avatarName);
+
+            if ($user->avatar) {
+                if (file_exists(public_path('storage/avatar/') . $user->avatar)) {
+                    unlink(public_path('storage/avatar/') . $user->avatar);
+                }
+            }
+        } else {
+            $avatarName = $user->avatar;
+        }
+
+        $user->update([
+            'name' => $data['name'],
+            'username' => $data['username'],
+            'email' => $data['email'],
+            'avatar' => $avatarName,
+        ]);
+
+        if ($request->has('password')) {
+            $user->update([
+                'password' => Hash::make($data['password']),
+            ]);
+        }
+
+        $fasilitator = Fasilitator::where('user_id', $id)->first();
+
+        $fasilitator->update([
+            'wilayah_id' => $data['desa'],
         ]);
 
         return redirect()->route('user.index')->with('success', 'Data user berhasil diperbarui.');

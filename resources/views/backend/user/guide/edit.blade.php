@@ -1,16 +1,16 @@
 @extends('layouts.master')
-@section('title') Edit Admin @endsection
+@section('title') Edit Guide @endsection
 @section('content')
 @component('components.breadcrumb')
 @slot('li_1') Data User @endslot
-@slot('title') Edit Admin @endslot
+@slot('title') Edit Guide @endslot
 @endcomponent
 
 <div class="row">
     <div class="col">
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="{{ route('user.admin.update', $user->id) }}" class="needs-validation" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('user.leader.update', $user->id) }}" class="needs-validation" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -66,6 +66,80 @@
                     </div>
 
                     <div class="row">
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="mb-3">
+                                <label for="provinsi" class="form-label font-size-13 text-muted">Provinsi</label>
+                                <select class="form-select @error('provinsi') is-invalid @enderror" name="provinsi" id="provinsi"
+                                    placeholder="Provinsi" required>
+                                    <option value="">Pilih Provinsi</option>
+                                    @foreach ($provinsi as $item)
+                                    <option value="{{ $item->id }}" {{ old('provinsi') == $item->id || $provinsiId->id == $item->id ? 'selected' : '' }}>{{ $item->nama }}</option>
+                                    @endforeach
+                                </select>
+                                @error('provinsi')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="mb-3">
+                                <label for="kabupaten" class="form-label font-size-13 text-muted">Kabupaten/Kota</label>
+                                <select class="form-select @error('kabupaten') is-invalid @enderror" name="kabupaten" id="kabupaten"
+                                    placeholder="Kab/Kota" required>
+                                    <option value="">Pilih Kabupaten/Kota</option>
+                                    @foreach ($kabupaten as $item)
+                                    <option value="{{ $item->id }}" {{ old('kabupaten') == $item->id || $kabupatenId->id == $item->id ? 'selected' : '' }}>{{ $item->nama }}</option>
+                                    @endforeach
+                                </select>
+                                @error('kabupaten')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="mb-3">
+                                <label for="kecamatan" class="form-label font-size-13 text-muted">Kecamatan</label>
+                                <select class="form-select @error('kecamatan') is-invalid @enderror" name="kecamatan" id="kecamatan"
+                                    placeholder="Kecamatan" required>
+                                    <option value="">Pilih Kecamatan</option>
+                                    @foreach ($kecamatan as $item)
+                                    <option value="{{ $item->id }}" {{ old('kecamatan') == $item->id || $kecamatanId->id == $item->id ? 'selected' : '' }}>{{ $item->nama }}</option>
+                                    @endforeach
+                                </select>
+                                @error('kecamatan')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="mb-3">
+                                <label for="desa" class="form-label font-size-13 text-muted">Desa</label>
+                                <select class="form-select @error('desa') is-invalid @enderror" name="desa" id="desa"
+                                    placeholder="Desa" required>
+                                    <option value="">Pilih Desa</option>
+                                    @foreach ($desa as $item)
+                                    <option value="{{ $item->id }}" {{ old('desa') == $item->id || $user->fasilitator->wilayah_id == $item->id ? 'selected' : '' }}>{{ $item->nama }}</option>
+                                    @endforeach
+                                </select>
+                                @error('desa')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
                         <div class="col-12">
                             <div class="mb-3">
                                 <label for="avatar" class="form-label">Avatar</label>
@@ -99,6 +173,88 @@
 
 @section('script')
 <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
+
+<script>
+    const provinsi = document.querySelector('#provinsi');
+    const kabupaten = document.querySelector('#kabupaten');
+    const kecamatan = document.querySelector('#kecamatan');
+    const desa = document.querySelector('#desa');
+
+    let provinsiId;
+    let kabupatenId;
+    let kecamatanId;
+
+    const provinsiValue = provinsi.options[provinsi.selectedIndex].value;
+    const kabupatenValue = kabupaten.options[kabupaten.selectedIndex].value;
+    const kecamatanValue = kecamatan.options[kecamatan.selectedIndex].value;
+
+    const fetchData = (level, url) => {
+        let fetchRes = fetch(url);
+        fetchRes.then(res =>
+        res.json()).then(d => {
+            d.forEach(e => {
+                var option = document.createElement("option");
+                option.text = e.nama;
+                option.value = e.id;
+                level.add(option);
+            });
+        });
+    }
+
+    const removeChildren = (child) => {
+        for (let i = child.length - 1; i >= 1; --i) {
+            child[i].remove();
+        }
+    }
+
+    if (provinsiValue) {
+        const url = '/data/kota/' + provinsiValue;
+
+        fetchData(kabupaten, url);
+    }
+    
+    provinsi.addEventListener('change', () => {
+        provinsiId = provinsi.options[provinsi.selectedIndex].value;
+
+        const url = '/data/kota/' + provinsiId;
+
+        const lastOptKabupaten = kabupaten.children;
+        const lastOptKecamatan = kecamatan.children;
+        const lastOptDesa = desa.children;
+
+        removeChildren(lastOptKabupaten);
+        removeChildren(lastOptKecamatan);
+        removeChildren(lastOptDesa);
+
+        fetchData(kabupaten, url);
+    });
+
+    kabupaten.addEventListener('change', () => {
+        kabupatenId = kabupaten.options[kabupaten.selectedIndex].value;
+
+        const url = '/data/kecamatan/' + kabupatenId;
+
+        const lastOptKecamatan = kecamatan.children;
+        const lastOptDesa = desa.children;
+
+        removeChildren(lastOptKecamatan);
+        removeChildren(lastOptDesa);
+
+        fetchData(kecamatan, url);
+    });
+
+    kecamatan.addEventListener('change', () => {
+        kecamatanId = kecamatan.options[kecamatan.selectedIndex].value;
+
+        const url = '/data/desa/' + kecamatanId;
+
+        const lastOptDesa = desa.children;
+
+        removeChildren(lastOptDesa);
+
+        fetchData(desa, url);
+    });
+</script>
 
 <script>
     function uploadImg(id) {

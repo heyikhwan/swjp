@@ -24,6 +24,12 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
+        if (request()->isMethod('put')) {
+            $password = ['sometimes', 'string', 'min:6', 'nullable'];
+        } else {
+            $password = ['required', 'string', 'min:6'];
+        }
+
         return [
             'name' => ['required', 'string', 'max:255'],
             'provinsi' => ['sometimes', 'required'],
@@ -33,7 +39,7 @@ class UserRequest extends FormRequest
             'username' => ['required', 'string', 'min:5', 'max:255', Rule::unique('users', 'username')->ignore($this->user)],
             'nik' => ['sometimes', 'required', 'numeric'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users', 'email')->ignore($this->user)],
-            'password' => ['sometimes', 'string', 'min:6', 'nullable'],
+            'password' => $password,
             'avatar' => ['image' ,'mimes:jpg,jpeg,png','max:1024', 'nullable'],
             'tempat_lahir' => ['string', 'nullable'],
             'tanggal_lahir' => ['date', 'nullable'],

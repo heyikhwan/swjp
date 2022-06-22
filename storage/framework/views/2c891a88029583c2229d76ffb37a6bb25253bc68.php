@@ -165,17 +165,11 @@ unset($__errorArgs, $__bag); ?>
     let kabupatenId;
     let kecamatanId;
 
-    provinsi.addEventListener('change', () => {
-        provinsiId = provinsi.options[provinsi.selectedIndex].value;
+    const provinsiValue = provinsi.options[provinsi.selectedIndex].value;
+    const kabupatenValue = kabupaten.options[kabupaten.selectedIndex].value;
+    const kecamatanValue = kecamatan.options[kecamatan.selectedIndex].value;
 
-        const url = '/data/kota/' + provinsiId;
-
-        const lastOpt = kabupaten.children;
-
-        for (let i = lastOpt.length - 1; i >= 1; --i) {
-            lastOpt[i].remove();
-        }
-
+    const fetchData = (level, url) => {
         let fetchRes = fetch(url);
         fetchRes.then(res =>
         res.json()).then(d => {
@@ -183,9 +177,37 @@ unset($__errorArgs, $__bag); ?>
                 var option = document.createElement("option");
                 option.text = e.nama;
                 option.value = e.id;
-                kabupaten.add(option);
+                level.add(option);
             });
         });
+    }
+
+    const removeChildren = (child) => {
+        for (let i = child.length - 1; i >= 1; --i) {
+            child[i].remove();
+        }
+    }
+
+    if (provinsiValue) {
+        const url = '/data/kota/' + provinsiValue;
+
+        fetchData(kabupaten, url);
+    }
+    
+    provinsi.addEventListener('change', () => {
+        provinsiId = provinsi.options[provinsi.selectedIndex].value;
+
+        const url = '/data/kota/' + provinsiId;
+
+        const lastOptKabupaten = kabupaten.children;
+        const lastOptKecamatan = kecamatan.children;
+        const lastOptDesa = desa.children;
+
+        removeChildren(lastOptKabupaten);
+        removeChildren(lastOptKecamatan);
+        removeChildren(lastOptDesa);
+
+        fetchData(kabupaten, url);
     });
 
     kabupaten.addEventListener('change', () => {
@@ -193,22 +215,13 @@ unset($__errorArgs, $__bag); ?>
 
         const url = '/data/kecamatan/' + kabupatenId;
 
-        const lastOpt = kecamatan.children;
+        const lastOptKecamatan = kecamatan.children;
+        const lastOptDesa = desa.children;
 
-        for (let i = lastOpt.length - 1; i >= 1; --i) {
-            lastOpt[i].remove();
-        }
+        removeChildren(lastOptKecamatan);
+        removeChildren(lastOptDesa);
 
-        let fetchRes = fetch(url);
-        fetchRes.then(res =>
-        res.json()).then(d => {
-            d.forEach(e => {
-                var option = document.createElement("option");
-                option.text = e.nama;
-                option.value = e.id;
-                kecamatan.add(option);
-            });
-        });
+        fetchData(kecamatan, url);
     });
 
     kecamatan.addEventListener('change', () => {
@@ -216,22 +229,11 @@ unset($__errorArgs, $__bag); ?>
 
         const url = '/data/desa/' + kecamatanId;
 
-        const lastOpt = desa.children;
+        const lastOptDesa = desa.children;
 
-        for (let i = lastOpt.length - 1; i >= 1; --i) {
-            lastOpt[i].remove();
-        }
+        removeChildren(lastOptDesa);
 
-        let fetchRes = fetch(url);
-        fetchRes.then(res =>
-        res.json()).then(d => {
-            d.forEach(e => {
-                var option = document.createElement("option");
-                option.text = e.nama;
-                option.value = e.id;
-                desa.add(option);
-            });
-        });
+        fetchData(desa, url);
     });
 </script>
 
