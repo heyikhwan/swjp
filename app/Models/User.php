@@ -49,4 +49,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Customer::class, 'user_id', 'id');
     }
+
+    public function fasilitator()
+    {
+        return $this->hasOne(Fasilitator::class, 'user_id', 'id');
+    }
 }

@@ -14,4 +14,9 @@ class Fasilitator extends Model
         'user_id',
         'rating',
     ];
+
+    public function wilayah()
+    {
+        return $this->belongsTo(Wilayah::class, 'wilayah_id', 'id');
+    }
 }

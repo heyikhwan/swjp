@@ -16,7 +16,6 @@
             <div class="card-body">
                 <form method="POST" action="<?php echo e(route('kendaraan.store')); ?>" class="needs-validation">
                     <?php echo csrf_field(); ?>
-
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">

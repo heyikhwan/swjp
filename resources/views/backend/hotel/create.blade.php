@@ -22,75 +22,88 @@
                         <div class="col">
                             <div class="mb-3">
                                 <label class="form-label" for="name">Nama Hotel</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Nama Hotel"
-                                    required>
-                                    @error('nama')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
+                                    name="name" placeholder="Nama Hotel" required>
+                                @error('nama')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
                                 </div>
+                                @enderror
                             </div>
-                            <div class="invalid-feedback">
-                                Please choose a username.
-                            </div>
+                        </div>
 
                         <div class="col-3">
                             <label for="bintang">Bintang</label>
                             <div class="input-group mb-3">
-                              <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroupPrepend"><i class="bx bxs-star font-size-20 text-warning"></i></span>
-                              </div>
-                              <input type="text" class="form-control @error('bintang') is-invalid @enderror" id="bintang" placeholder="Bintang" aria-describedby="inputGroupPrepend" name="bintang" required>
-                              @error('bintang')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupPrepend"><i
+                                            class="bx bxs-star font-size-20 text-warning"></i></span>
                                 </div>
-                              <div class="invalid-feedback">
-                                Masukkan bintang hotel
-                              </div>
-                            </div>
-                          </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="mb-3">
-                                <label class="form-label" for="wilayah">Nama Wilayah</label>
-                                <input type="text" class="form-control  @error('wilayah') is-invalid @enderror" id="wilayah" name="wilayah"
-                                    placeholder="Nama Wilayah" required>
-                                    @error('wilayah')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
+                                <input type="text" class="form-control @error('bintang') is-invalid @enderror"
+                                    id="bintang" placeholder="Bintang" aria-describedby="inputGroupPrepend"
+                                    name="bintang" required>
+                                @error('bintang')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
                                 </div>
+                                @enderror
                             </div>
                         </div>
+                    </div>
 
-                    {{-- <div class="row">
-                        <div class="col-12">
-                            <div class="mb-3">
-                                <label for="foto" class="form-label">Foto</label>
-                                <input class="form-control" type="file" id="foto-1" name="foto"
-                                    onclick="uploadImg(1)">
+                    <div>
+                        <label>Wilayah</label>
+                        <div class="row">
+                            <div class="col-12 col-md-6 col-lg-3">
+                                <div class="mb-3">
+                                    <label for="provinsi" class="form-label font-size-13 text-muted">Provinsi</label>
+                                    <select class="form-select" name="provinsi" id="provinsi" placeholder="Provinsi">
+                                        <option value="">Pilih Provinsi</option>
+                                        @foreach ($provinsi as $item)
+                                        <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-3">
+                                <div class="mb-3">
+                                    <label for="kabupaten"
+                                        class="form-label font-size-13 text-muted">Kabupaten/Kota</label>
+                                    <select class="form-select" name="kabupaten" id="kabupaten" placeholder="Kab/Kota">
+                                        <option value="">Pilih Kabupaten/Kota</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-3">
+                                <div class="mb-3">
+                                    <label for="kecamatan" class="form-label font-size-13 text-muted">Kecamatan</label>
+                                    <select class="form-select" name="kecamatan" id="kecamatan" placeholder="Kecamatan">
+                                        <option value="">Pilih Kecamatan</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-3">
+                                <div class="mb-3">
+                                    <label for="desa" class="form-label font-size-13 text-muted">Desa</label>
+                                    <select class="form-select" name="desa" id="desa" placeholder="Desa">
+                                        <option value="">Pilih Desa</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-12">
-                            <div class="mb-3">
-                                <img id="myImg-1" class="d-none border p-1 rounded img-fluid img-thumbnail" src="#"
-                                    width="120" height="120">
-                            </div>
-                        </div>
-                    </div> --}}
+                    </div>
 
                     <div class="row">
                         <div class="col">
                             <div class="mb-3">
                                 <div class="form-group">
                                     <label for="image">Gambar</label>
-                                    <input type="file" id="image" name="image[]" accept=".svg, image/png,image/jpg,image/jpeg" multiple />
-            
+                                    <input type="file" id="image" name="image[]"
+                                        accept=".svg, image/png,image/jpg,image/jpeg" multiple />
+
                                     <small class="form-text text-muted">only allowed
                                         jpg/jpeg/png/svg file and smaller than 2MB</small>
                                 </div>
@@ -111,6 +124,86 @@
 
 @section('script')
 <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
+
+<script>
+    const provinsi = document.querySelector('#provinsi');
+    const kabupaten = document.querySelector('#kabupaten');
+    const kecamatan = document.querySelector('#kecamatan');
+    const desa = document.querySelector('#desa');
+
+    let provinsiId;
+    let kabupatenId;
+    let kecamatanId;
+
+    provinsi.addEventListener('change', () => {
+        provinsiId = provinsi.options[provinsi.selectedIndex].value;
+
+        const url = '/data/kota/' + provinsiId;
+
+        const lastOpt = kabupaten.children;
+
+        for (let i = lastOpt.length - 1; i >= 1; --i) {
+            lastOpt[i].remove();
+        }
+
+        let fetchRes = fetch(url);
+        fetchRes.then(res =>
+        res.json()).then(d => {
+            d.forEach(e => {
+                var option = document.createElement("option");
+                option.text = e.nama;
+                option.value = e.id;
+                kabupaten.add(option);
+            });
+        });
+    });
+
+    kabupaten.addEventListener('change', () => {
+        kabupatenId = kabupaten.options[kabupaten.selectedIndex].value;
+
+        const url = '/data/kecamatan/' + kabupatenId;
+
+        const lastOpt = kecamatan.children;
+
+        for (let i = lastOpt.length - 1; i >= 1; --i) {
+            lastOpt[i].remove();
+        }
+
+        let fetchRes = fetch(url);
+        fetchRes.then(res =>
+        res.json()).then(d => {
+            d.forEach(e => {
+                var option = document.createElement("option");
+                option.text = e.nama;
+                option.value = e.id;
+                kecamatan.add(option);
+            });
+        });
+    });
+
+    kecamatan.addEventListener('change', () => {
+        kecamatanId = kecamatan.options[kecamatan.selectedIndex].value;
+
+        const url = '/data/desa/' + kecamatanId;
+
+        const lastOpt = desa.children;
+
+        for (let i = lastOpt.length - 1; i >= 1; --i) {
+            lastOpt[i].remove();
+        }
+
+        let fetchRes = fetch(url);
+        fetchRes.then(res =>
+        res.json()).then(d => {
+            d.forEach(e => {
+                var option = document.createElement("option");
+                option.text = e.nama;
+                option.value = e.id;
+                desa.add(option);
+            });
+        });
+    });
+</script>
 
 <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js">
 </script>

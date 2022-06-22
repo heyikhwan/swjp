@@ -1,19 +1,16 @@
 
-<?php $__env->startSection('title'); ?> Tambah Guide <?php $__env->stopSection(); ?>
-<?php $__env->startSection('css'); ?>
-<link href="<?php echo e(URL::asset('assets/libs/choices.js/choices.js.min.css')); ?>" rel="stylesheet">
-<?php $__env->stopSection(); ?>
+<?php $__env->startSection('title'); ?> Tambah Leader <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
 <?php $__env->startComponent('components.breadcrumb'); ?>
 <?php $__env->slot('li_1'); ?> Data User <?php $__env->endSlot(); ?>
-<?php $__env->slot('title'); ?> Tambah Guide <?php $__env->endSlot(); ?>
+<?php $__env->slot('title'); ?> Tambah Leader <?php $__env->endSlot(); ?>
 <?php echo $__env->renderComponent(); ?>
 
 <div class="row">
     <div class="col">
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="<?php echo e(route('user.admin.store')); ?>" class="needs-validation"
+                <form method="POST" action="<?php echo e(route('user.leader.store')); ?>" class="needs-validation"
                     enctype="multipart/form-data">
                     <?php echo csrf_field(); ?>
 
@@ -138,13 +135,12 @@ unset($__errorArgs, $__bag); ?>
                     <div class="row">
                         <div class="col-12 col-md-6 col-lg-3">
                             <div class="mb-3">
-                                <label for="provinsi"
-                                    class="form-label font-size-13 text-muted">Provinsi</label>
-                                <select class="form-control" data-trigger name="provinsi"
-                                    id="provinsi" placeholder="Provinsi">
+                                <label for="provinsi" class="form-label font-size-13 text-muted">Provinsi</label>
+                                <select class="form-select" name="provinsi" id="provinsi"
+                                    placeholder="Provinsi">
                                     <option value="">Pilih Provinsi</option>
                                     <?php $__currentLoopData = $provinsi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <option value="<?php echo e($item->id); ?>"><?php echo e($item->nama); ?></option>
+                                    <option value="<?php echo e($item->id); ?>"><?php echo e($item->nama); ?></option>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                             </div>
@@ -152,11 +148,30 @@ unset($__errorArgs, $__bag); ?>
 
                         <div class="col-12 col-md-6 col-lg-3">
                             <div class="mb-3">
-                                <label for="kabupaten"
-                                    class="form-label font-size-13 text-muted">Kabupaten/Kota</label>
-                                <select class="form-control" data-trigger name="kabupaten"
-                                    id="kabupaten" placeholder="Kab/Kota">
+                                <label for="kabupaten" class="form-label font-size-13 text-muted">Kabupaten/Kota</label>
+                                <select class="form-select" name="kabupaten" id="kabupaten"
+                                    placeholder="Kab/Kota">
                                     <option value="">Pilih Kabupaten/Kota</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="mb-3">
+                                <label for="kecamatan" class="form-label font-size-13 text-muted">Kecamatan</label>
+                                <select class="form-select" name="kecamatan" id="kecamatan"
+                                    placeholder="Kecamatan">
+                                    <option value="">Pilih Kecamatan</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="mb-3">
+                                <label for="desa" class="form-label font-size-13 text-muted">Desa</label>
+                                <select class="form-select" name="desa" id="desa"
+                                    placeholder="Desa">
+                                    <option value="">Pilih Desa</option>
                                 </select>
                             </div>
                         </div>
@@ -210,8 +225,6 @@ unset($__errorArgs, $__bag); ?>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('script'); ?>
-<script src="<?php echo e(URL::asset('assets/libs/choices.js/choices.js.min.js')); ?>"></script>
-<script src="<?php echo e(URL::asset('assets/js/pages/form-advanced.init.js')); ?>"></script>
 <script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
 
 <script>
@@ -236,44 +249,81 @@ unset($__errorArgs, $__bag); ?>
 <script>
     const provinsi = document.querySelector('#provinsi');
     const kabupaten = document.querySelector('#kabupaten');
+    const kecamatan = document.querySelector('#kecamatan');
+    const desa = document.querySelector('#desa');
 
     let provinsiId;
-
-    async function getData(url) {
-        try {
-            let res = await fetch(url);
-            return await res.json();
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    let kabupatenId;
+    let kecamatanId;
 
     provinsi.addEventListener('change', () => {
         provinsiId = provinsi.options[provinsi.selectedIndex].value;
 
-        console.log(provinsiId);
-
         const url = '/data/kota/' + provinsiId;
 
-        let kota = await getData(url);
+        const lastOpt = kabupaten.children;
 
-        console.log(kota);
-        
-        // fetch(url)
-        //     .then(data => {
-        //     return data.json();
-        // })
-        // .then(res => {            
-        //     res.map((item) => {
-        //         let opt = document.createElement('option');
-        //         opt.value = item.id;
-        //         opt.innerHTML = item.nama;
-        //         kabupaten.appendChild(opt);
-        //     });
-        // });
-   });
+        for (let i = lastOpt.length - 1; i >= 1; --i) {
+            lastOpt[i].remove();
+        }
 
+        let fetchRes = fetch(url);
+        fetchRes.then(res =>
+        res.json()).then(d => {
+            d.forEach(e => {
+                var option = document.createElement("option");
+                option.text = e.nama;
+                option.value = e.id 
+                kabupaten.add(option);
+            });
+        });
+    });
+
+    kabupaten.addEventListener('change', () => {
+        kabupatenId = kabupaten.options[kabupaten.selectedIndex].value;
+
+        const url = '/data/kecamatan/' + kabupatenId;
+
+        const lastOpt = kecamatan.children;
+
+        for (let i = lastOpt.length - 1; i >= 1; --i) {
+            lastOpt[i].remove();
+        }
+
+        let fetchRes = fetch(url);
+        fetchRes.then(res =>
+        res.json()).then(d => {
+            d.forEach(e => {
+                var option = document.createElement("option");
+                option.text = e.nama;
+                option.value = e.id;
+                kecamatan.add(option);
+            });
+        });
+    });
+
+    kecamatan.addEventListener('change', () => {
+        kecamatanId = kecamatan.options[kecamatan.selectedIndex].value;
+
+        const url = '/data/desa/' + kecamatanId;
+
+        const lastOpt = desa.children;
+
+        for (let i = lastOpt.length - 1; i >= 1; --i) {
+            lastOpt[i].remove();
+        }
+
+        let fetchRes = fetch(url);
+        fetchRes.then(res =>
+        res.json()).then(d => {
+            d.forEach(e => {
+                var option = document.createElement("option");
+                option.text = e.nama;
+                option.value = e.id;
+                desa.add(option);
+            });
+        });
+    });
 </script>
-
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Project\swjp\resources\views/backend/user/leader/create.blade.php ENDPATH**/ ?>

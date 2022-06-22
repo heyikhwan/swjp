@@ -22,10 +22,12 @@ Route::get('user/admin/create', [UserController::class, 'createAdmin'])->name('u
 Route::get('user/manager/create', [UserController::class, 'createManager'])->name('user.manager.create');
 Route::get('user/leader/create', [UserController::class, 'createLeader'])->name('user.leader.create');
 Route::get('user/guide/create', [UserController::class, 'createGuide'])->name('user.guide.create');
-Route::post('user/admin', [UserController::class, 'storeUser'])->name('user.admin.store');
+Route::post('user/admin', [UserController::class, 'userStore'])->name('user.admin.store');
+Route::post('user/leader', [UserController::class, 'leaderStore'])->name('user.leader.store');
 Route::get('user/admin/edit/{user}', [UserController::class, 'editAdmin'])->name('user.admin.edit');
 Route::get('user/manager/edit/{user}', [UserController::class, 'editManager'])->name('user.manager.edit');
 Route::get('user/customer/edit/{user}', [UserController::class, 'editCustomer'])->name('user.customer.edit');
+Route::get('user/leader/edit/{user}', [UserController::class, 'editLeader'])->name('user.leader.edit');
 Route::put('user/admin-update/{user}', [UserController::class, 'updateUser'])->name('user.admin.update');
 Route::put('user/customer-update/{user}', [UserController::class, 'updateCustomer'])->name('user.customer.update');
 Route::delete('user/admin-delete/{user}', [UserController::class, 'destroy'])->name('user.destroy');

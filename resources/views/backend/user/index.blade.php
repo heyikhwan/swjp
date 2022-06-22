@@ -157,6 +157,14 @@
                                                                     <td>{{ $item->customer->no_passport }}</td>
                                                                 </tr>
                                                                 @endif
+
+                                                                @if ($item->getRoleNames()[0] == 'leader' || $item->getRoleNames()[0] == 'guide')
+                                                                <tr>
+                                                                    <th>Wilayah</th>
+                                                                    <td class="px-2">:</td>
+                                                                    <td>{{ $item->fasilitator->wilayah->nama }}</td>
+                                                                </tr>
+                                                                @endif
                                                             </table>
                                                         </div>
                                                     </div>

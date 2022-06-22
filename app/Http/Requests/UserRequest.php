@@ -26,6 +26,10 @@ class UserRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
+            'provinsi' => ['sometimes', 'required'],
+            'kabupaten' => ['sometimes', 'required'],
+            'kecamatan' => ['sometimes', 'required'],
+            'desa' => ['sometimes', 'required'],
             'username' => ['required', 'string', 'min:5', 'max:255', Rule::unique('users', 'username')->ignore($this->user)],
             'nik' => ['sometimes', 'required', 'numeric'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users', 'email')->ignore($this->user)],

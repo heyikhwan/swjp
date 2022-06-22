@@ -55,37 +55,51 @@
                             </div>
                           </div>
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="mb-3">
-                                <label class="form-label" for="wilayah">Nama Wilayah</label>
-                                <input type="text" class="form-control  @error('wilayah') is-invalid @enderror" id="wilayah" name="wilayah"
-                                    placeholder="Nama Wilayah" value="{{ old('wilayah') ?? $hotel->wilayah }}" required>
-                                    @error('wilayah')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
+
+                    <div>
+                        <label>Wilayah</label>
+                        <div class="row">
+                            <div class="col-12 col-md-6 col-lg-3">
+                                <div class="mb-3">
+                                    <label for="provinsi" class="form-label font-size-13 text-muted">Provinsi</label>
+                                    <select class="form-select" name="provinsi" id="provinsi" placeholder="Provinsi">
+                                        <option value="">Pilih Provinsi</option>
+                                        @foreach ($provinsi as $item)
+                                        <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-3">
+                                <div class="mb-3">
+                                    <label for="kabupaten"
+                                        class="form-label font-size-13 text-muted">Kabupaten/Kota</label>
+                                    <select class="form-select" name="kabupaten" id="kabupaten" placeholder="Kab/Kota">
+                                        <option value="">Pilih Kabupaten/Kota</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-3">
+                                <div class="mb-3">
+                                    <label for="kecamatan" class="form-label font-size-13 text-muted">Kecamatan</label>
+                                    <select class="form-select" name="kecamatan" id="kecamatan" placeholder="Kecamatan">
+                                        <option value="">Pilih Kecamatan</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-3">
+                                <div class="mb-3">
+                                    <label for="desa" class="form-label font-size-13 text-muted">Desa</label>
+                                    <select class="form-select" name="desa" id="desa" placeholder="Desa">
+                                        <option value="">Pilih Desa</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    {{-- <div class="row">
-                        <div class="col-12">
-                            <div class="mb-3">
-                                <label for="foto" class="form-label">Foto</label>
-                                <input class="form-control" type="file" id="foto-1" name="foto"
-                                    onclick="uploadImg(1)">
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="mb-3">
-                                <img id="myImg-1" class="d-none border p-1 rounded img-fluid img-thumbnail" src="#"
-                                    width="120" height="120">
-                            </div>
-                        </div>
-                    </div> --}}
 
                     <div class="row">
                         <div class="col">
@@ -120,7 +134,85 @@
 <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
 <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
 <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+<script>
+    const provinsi = document.querySelector('#provinsi');
+    const kabupaten = document.querySelector('#kabupaten');
+    const kecamatan = document.querySelector('#kecamatan');
+    const desa = document.querySelector('#desa');
 
+    let provinsiId;
+    let kabupatenId;
+    let kecamatanId;
+
+    provinsi.addEventListener('change', () => {
+        provinsiId = provinsi.options[provinsi.selectedIndex].value;
+
+        const url = '/data/kota/' + provinsiId;
+
+        const lastOpt = kabupaten.children;
+
+        for (let i = lastOpt.length - 1; i >= 1; --i) {
+            lastOpt[i].remove();
+        }
+
+        let fetchRes = fetch(url);
+        fetchRes.then(res =>
+        res.json()).then(d => {
+            d.forEach(e => {
+                var option = document.createElement("option");
+                option.text = e.nama;
+                option.value = e.id;
+                kabupaten.add(option);
+            });
+        });
+    });
+
+    kabupaten.addEventListener('change', () => {
+        kabupatenId = kabupaten.options[kabupaten.selectedIndex].value;
+
+        const url = '/data/kecamatan/' + kabupatenId;
+
+        const lastOpt = kecamatan.children;
+
+        for (let i = lastOpt.length - 1; i >= 1; --i) {
+            lastOpt[i].remove();
+        }
+
+        let fetchRes = fetch(url);
+        fetchRes.then(res =>
+        res.json()).then(d => {
+            d.forEach(e => {
+                var option = document.createElement("option");
+                option.text = e.nama;
+                option.value = e.id;
+                kecamatan.add(option);
+            });
+        });
+    });
+
+    kecamatan.addEventListener('change', () => {
+        kecamatanId = kecamatan.options[kecamatan.selectedIndex].value;
+
+        const url = '/data/desa/' + kecamatanId;
+
+        const lastOpt = desa.children;
+
+        for (let i = lastOpt.length - 1; i >= 1; --i) {
+            lastOpt[i].remove();
+        }
+
+        let fetchRes = fetch(url);
+        fetchRes.then(res =>
+        res.json()).then(d => {
+            d.forEach(e => {
+                var option = document.createElement("option");
+                option.text = e.nama;
+                option.value = e.id;
+                desa.add(option);
+            });
+        });
+    });
+</script>
 <script>
     function uploadImg(id) {
         document.querySelector('#foto-' + id).addEventListener('change', function() {

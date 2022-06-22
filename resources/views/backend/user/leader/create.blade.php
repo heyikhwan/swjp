@@ -10,7 +10,7 @@
     <div class="col">
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="#" class="needs-validation"
+                <form method="POST" action="{{ route('user.leader.store') }}" class="needs-validation"
                     enctype="multipart/form-data">
                     @csrf
 
@@ -198,6 +198,7 @@
             d.forEach(e => {
                 var option = document.createElement("option");
                 option.text = e.nama;
+                option.value = e.id 
                 kabupaten.add(option);
             });
         });
@@ -220,6 +221,7 @@
             d.forEach(e => {
                 var option = document.createElement("option");
                 option.text = e.nama;
+                option.value = e.id;
                 kecamatan.add(option);
             });
         });
@@ -242,6 +244,7 @@
             d.forEach(e => {
                 var option = document.createElement("option");
                 option.text = e.nama;
+                option.value = e.id;
                 desa.add(option);
             });
         });

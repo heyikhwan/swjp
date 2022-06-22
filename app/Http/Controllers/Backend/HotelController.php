@@ -24,7 +24,11 @@ class HotelController extends Controller
 
     public function create()
     {
-        return view('backend.hotel.create');
+        $provinsi = Wilayah::where('level', 1)->get();
+
+        return view('backend.hotel.create', [
+            'provinsi' => $provinsi
+        ]);
     }
 
     public function store(Request $request)
@@ -33,11 +37,10 @@ class HotelController extends Controller
             'name' => 'required|string',
             'wilayah' => 'required|string',
             'bintang' => 'required|string',
-            // 'foto' => 'required',
         ]);
 
         $wilayah = Wilayah::where('id', $validatedData['wilayah'])->first();
-    //     dd($wilayah->id);
+
         Hotel::create([
             'name' => $validatedData['name'],
             'wilayah_id' => $wilayah->id,
@@ -63,28 +66,6 @@ class HotelController extends Controller
                 $temporaryFile->delete();
             }
         }
-
-        //     if (request()->has('foto')) {
-    //         $foto = request()->file('foto');
-    //         $fotoName = time() . '.' . $foto->getClientOriginalExtension();
-    //         $fotoPath = public_path('storage/foto');
-    //         $foto->move($fotoPath, $fotoName);
-    //     } else {
-    //         $fotoName = null;
-    //     }
-
-    //     $wilayah = Wilayah::where('id', $validatedData['wilayah'])->first();
-    //     dd($wilayah->id);
-
-    //     Hotel::create([
-    //         'name' => $validatedData['name'],
-    //         'wilayah_id' => $wilayah->id,
-    //         'bintang' => $validatedData['bintang'],
-    //         'foto' => $fotoName,
-    //     ]);
-
-    //     return redirect()->route('user.index')->with('success', 'User berhasil ditambahkan.');
-    // }
 
         return redirect()->route('hotel.index')->with('success', 'Hotel berhasil ditambahkan');
     }

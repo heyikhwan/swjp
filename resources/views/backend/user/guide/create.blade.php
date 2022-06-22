@@ -198,6 +198,7 @@
             d.forEach(e => {
                 var option = document.createElement("option");
                 option.text = e.nama;
+                option.value = e.id;
                 kabupaten.add(option);
             });
         });
@@ -220,6 +221,7 @@
             d.forEach(e => {
                 var option = document.createElement("option");
                 option.text = e.nama;
+                option.value = e.id;
                 kecamatan.add(option);
             });
         });
@@ -242,6 +244,7 @@
             d.forEach(e => {
                 var option = document.createElement("option");
                 option.text = e.nama;
+                option.value = e.id;
                 desa.add(option);
             });
         });

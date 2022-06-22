@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserAdminRequest;
 use App\Http\Requests\UserRequest;
 use App\Models\Customer;
+use App\Models\Fasilitator;
 use App\Models\User;
 use App\Models\Wilayah;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $users = User::with(['customer', 'fasilitator'])->get();
 
         return view('backend.user.index', [
             'users' => $users
@@ -56,7 +57,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function storeUser(UserRequest $request)
+    public function userStore(UserRequest $request)
     {
         $data = $request->all();
 
@@ -76,6 +77,37 @@ class UserController extends Controller
             'password' => Hash::make($data['password']),
             'avatar' => $avatarName,
         ])->assignRole($data['role']);
+
+        return redirect()->route('user.index')->with('success', 'User berhasil ditambahkan.');
+    }
+
+    public function leaderStore(UserRequest $request)
+    {
+        $data = $request->all();
+
+        if (request()->has('avatar')) {
+            $avatar = request()->file('avatar');
+            $avatarName = time() . '.' . $avatar->getClientOriginalExtension();
+            $avatarPath = public_path('storage/avatar');
+            $avatar->move($avatarPath, $avatarName);
+        } else {
+            $avatarName = null;
+        }
+
+        User::create([
+            'name' => $data['name'],
+            'username' => $data['username'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'avatar' => $avatarName,
+        ])->assignRole($data['role']);
+
+        $user = User::latest()->first();
+
+        Fasilitator::create([
+            'user_id' => $user->id,
+            'wilayah_id' => $data['desa'],
+        ]);
 
         return redirect()->route('user.index')->with('success', 'User berhasil ditambahkan.');
     }
@@ -101,6 +133,15 @@ class UserController extends Controller
     public function editCustomer($id)
     {
         $user = User::with('customer')->findOrFail($id);
+
+        return view('backend.user.customer.edit', [
+            'user' => $user
+        ]);
+    }
+
+    public function editLeader($id)
+    {
+        $user = User::with('fasilitator')->findOrFail($id);
 
         return view('backend.user.customer.edit', [
             'user' => $user

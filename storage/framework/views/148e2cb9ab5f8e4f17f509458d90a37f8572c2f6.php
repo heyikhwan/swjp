@@ -158,6 +158,14 @@
                                                                     <td><?php echo e($item->customer->no_passport); ?></td>
                                                                 </tr>
                                                                 <?php endif; ?>
+
+                                                                <?php if($item->getRoleNames()[0] == 'leader' || $item->getRoleNames()[0] == 'guide'): ?>
+                                                                <tr>
+                                                                    <th>Wilayah</th>
+                                                                    <td class="px-2">:</td>
+                                                                    <td><?php echo e($item->fasilitator->wilayah->nama); ?></td>
+                                                                </tr>
+                                                                <?php endif; ?>
                                                             </table>
                                                         </div>
                                                     </div>
