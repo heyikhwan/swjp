@@ -18,6 +18,17 @@
         @endslot
     @endcomponent
 
+    @if ($message = Session::get('success'))
+    <div class="row">
+        <div class="col">
+            <div class="alert alert-success alert-border-left alert-dismissible fade show" role="alert">
+                <i class="mdi mdi-check-all me-3 align-middle"></i><strong>Success</strong> - {{ $message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    @endif
+
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -51,7 +62,7 @@
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
                                         <td>{{ $item->name }}</td>
-                                        <td>{{ $item->wilayah }}</td>
+                                        <td>{{ $item->wilayah->nama }}</td>
                                         <td>
                                             <div class="d-flex align-items-center gap-1">
                                                 <i class="mdi mdi-star text-warning"></i>

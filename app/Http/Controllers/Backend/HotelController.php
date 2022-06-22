@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\HotelRequest;
 use App\Models\Hotel;
 use App\Models\HotelGallery;
 use App\Models\Wilayah;
@@ -24,27 +25,28 @@ class HotelController extends Controller
 
     public function create()
     {
-        $provinsi = Wilayah::where('level', 1)->get();
+        $provinsi = Wilayah::where('level', 1)->orderBy('nama', 'asc')->get();
+        $kota = Wilayah::where('level', 2)->get();
+        $kecamatan = Wilayah::where('level', 3)->get();
+        $desa = Wilayah::where('level', 4)->get();
 
         return view('backend.hotel.create', [
-            'provinsi' => $provinsi
+            'provinsi' => $provinsi,
+            'kota' => $kota,
+            'kecamatan' => $kecamatan,
+            'desa' => $desa,
         ]);
     }
 
-    public function store(Request $request)
+    public function store(HotelRequest $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string',
-            'wilayah' => 'required|string',
-            'bintang' => 'required|string',
-        ]);
-
-        $wilayah = Wilayah::where('id', $validatedData['wilayah'])->first();
+        $data = $request->all();
+        // dd($data);
 
         Hotel::create([
-            'name' => $validatedData['name'],
-            'wilayah_id' => $wilayah->id,
-            'bintang' => $validatedData['bintang'],
+            'name' => $data['name'],
+            'wilayah_id' => $data['desa'],
+            'bintang' => $data['bintang'],
         ]);
 
         $hotel = Hotel::latest()->first();
@@ -52,17 +54,17 @@ class HotelController extends Controller
         if (!is_null($request->image[0])) {
             foreach ($request->image as $img) {
                 $temporaryFile = TemporaryFile::where('folder', $img)->first();
-    
+
                 // dd($temporaryFile);
                 HotelGallery::create([
                     'hotel_id' => $hotel->id,
                     'image' => $temporaryFile->filename
                 ]);
-    
+
                 \File::move(public_path('storage/tmp/' . $img . '/' . $temporaryFile->filename, 'storage/hotel/'), public_path('storage/hotel/' . $temporaryFile->filename));
-    
+
                 \File::delete(public_path('storage/tmp/' . $img));
-    
+
                 $temporaryFile->delete();
             }
         }
@@ -74,9 +76,17 @@ class HotelController extends Controller
     public function edit($id)
     {
         $hotel = Hotel::with('galleries')->findOrFail($id);
+        $provinsi = Wilayah::where('level', 1)->orderBy('nama', 'asc')->get();
+        $kota = Wilayah::where('level', 2)->get();
+        $kecamatan = Wilayah::where('level', 3)->get();
+        $desa = Wilayah::where('level', 4)->get();
 
         return view('backend.hotel.edit', [
             'hotel' => $hotel,
+            'provinsi' => $provinsi,
+            'kota' => $kota,
+            'kecamatan' => $kecamatan,
+            'desa' => $desa,
         ]);
     }
 
@@ -94,28 +104,22 @@ class HotelController extends Controller
     }
 
 
-    public function update(Request $request, $id)
+    public function update(HotelRequest $request, $id)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string',
-            'wilayah' => 'required|string',
-            'bintang' => 'required|string',
-            // 'foto' => 'required',
-        ]);
+        $data = $request->all();
         $hotel = Hotel::findOrFail($id);
-        $wilayah = Wilayah::where('id', $validatedData['wilayah'])->first();
 
         $hotel->update([
-            'name' => $validatedData['name'],
+            'name' => $data['name'],
             'image' => 'nullable',
-            'wilayah_id' => $wilayah->id,
-            'bintang' => $validatedData['bintang'],
+            'wilayah_id' => $data['desa'],
+            'bintang' => $data['bintang'],
         ]);
 
         if (!is_null($request->image[0])) {
             foreach ($request->image as $img) {
                 $temporaryFile = TemporaryFile::where('folder', $img)->first();
-    
+
                 HotelGallery::create([
                     'hotel_id' => $hotel->id,
                     'image' => $temporaryFile->filename
@@ -124,7 +128,7 @@ class HotelController extends Controller
                 \File::move(public_path('storage/tmp/' . $img . '/' . $temporaryFile->filename, 'storage/hotel/'), public_path('storage/hotel/' . $temporaryFile->filename));
 
                 \File::delete(public_path('storage/tmp/' . $img));
-    
+
                 $temporaryFile->delete();
             }
         }
