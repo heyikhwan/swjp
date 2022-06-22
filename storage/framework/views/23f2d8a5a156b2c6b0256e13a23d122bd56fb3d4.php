@@ -29,6 +29,13 @@
                 <li class="menu-title" data-key="t-menu">Master Data</li>
 
                 <li>
+                    <a href="<?php echo e(route('wilayah.index')); ?>">
+                        <i class="bx bx-map"></i>
+                        <span data-key="t-chat">Data Wilayah</span>
+                    </a>
+                </li>
+
+                <li>
                     <a href="<?php echo e(route('user.index')); ?>">
                         <i data-feather="users"></i>
                         <span data-key="t-chat">Data User</span>
@@ -39,13 +46,6 @@
                     <a href="<?php echo e(route('kendaraan.index')); ?>">
                         <i class="bx bx-car"></i>
                         <span data-key="t-chat">Data Kendaraan</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="<?php echo e(route('wilayah.index')); ?>">
-                        <i class=" bx bx-map""></i>
-                        <span data-key="t-chat">Data Wilayah</span>
                     </a>
                 </li>
 
