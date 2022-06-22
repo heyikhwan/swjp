@@ -15,4 +15,9 @@ class Kendaraan extends Model
         'pemilik',
         'rating',
     ];
+
+    public function galleries()
+    {
+        return $this->hasMany(KendaraanGallery::class, 'kendaraan_id', 'id');
+    }
 }

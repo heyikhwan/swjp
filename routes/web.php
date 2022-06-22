@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\WilayahController;
 use App\Http\Controllers\Backend\HotelController;
 use App\Http\Controllers\Backend\KendaraanController;
 use App\Http\Controllers\Backend\ReservasiController;
+use App\Http\Controllers\Backend\UploadController;
 use App\Models\Wilayah;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -61,10 +62,14 @@ Route::get('hotel/tambah', [HotelController::class, 'create'])->name('hotel.crea
 
 // Kendaraan
 Route::resource('kendaraan', KendaraanController::class);
+Route::put('kendaraan/img-delete/{id}', [KendaraanController::class, 'imgDestroy']);
 
 // Reservasi
 Route::get('reservasi/data', [ReservasiController::class, 'data'])->name('reservasi.data');
 Route::get('reservasi/riwayat', [ReservasiController::class, 'riwayat'])->name('reservasi.riwayat');
+
+// Temporary Upload
+Route::post('image-upload', [UploadController::class, 'store'])->name('upload');
 
 
 Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');

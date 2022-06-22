@@ -2,7 +2,8 @@
 <?php $__env->startSection('title'); ?> Data Kendaraan <?php $__env->stopSection(); ?>
 <?php $__env->startSection('css'); ?>
 <link href="<?php echo e(URL::asset('/assets/libs/datatables.net-bs4/datatables.net-bs4.min.css')); ?>" rel="stylesheet">
-<link href="<?php echo e(URL::asset('assets/libs/datatables.net-responsive-bs4/datatables.net-responsive-bs4.min.css')); ?>" rel="stylesheet" type="text/css" />
+<link href="<?php echo e(URL::asset('assets/libs/datatables.net-responsive-bs4/datatables.net-responsive-bs4.min.css')); ?>"
+    rel="stylesheet" type="text/css" />
 <link href="<?php echo e(URL::asset('assets/libs/sweetalert2/sweetalert2.min.css')); ?>" rel="stylesheet">
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
@@ -72,7 +73,44 @@
                                     </div>
                                 </td>
                                 <td class="d-flex gap-2 align-items-center">
-                                    <a href="<?php echo e(route('kendaraan.edit', $item->id)); ?>" class="btn btn-soft-warning waves-effect waves-light">
+                                    <div>
+                                        <button type="button" class="btn btn-soft-secondary waves-effect waves-light"
+                                            data-bs-toggle="modal" data-bs-target="#detail-<?php echo e($item->id); ?>">
+                                            <i class="fas fa-image"></i>
+                                        </button>
+
+                                        <!-- Modal Galeri -->
+                                        <div id="detail-<?php echo e($item->id); ?>" class="modal fade" tabindex="-1"
+                                            aria-labelledby="detailLabel" aria-hidden="true" data-bs-scroll="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="detailLabel">Galeri</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="mb-4">
+                                                            <?php $__currentLoopData = $galleries; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $gallery): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                            <?php if($gallery->kendaraan_id === $item->id): ?>
+                                                            <img src="<?php echo e(asset('storage/kendaraan/' . $gallery->image)); ?>"
+                                                                class="img-fluid img-thumbnail mx-1"
+                                                                style="max-width: 200px">
+                                                            <?php endif; ?>
+                                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary waves-effect"
+                                                            data-bs-dismiss="modal">Tutup</button>
+                                                    </div>
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                        </div><!-- /.modal -->
+                                    </div> <!-- end preview-->
+
+                                    <a href="<?php echo e(route('kendaraan.edit', $item->id)); ?>"
+                                        class="btn btn-soft-warning waves-effect waves-light">
                                         <i class="fas fa-edit"></i>
                                     </a>
 
@@ -80,7 +118,8 @@
                                         id="sa-warning" onclick="swal(<?php echo e($item->id); ?>)">
                                         <i class="fas fa-trash"></i>
 
-                                        <form action="<?php echo e(route('kendaraan.destroy', $item->id)); ?>" method="post" id="delete-<?php echo e($item->id); ?>">
+                                        <form action="<?php echo e(route('kendaraan.destroy', $item->id)); ?>" method="post"
+                                            id="delete-<?php echo e($item->id); ?>">
                                             <?php echo csrf_field(); ?>
                                             <?php echo method_field('delete'); ?>
                                         </form>
@@ -128,5 +167,4 @@
 <script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
 <script src="<?php echo e(URL::asset('assets/js/pages/datatable-pages.init.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
-
 <?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Project\swjp\resources\views/backend/kendaraan/index.blade.php ENDPATH**/ ?>
