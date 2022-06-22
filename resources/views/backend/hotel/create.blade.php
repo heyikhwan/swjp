@@ -1,5 +1,9 @@
 @extends('layouts.master')
 @section('title') Tambah Hotel @endsection
+@section('css')
+<link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
+<link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet" />
+@endsection
 @section('content')
 @component('components.breadcrumb')
 @slot('li_1') Data Hotel @endslot
@@ -10,48 +14,61 @@
     <div class="col">
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="{{ route('user.admin.store') }}" class="needs-validation" novalidate
+                <form method="POST" action="{{ route('hotel.store') }}" class="needs-validation" novalidate
                     enctype="multipart/form-data">
                     @csrf
-
-                    <input type="hidden" name="role" value="admin">
 
                     <div class="row">
                         <div class="col">
                             <div class="mb-3">
                                 <label class="form-label" for="name">Nama Hotel</label>
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Nama Hotel"
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Nama Hotel"
                                     required>
+                                    @error('nama')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
                             </div>
                             <div class="invalid-feedback">
                                 Please choose a username.
                             </div>
-                        </div>
 
                         <div class="col-3">
                             <label for="bintang">Bintang</label>
                             <div class="input-group mb-3">
                               <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroupPrepend"><i style ="color:rgba(216, 219, 0, 0.938);"class="bx bxs-star font-size-20"></i></span>
+                                <span class="input-group-text" id="inputGroupPrepend"><i class="bx bxs-star font-size-20 text-warning"></i></span>
                               </div>
-                              <input type="text" class="form-control" id="bintang" placeholder="Bintang" aria-describedby="inputGroupPrepend" required>
+                              <input type="text" class="form-control @error('bintang') is-invalid @enderror" id="bintang" placeholder="Bintang" aria-describedby="inputGroupPrepend" name="bintang" required>
+                              @error('bintang')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
                               <div class="invalid-feedback">
                                 Masukkan bintang hotel
                               </div>
                             </div>
                           </div>
-                    </div>
                     <div class="row">
                         <div class="col">
                             <div class="mb-3">
                                 <label class="form-label" for="wilayah">Nama Wilayah</label>
-                                <input type="text" class="form-control" id="wilayah" name="wilayah"
+                                <input type="text" class="form-control  @error('wilayah') is-invalid @enderror" id="wilayah" name="wilayah"
                                     placeholder="Nama Wilayah" required>
+                                    @error('wilayah')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-12">
                             <div class="mb-3">
                                 <label for="foto" class="form-label">Foto</label>
@@ -63,6 +80,20 @@
                             <div class="mb-3">
                                 <img id="myImg-1" class="d-none border p-1 rounded img-fluid img-thumbnail" src="#"
                                     width="120" height="120">
+                            </div>
+                        </div>
+                    </div> --}}
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <div class="form-group">
+                                    <label for="image">Gambar</label>
+                                    <input type="file" id="image" name="image[]" accept=".svg, image/png,image/jpg,image/jpeg" multiple />
+            
+                                    <small class="form-text text-muted">only allowed
+                                        jpg/jpeg/png/svg file and smaller than 2MB</small>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -79,9 +110,13 @@
 @endsection
 
 @section('script')
-<script src="{{ URL::asset('assets/libs/rater-js/rater-js.min.js') }}"></script>
-<script src="{{ URL::asset('assets/js/pages/rating.init.js') }}"></script>
 <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
+
+<script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js">
+</script>
+<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+<script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+<script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
 
 <script>
     function uploadImg(id) {
@@ -103,11 +138,24 @@
 </script>
 
 <script>
-    function rating() {
-        document.querySelector('.star-rating').addEventListener('change', function() {
-            const rating = document.querySelector('.star-rating').rate("getValue")
-            console.log(rating);
-        });
-    }
+    FilePond.registerPlugin(
+        FilePondPluginFileValidateType,
+        FilePondPluginImagePreview,
+        FilePondPluginFileValidateSize
+    );
+    
+    FilePond.setOptions({
+        server: {
+            url: '{{ route("upload") }}',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+        },
+        allowMultiple: true,
+    });
+    const inputElement = document.querySelector('input[id="image"]');
+    const pond = FilePond.create(inputElement, {
+        maxFileSize: '2MB',
+    });
 </script>
 @endsection

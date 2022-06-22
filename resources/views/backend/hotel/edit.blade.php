@@ -1,54 +1,40 @@
-
-<?php $__env->startSection('title'); ?> Tambah Hotel <?php $__env->stopSection(); ?>
-<?php $__env->startSection('css'); ?>
+@extends('layouts.master')
+@section('title') Tambah Hotel @endsection
+@section('css')
 <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
 <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet" />
-<?php $__env->stopSection(); ?>
-<?php $__env->startSection('content'); ?>
-<?php $__env->startComponent('components.breadcrumb'); ?>
-<?php $__env->slot('li_1'); ?> Data Hotel <?php $__env->endSlot(); ?>
-<?php $__env->slot('title'); ?> Tambah Hotel <?php $__env->endSlot(); ?>
-<?php echo $__env->renderComponent(); ?>
+@endsection
+@section('content')
+@component('components.breadcrumb')
+@slot('li_1') Data Hotel @endslot
+@slot('title') Tambah Hotel @endslot
+@endcomponent
 
 <div class="row">
     <div class="col">
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="<?php echo e(route('hotel.store')); ?>" class="needs-validation" novalidate
+                <form method="POST" action="{{ route('hotel.udpate', $hotel->id) }}" class="needs-validation" novalidate
                     enctype="multipart/form-data">
-                    <?php echo csrf_field(); ?>
+                    @csrf
 
                     <div class="row">
                         <div class="col">
                             <div class="mb-3">
                                 <label class="form-label" for="name">Nama Hotel</label>
-                                <input type="text" class="form-control <?php $__errorArgs = ['name'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>" id="name" name="name" placeholder="Nama Hotel"
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Nama Hotel" value="{{ old('name') ?? $hotel->nama }}"
                                     required>
-                                    <?php $__errorArgs = ['nama'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
+                                    @error('nama')
                                     <div class="invalid-feedback">
-                                        <?php echo e($message); ?>
-
+                                        {{ $message }}
                                     </div>
-                                    <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="invalid-feedback">
                                 Please choose a username.
                             </div>
+                        </div>
 
                         <div class="col-3">
                             <label for="bintang">Bintang</label>
@@ -56,64 +42,50 @@ unset($__errorArgs, $__bag); ?>
                               <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroupPrepend"><i class="bx bxs-star font-size-20 text-warning"></i></span>
                               </div>
-                              <input type="text" class="form-control <?php $__errorArgs = ['bintang'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>" id="bintang" placeholder="Bintang" aria-describedby="inputGroupPrepend" name="bintang" required>
-                              <?php $__errorArgs = ['bintang'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
+                              <input type="text" class="form-control @error('bintang') is-invalid @enderror" id="bintang" placeholder="Bintang" aria-describedby="inputGroupPrepend" name="bintang"  value="{{ old('bintang') ?? $hotel->bintang }}"required>
+                              @error('bintang')
                                     <div class="invalid-feedback">
-                                        <?php echo e($message); ?>
-
+                                        {{ $message }}
                                     </div>
-                                    <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
+                                    @enderror
                                 </div>
                               <div class="invalid-feedback">
                                 Masukkan bintang hotel
                               </div>
                             </div>
                           </div>
+                    </div>
                     <div class="row">
                         <div class="col">
                             <div class="mb-3">
                                 <label class="form-label" for="wilayah">Nama Wilayah</label>
-                                <input type="text" class="form-control  <?php $__errorArgs = ['wilayah'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>" id="wilayah" name="wilayah"
-                                    placeholder="Nama Wilayah" required>
-                                    <?php $__errorArgs = ['wilayah'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
+                                <input type="text" class="form-control  @error('wilayah') is-invalid @enderror" id="wilayah" name="wilayah"
+                                    placeholder="Nama Wilayah" value="{{ old('wilayah') ?? $hotel->wilayah }}" required>
+                                    @error('wilayah')
                                     <div class="invalid-feedback">
-                                        <?php echo e($message); ?>
-
+                                        {{ $message }}
                                     </div>
-                                    <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                    
+                    {{-- <div class="row">
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label for="foto" class="form-label">Foto</label>
+                                <input class="form-control" type="file" id="foto-1" name="foto"
+                                    onclick="uploadImg(1)">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <img id="myImg-1" class="d-none border p-1 rounded img-fluid img-thumbnail" src="#"
+                                    width="120" height="120">
+                            </div>
+                        </div>
+                    </div> --}}
 
                     <div class="row">
                         <div class="col">
@@ -130,7 +102,7 @@ unset($__errorArgs, $__bag); ?>
                     </div>
 
                     <div class="d-flex justify-content-end gap-2">
-                        <a class="btn btn-secondary" href="<?php echo e(route('hotel.index')); ?>">Kembali</a>
+                        <a class="btn btn-secondary" href="{{ route('hotel.index') }}">Kembali</a>
                         <button class="btn btn-primary" type="submit">Submit</button>
                     </div>
                 </form>
@@ -138,10 +110,10 @@ unset($__errorArgs, $__bag); ?>
         </div>
     </div>
 </div>
-<?php $__env->stopSection(); ?>
+@endsection
 
-<?php $__env->startSection('script'); ?>
-<script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
+@section('script')
+<script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
 
 <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js">
 </script>
@@ -177,9 +149,9 @@ unset($__errorArgs, $__bag); ?>
     
     FilePond.setOptions({
         server: {
-            url: '<?php echo e(route("upload")); ?>',
+            url: '{{ route("upload") }}',
             headers: {
-                'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>'
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
             }
         },
         allowMultiple: true,
@@ -189,6 +161,4 @@ unset($__errorArgs, $__bag); ?>
         maxFileSize: '2MB',
     });
 </script>
-<?php $__env->stopSection(); ?>
-
-<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\swjp\resources\views/backend/hotel/create.blade.php ENDPATH**/ ?>
+@endsection

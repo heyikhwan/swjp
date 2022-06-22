@@ -57,8 +57,8 @@ Route::get('data/desa/{id}', function ($id)
 });
 
 // Hotel
-Route::get('hotel', [HotelController::class, 'index'])->name('hotel.index');
-Route::get('hotel/tambah', [HotelController::class, 'create'])->name('hotel.create');
+Route::resource('hotel', HotelController::class);
+Route::put('hotel/img-delete/{id}', [HotelController::class, 'imgDestroy']);
 
 // Kendaraan
 Route::resource('kendaraan', KendaraanController::class);

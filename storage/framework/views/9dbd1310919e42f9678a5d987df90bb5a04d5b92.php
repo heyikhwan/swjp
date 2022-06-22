@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('title'); ?> Data Wilayah <?php $__env->stopSection(); ?>
 <?php $__env->startSection('css'); ?>
 <link href="<?php echo e(URL::asset('/assets/libs/datatables.net-bs4/datatables.net-bs4.min.css')); ?>" rel="stylesheet">

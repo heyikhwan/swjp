@@ -16,7 +16,6 @@
             <div class="card-body">
                 <form method="POST" action="{{ route('kendaraan.store') }}" class="needs-validation">
                     @csrf
-
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
