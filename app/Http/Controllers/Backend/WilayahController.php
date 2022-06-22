@@ -33,6 +33,7 @@ class WilayahController extends Controller
         ->addColumn('level', function ($data) {
             return ($data->level == 1) ? "Provinsi" : (($data->level == 2) ? "Kabupaten/Kota" : (($data->level == 3) ? "Kecamatan" : "Desa"));
         })
+        ->orderColumn('level', 'level $1')
         ->rawColumns(['aksi', 'level'])
         ->make(true);
     }
