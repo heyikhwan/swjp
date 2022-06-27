@@ -1,20 +1,19 @@
 <?php
 
+use App\Models\Wilayah;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Backend\UserController;
-use App\Http\Controllers\Backend\WilayahController;
 use App\Http\Controllers\Backend\HotelController;
+use App\Http\Controllers\Backend\UploadController;
+use App\Http\Controllers\Backend\WilayahController;
 use App\Http\Controllers\Backend\KendaraanController;
 use App\Http\Controllers\Backend\ReservasiController;
-use App\Http\Controllers\Backend\UploadController;
-use App\Models\Wilayah;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Auth::routes();
-//Language Translation
-Route::get('index/{locale}', [App\Http\Controllers\HomeController::class, 'lang']);
-
-Route::get('/', [App\Http\Controllers\HomeController::class, 'root'])->name('root');
 
 // User
 Route::get('user', [UserController::class, 'index'])->name('user.index');
@@ -32,10 +31,6 @@ Route::put('user/admin-update/{user}', [UserController::class, 'updateUser'])->n
 Route::put('user/customer-update/{user}', [UserController::class, 'updateCustomer'])->name('user.customer.update');
 Route::put('user/leader-update/{user}', [UserController::class, 'updateLeader'])->name('user.leader.update');
 Route::delete('user/admin-delete/{user}', [UserController::class, 'destroy'])->name('user.destroy');
-
-//Update User Details
-Route::post('/update-profile/{id}', [App\Http\Controllers\HomeController::class, 'updateProfile'])->name('updateProfile');
-Route::post('/update-password/{id}', [App\Http\Controllers\HomeController::class, 'updatePassword'])->name('updatePassword');
 
 // Wilayah
 Route::resource('wilayah', WilayahController::class);
