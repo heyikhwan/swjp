@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\FeedbackController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\WilayahController;
 use App\Http\Controllers\Backend\HotelController;
@@ -71,6 +72,9 @@ Route::put('kendaraan/img-delete/{id}', [KendaraanController::class, 'imgDestroy
 
 // Paket Wisata
 Route::resource('paket-wisata', PaketWisataController::class);
+
+// Feedback
+Route::get('feedback/leader', [FeedbackController::class, 'leader'])->name('feedback.leader');
 
 // Reservasi
 Route::get('reservasi/data', [ReservasiController::class, 'data'])->name('reservasi.data');

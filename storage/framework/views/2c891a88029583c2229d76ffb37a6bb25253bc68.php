@@ -14,7 +14,7 @@
     <div class="col">
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="<?php echo e(route('hotel.store')); ?>" class="needs-validation" novalidate
+                <form method="POST" action="<?php echo e(route('hotel.store')); ?>" class="needs-validation"
                     enctype="multipart/form-data">
                     <?php echo csrf_field(); ?>
 
