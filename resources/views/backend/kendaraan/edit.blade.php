@@ -67,14 +67,14 @@
                             <div class="mb-3">
                                 <div class="form-group">
                                     <label for="image">Gambar</label>
-            
+
                                     <div class="mb-3">
                                         <div class="row d-flex align-items-end">
                                             @foreach ($kendaraan->galleries as $gallery)
                                             <div class="col-lg-2 my-1" id="image-container-{{ $gallery->id }}">
                                                 <img class="{{ $gallery->image ? '' : 'd-none' }} border p-1 rounded img-fluid"
                                                     src="{{ $gallery->image ? url('storage/kendaraan/', $gallery->image) : '#' }}" width="200">
-            
+
                                                 @if ($gallery->image)
                                                 <div class="text-center">
                                                     <a href="javascript:void(0)" class="btn btn-link btn-sm text-danger"
@@ -85,10 +85,10 @@
                                             @endforeach
                                         </div>
                                     </div>
-            
+
                                     <input type="file" id="image" name="image[]" accept=".svg, image/png,image/jpg,image/jpeg"
                                         multiple />
-            
+
                                     <small class="form-text text-muted">recommended size is 800 x 600px or 800 x 800px. only allowed
                                         jpg/jpeg/png/svg file and smaller than 2MB</small>
                                 </div>
@@ -121,7 +121,7 @@
         FilePondPluginImagePreview,
         FilePondPluginFileValidateSize
     );
-    
+
     FilePond.setOptions({
         server: {
             url: '{{ route("upload") }}',
@@ -141,7 +141,7 @@
         if(confirm('Anda yakin ingin menghapus?'))
         {
             $.ajax({
-                url: '/kendaraan/img-delete/' + id,
+                url: '/admin/kendaraan/img-delete/' + id,
                 method: 'put',
                 data: {
                     _token: '{{ csrf_token() }}',

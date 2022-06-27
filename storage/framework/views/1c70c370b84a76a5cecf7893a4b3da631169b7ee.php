@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title'); ?> Edit Kendaraan <?php $__env->stopSection(); ?>
 <?php $__env->startSection('css'); ?>
 <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
@@ -112,14 +111,14 @@ unset($__errorArgs, $__bag); ?>
                             <div class="mb-3">
                                 <div class="form-group">
                                     <label for="image">Gambar</label>
-            
+
                                     <div class="mb-3">
                                         <div class="row d-flex align-items-end">
                                             <?php $__currentLoopData = $kendaraan->galleries; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $gallery): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <div class="col-lg-2 my-1" id="image-container-<?php echo e($gallery->id); ?>">
                                                 <img class="<?php echo e($gallery->image ? '' : 'd-none'); ?> border p-1 rounded img-fluid"
                                                     src="<?php echo e($gallery->image ? url('storage/kendaraan/', $gallery->image) : '#'); ?>" width="200">
-            
+
                                                 <?php if($gallery->image): ?>
                                                 <div class="text-center">
                                                     <a href="javascript:void(0)" class="btn btn-link btn-sm text-danger"
@@ -130,10 +129,10 @@ unset($__errorArgs, $__bag); ?>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </div>
                                     </div>
-            
+
                                     <input type="file" id="image" name="image[]" accept=".svg, image/png,image/jpg,image/jpeg"
                                         multiple />
-            
+
                                     <small class="form-text text-muted">recommended size is 800 x 600px or 800 x 800px. only allowed
                                         jpg/jpeg/png/svg file and smaller than 2MB</small>
                                 </div>
@@ -166,7 +165,7 @@ unset($__errorArgs, $__bag); ?>
         FilePondPluginImagePreview,
         FilePondPluginFileValidateSize
     );
-    
+
     FilePond.setOptions({
         server: {
             url: '<?php echo e(route("upload")); ?>',
@@ -186,7 +185,7 @@ unset($__errorArgs, $__bag); ?>
         if(confirm('Anda yakin ingin menghapus?'))
         {
             $.ajax({
-                url: '/kendaraan/img-delete/' + id,
+                url: '/admin/kendaraan/img-delete/' + id,
                 method: 'put',
                 data: {
                     _token: '<?php echo e(csrf_token()); ?>',
@@ -199,4 +198,5 @@ unset($__errorArgs, $__bag); ?>
     }
 </script>
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\swjp\resources\views/backend/kendaraan/edit.blade.php ENDPATH**/ ?>

@@ -82,7 +82,7 @@
                                         <!-- Modal Galeri -->
                                         <div id="detail-<?php echo e($item->id); ?>" class="modal fade" tabindex="-1"
                                             aria-labelledby="detailLabel" aria-hidden="true" data-bs-scroll="true">
-                                            <div class="modal-dialog">
+                                            <div class="modal-dialog modal-dialog-scrollable">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="detailLabel">Galeri</h5>
@@ -90,12 +90,13 @@
                                                             aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <div class="mb-4">
+                                                        <div class="row">
                                                             <?php $__currentLoopData = $galleries; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $gallery): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                             <?php if($gallery->kendaraan_id === $item->id): ?>
-                                                            <img src="<?php echo e(asset('storage/kendaraan/' . $gallery->image)); ?>"
-                                                                class="img-fluid img-thumbnail mx-1"
-                                                                style="max-width: 200px">
+                                                            <div class="col-6">
+                                                                <img src="<?php echo e(asset('storage/kendaraan/' . $gallery->image)); ?>"
+                                                                class="img-fluid img-thumbnail m-2">
+                                                            </div>
                                                             <?php endif; ?>
                                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                         </div>

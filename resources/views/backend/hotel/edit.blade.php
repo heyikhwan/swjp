@@ -131,14 +131,14 @@
                             <div class="mb-3">
                                 <div class="form-group">
                                     <label for="image">Gambar</label>
-            
+
                                     <div class="mb-3">
                                         <div class="row d-flex align-items-end">
                                             @foreach ($hotel->galleries as $gallery)
                                             <div class="col-lg-2 my-1" id="image-container-{{ $gallery->id }}">
                                                 <img class="{{ $gallery->image ? '' : 'd-none' }} border p-1 rounded img-fluid"
                                                     src="{{ $gallery->image ? url('storage/hotel/', $gallery->image) : '#' }}" width="200">
-            
+
                                                 @if ($gallery->image)
                                                 <div class="text-center">
                                                     <a href="javascript:void(0)" class="btn btn-link btn-sm text-danger"
@@ -149,10 +149,10 @@
                                             @endforeach
                                         </div>
                                     </div>
-            
+
                                     <input type="file" id="image" name="image[]" accept=".svg, image/png,image/jpg,image/jpeg"
                                         multiple />
-            
+
                                     <small class="form-text text-muted">recommended size is 800 x 600px or 800 x 800px. only allowed
                                         jpg/jpeg/png/svg file and smaller than 2MB</small>
                                 </div>
@@ -213,15 +213,15 @@
     }
 
     if (provinsiValue) {
-        const url = '/data/kota/' + provinsiValue;
+        const url = '/admin/data/kota/' + provinsiValue;
 
         fetchData(kabupaten, url);
     }
-    
+
     provinsi.addEventListener('change', () => {
         provinsiId = provinsi.options[provinsi.selectedIndex].value;
 
-        const url = '/data/kota/' + provinsiId;
+        const url = '/admin/data/kota/' + provinsiId;
 
         const lastOptKabupaten = kabupaten.children;
         const lastOptKecamatan = kecamatan.children;
@@ -237,7 +237,7 @@
     kabupaten.addEventListener('change', () => {
         kabupatenId = kabupaten.options[kabupaten.selectedIndex].value;
 
-        const url = '/data/kecamatan/' + kabupatenId;
+        const url = '/admin/data/kecamatan/' + kabupatenId;
 
         const lastOptKecamatan = kecamatan.children;
         const lastOptDesa = desa.children;
@@ -251,7 +251,7 @@
     kecamatan.addEventListener('change', () => {
         kecamatanId = kecamatan.options[kecamatan.selectedIndex].value;
 
-        const url = '/data/desa/' + kecamatanId;
+        const url = '/admin/data/desa/' + kecamatanId;
 
         const lastOptDesa = desa.children;
 
@@ -285,7 +285,7 @@
         FilePondPluginImagePreview,
         FilePondPluginFileValidateSize
     );
-    
+
     FilePond.setOptions({
         server: {
             url: '{{ route("upload") }}',
