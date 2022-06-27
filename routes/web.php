@@ -15,9 +15,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 
-// });
-// User
-Route::group(['middleware' => ['role:admin']], function() {
+// Admin
+    Route::group(['middleware' => ['role:admin|guide|manager|leader']], function() {
         Route::get('user', [UserController::class, 'index'])->name('user.index');
         Route::get('user/admin/create', [UserController::class, 'createAdmin'])->name('user.admin.create');
         Route::get('user/manager/create', [UserController::class, 'createManager'])->name('user.manager.create');
@@ -79,6 +78,3 @@ Route::group(['middleware' => ['role:admin']], function() {
         Route::post('image-upload', [UploadController::class, 'store'])->name('upload');
 });
 
-
-
-Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
