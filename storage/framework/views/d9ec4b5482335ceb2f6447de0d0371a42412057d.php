@@ -14,9 +14,10 @@
     <div class="col">
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="<?php echo e(route('hotel.store')); ?>" class="needs-validation" novalidate
+                <form method="POST" action="<?php echo e(route('hotel.update', $hotel->id)); ?>" class="needs-validation" novalidate
                     enctype="multipart/form-data">
                     <?php echo csrf_field(); ?>
+                    <?php echo method_field('PUT'); ?>
 
                     <div class="row">
                         <div class="col">
@@ -30,7 +31,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" id="name"
-                                    name="name" placeholder="Nama Hotel" value="<?php echo e(old('name')); ?>" required>
+                                    name="name" placeholder="Nama Hotel" value="<?php echo e(old('name') ?? $hotel->name); ?>" required>
                                 <?php $__errorArgs = ['name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -63,7 +64,7 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
                                     id="bintang" placeholder="Bintang" aria-describedby="inputGroupPrepend"
-                                    name="bintang" value="<?php echo e(old('bintang')); ?>" required>
+                                    name="bintang" value="<?php echo e(old('bintang') ?? $hotel->bintang); ?>" required>
                                 <?php $__errorArgs = ['bintang'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -81,13 +82,11 @@ unset($__errorArgs, $__bag); ?>
                         </div>
                     </div>
 
-                    <div>
-                        <label>Wilayah</label>
-                        <div class="row">
-                            <div class="col-12 col-md-6 col-lg-3">
-                                <div class="mb-3">
-                                    <label for="provinsi" class="form-label font-size-13 text-muted">Provinsi</label>
-                                    <select class="form-select <?php $__errorArgs = ['provinsi'];
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="mb-3">
+                                <label for="provinsi" class="form-label font-size-13 text-muted">Provinsi</label>
+                                <select class="form-select <?php $__errorArgs = ['provinsi'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -95,32 +94,32 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="provinsi" id="provinsi"
-                                        placeholder="Provinsi" required>
-                                        <option value="">Pilih Provinsi</option>
-                                        <?php $__currentLoopData = $provinsi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <option value="<?php echo e($item->id); ?>" <?php echo e(old('provinsi') == $item->id ? 'selected' : ''); ?>><?php echo e($item->nama); ?></option>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                    </select>
-                                    <?php $__errorArgs = ['provinsi'];
+                                    placeholder="Provinsi" required>
+                                    <option value="">Pilih Provinsi</option>
+                                    <?php $__currentLoopData = $provinsi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($item->id); ?>" <?php echo e(old('provinsi') == $item->id || $provinsiId->id == $item->id ? 'selected' : ''); ?>><?php echo e($item->nama); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </select>
+                                <?php $__errorArgs = ['provinsi'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                        <div class="invalid-feedback">
-                                            <?php echo e($message); ?>
+                                    <div class="invalid-feedback">
+                                        <?php echo e($message); ?>
 
-                                        </div>
-                                    <?php unset($message);
+                                    </div>
+                                <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                                </div>
                             </div>
-    
-                            <div class="col-12 col-md-6 col-lg-3">
-                                <div class="mb-3">
-                                    <label for="kabupaten" class="form-label font-size-13 text-muted">Kabupaten/Kota</label>
-                                    <select class="form-select <?php $__errorArgs = ['kabupaten'];
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="mb-3">
+                                <label for="kabupaten" class="form-label font-size-13 text-muted">Kabupaten/Kota</label>
+                                <select class="form-select <?php $__errorArgs = ['kabupaten'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -128,29 +127,32 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="kabupaten" id="kabupaten"
-                                        placeholder="Kab/Kota" required>
-                                        <option value="">Pilih Kabupaten/Kota</option>
-                                    </select>
-                                    <?php $__errorArgs = ['kabupaten'];
+                                    placeholder="Kab/Kota" required>
+                                    <option value="">Pilih Kabupaten/Kota</option>
+                                    <?php $__currentLoopData = $kabupaten; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($item->id); ?>" <?php echo e(old('kabupaten') == $item->id || $kabupatenId->id == $item->id ? 'selected' : ''); ?>><?php echo e($item->nama); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </select>
+                                <?php $__errorArgs = ['kabupaten'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                        <div class="invalid-feedback">
-                                            <?php echo e($message); ?>
+                                    <div class="invalid-feedback">
+                                        <?php echo e($message); ?>
 
-                                        </div>
-                                    <?php unset($message);
+                                    </div>
+                                <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                                </div>
                             </div>
-    
-                            <div class="col-12 col-md-6 col-lg-3">
-                                <div class="mb-3">
-                                    <label for="kecamatan" class="form-label font-size-13 text-muted">Kecamatan</label>
-                                    <select class="form-select <?php $__errorArgs = ['kecamatan'];
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="mb-3">
+                                <label for="kecamatan" class="form-label font-size-13 text-muted">Kecamatan</label>
+                                <select class="form-select <?php $__errorArgs = ['kecamatan'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -158,29 +160,32 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="kecamatan" id="kecamatan"
-                                        placeholder="Kecamatan" required>
-                                        <option value="">Pilih Kecamatan</option>
-                                    </select>
-                                    <?php $__errorArgs = ['kecamatan'];
+                                    placeholder="Kecamatan" required>
+                                    <option value="">Pilih Kecamatan</option>
+                                    <?php $__currentLoopData = $kecamatan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($item->id); ?>" <?php echo e(old('kecamatan') == $item->id || $kecamatanId->id == $item->id ? 'selected' : ''); ?>><?php echo e($item->nama); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </select>
+                                <?php $__errorArgs = ['kecamatan'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                        <div class="invalid-feedback">
-                                            <?php echo e($message); ?>
+                                    <div class="invalid-feedback">
+                                        <?php echo e($message); ?>
 
-                                        </div>
-                                    <?php unset($message);
+                                    </div>
+                                <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                                </div>
                             </div>
-    
-                            <div class="col-12 col-md-6 col-lg-3">
-                                <div class="mb-3">
-                                    <label for="desa" class="form-label font-size-13 text-muted">Desa</label>
-                                    <select class="form-select <?php $__errorArgs = ['desa'];
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="mb-3">
+                                <label for="desa" class="form-label font-size-13 text-muted">Desa</label>
+                                <select class="form-select <?php $__errorArgs = ['desa'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -188,23 +193,25 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="desa" id="desa"
-                                        placeholder="Desa" required>
-                                        <option value="">Pilih Desa</option>
-                                    </select>
-                                    <?php $__errorArgs = ['desa'];
+                                    placeholder="Desa" required>
+                                    <option value="">Pilih Desa</option>
+                                    <?php $__currentLoopData = $desa; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($item->id); ?>" <?php echo e(old('desa') == $item->id || $hotel->wilayah_id == $item->id ? 'selected' : ''); ?>><?php echo e($item->nama); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </select>
+                                <?php $__errorArgs = ['desa'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                        <div class="invalid-feedback">
-                                            <?php echo e($message); ?>
+                                    <div class="invalid-feedback">
+                                        <?php echo e($message); ?>
 
-                                        </div>
-                                    <?php unset($message);
+                                    </div>
+                                <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -214,10 +221,29 @@ unset($__errorArgs, $__bag); ?>
                             <div class="mb-3">
                                 <div class="form-group">
                                     <label for="image">Gambar</label>
-                                    <input type="file" id="image" name="image[]"
-                                        accept=".svg, image/png,image/jpg,image/jpeg" multiple />
-
-                                    <small class="form-text text-muted">only allowed
+            
+                                    <div class="mb-3">
+                                        <div class="row d-flex align-items-end">
+                                            <?php $__currentLoopData = $hotel->galleries; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $gallery): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <div class="col-lg-2 my-1" id="image-container-<?php echo e($gallery->id); ?>">
+                                                <img class="<?php echo e($gallery->image ? '' : 'd-none'); ?> border p-1 rounded img-fluid"
+                                                    src="<?php echo e($gallery->image ? url('storage/hotel/', $gallery->image) : '#'); ?>" width="200">
+            
+                                                <?php if($gallery->image): ?>
+                                                <div class="text-center">
+                                                    <a href="javascript:void(0)" class="btn btn-link btn-sm text-danger"
+                                                        onclick="event.preventDefault();imgDestroy(<?php echo e($gallery->id); ?>, 'image');">[Hapus]</a>
+                                                </div>
+                                                <?php endif; ?>
+                                            </div>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        </div>
+                                    </div>
+            
+                                    <input type="file" id="image" name="image[]" accept=".svg, image/png,image/jpg,image/jpeg"
+                                        multiple />
+            
+                                    <small class="form-text text-muted">recommended size is 800 x 600px or 800 x 800px. only allowed
                                         jpg/jpeg/png/svg file and smaller than 2MB</small>
                                 </div>
                             </div>
@@ -238,6 +264,11 @@ unset($__errorArgs, $__bag); ?>
 <?php $__env->startSection('script'); ?>
 <script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
 
+<script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js">
+</script>
+<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+<script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+<script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
 <script>
     const provinsi = document.querySelector('#provinsi');
     const kabupaten = document.querySelector('#kabupaten');
@@ -319,13 +350,6 @@ unset($__errorArgs, $__bag); ?>
         fetchData(desa, url);
     });
 </script>
-
-<script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js">
-</script>
-<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
-<script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
-<script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
-
 <script>
     function uploadImg(id) {
         document.querySelector('#foto-' + id).addEventListener('change', function() {
@@ -367,4 +391,5 @@ unset($__errorArgs, $__bag); ?>
     });
 </script>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Project\swjp\resources\views/backend/hotel/create.blade.php ENDPATH**/ ?>
+
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Project\swjp\resources\views/backend/hotel/edit.blade.php ENDPATH**/ ?>

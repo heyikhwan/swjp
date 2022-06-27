@@ -51,7 +51,7 @@
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
                                         <td>{{ $item->name }}</td>
-                                        <td>{{ $item->wilayah }}</td>
+                                        <td>{{ $item->wilayah->nama }}</td>
                                         <td>
                                             <div class="d-flex align-items-center gap-1">
                                                 <i class="mdi mdi-star text-warning"></i>
@@ -75,27 +75,27 @@
                                                 <!-- Modal Galeri -->
                                                 <div id="detail-{{ $item->id }}" class="modal fade" tabindex="-1"
                                                     aria-labelledby="detailLabel" aria-hidden="true" data-bs-scroll="true">
-                                                    <div class="modal-dialog">
+                                                    <div class="modal-dialog modal-dialog-scrollable">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="detailLabel">Galeri</h5>
-                                                                <button type="button" class="btn-close"
-                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                    aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <div class="mb-4">
+                                                                <div class="row">
                                                                     @foreach ($galleries as $gallery)
-                                                                        @if ($gallery->hotel_id === $item->id)
-                                                                            <img src="{{ asset('storage/hotel/' . $gallery->image) }}"
-                                                                                class="img-fluid img-thumbnail mx-1"
-                                                                                style="max-width: 200px">
-                                                                        @endif
+                                                                    @if ($gallery->hotel_id === $item->id)
+                                                                    <div class="col-6">
+                                                                        <img src="{{ asset('storage/hotel/' . $gallery->image) }}"
+                                                                        class="img-fluid img-thumbnail m-2">
+                                                                    </div>
+                                                                    @endif
                                                                     @endforeach
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button"
-                                                                    class="btn btn-secondary waves-effect"
+                                                                <button type="button" class="btn btn-secondary waves-effect"
                                                                     data-bs-dismiss="modal">Tutup</button>
                                                             </div>
                                                         </div><!-- /.modal-content -->

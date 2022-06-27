@@ -51,7 +51,7 @@
                                     <tr>
                                         <td><?php echo e($loop->index + 1); ?></td>
                                         <td><?php echo e($item->name); ?></td>
-                                        <td><?php echo e($item->wilayah); ?></td>
+                                        <td><?php echo e($item->wilayah->nama); ?></td>
                                         <td>
                                             <div class="d-flex align-items-center gap-1">
                                                 <i class="mdi mdi-star text-warning"></i>
@@ -75,27 +75,27 @@
                                                 <!-- Modal Galeri -->
                                                 <div id="detail-<?php echo e($item->id); ?>" class="modal fade" tabindex="-1"
                                                     aria-labelledby="detailLabel" aria-hidden="true" data-bs-scroll="true">
-                                                    <div class="modal-dialog">
+                                                    <div class="modal-dialog modal-dialog-scrollable">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="detailLabel">Galeri</h5>
-                                                                <button type="button" class="btn-close"
-                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                    aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <div class="mb-4">
+                                                                <div class="row">
                                                                     <?php $__currentLoopData = $galleries; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $gallery): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                                        <?php if($gallery->hotel_id === $item->id): ?>
-                                                                            <img src="<?php echo e(asset('storage/hotel/' . $gallery->image)); ?>"
-                                                                                class="img-fluid img-thumbnail mx-1"
-                                                                                style="max-width: 200px">
-                                                                        <?php endif; ?>
+                                                                    <?php if($gallery->hotel_id === $item->id): ?>
+                                                                    <div class="col-6">
+                                                                        <img src="<?php echo e(asset('storage/hotel/' . $gallery->image)); ?>"
+                                                                        class="img-fluid img-thumbnail m-2">
+                                                                    </div>
+                                                                    <?php endif; ?>
                                                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button"
-                                                                    class="btn btn-secondary waves-effect"
+                                                                <button type="button" class="btn btn-secondary waves-effect"
                                                                     data-bs-dismiss="modal">Tutup</button>
                                                             </div>
                                                         </div><!-- /.modal-content -->

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\HotelRequest;
 use App\Models\Hotel;
 use App\Models\HotelGallery;
 use App\Models\Wilayah;
@@ -13,7 +14,7 @@ class HotelController extends Controller
 {
     public function index()
     {
-        $hotel = Hotel::with('galleries')->latest()->get();
+        $hotel = Hotel::with(['galleries', 'wilayah'])->latest()->get();
         $galleries = HotelGallery::all();
 
         return view('backend.hotel.index', [
@@ -31,29 +32,22 @@ class HotelController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(HotelRequest $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string',
-            'wilayah' => 'required|string',
-            'bintang' => 'required|string',
-        ]);
-
-        $wilayah = Wilayah::where('id', $validatedData['wilayah'])->first();
+        $data = $request->all();
 
         Hotel::create([
-            'name' => $validatedData['name'],
-            'wilayah_id' => $wilayah->id,
-            'bintang' => $validatedData['bintang'],
+            'wilayah_id' => $data['desa'],
+            'name' => $data['name'],
+            'bintang' => $data['bintang'],
         ]);
 
         $hotel = Hotel::latest()->first();
 
-        if (!is_null($request->image[0])) {
+        if (!is_null($request->image)) {
             foreach ($request->image as $img) {
                 $temporaryFile = TemporaryFile::where('folder', $img)->first();
     
-                // dd($temporaryFile);
                 HotelGallery::create([
                     'hotel_id' => $hotel->id,
                     'image' => $temporaryFile->filename
@@ -73,10 +67,28 @@ class HotelController extends Controller
 
     public function edit($id)
     {
-        $hotel = Hotel::with('galleries')->findOrFail($id);
+        $hotel = Hotel::with(['galleries', 'wilayah'])->findOrFail($id);
+
+        $kecamatanId = Wilayah::findOrFail($hotel->wilayah->induk);
+        $desa = Wilayah::where('level', 4)->where('induk', $kecamatanId->id)->get();
+
+        $kabupatenId = Wilayah::findOrFail($kecamatanId->induk);
+        $kecamatan = Wilayah::where('level', 3)->where('induk', $kabupatenId->id)->get();
+
+        $provinsiId = Wilayah::findOrFail($kabupatenId->induk);
+        $kabupaten = Wilayah::where('level', 2)->where('induk', $provinsiId->id)->get();
+
+        $provinsi = Wilayah::where('level', 1)->orderBy('nama', 'asc')->get();
 
         return view('backend.hotel.edit', [
             'hotel' => $hotel,
+            'desa' => $desa,
+            'kecamatanId' => $kecamatanId,
+            'kecamatan' => $kecamatan,
+            'kabupaten' => $kabupaten,
+            'kabupatenId' => $kabupatenId,
+            'provinsi' => $provinsi,
+            'provinsiId' => $provinsiId,
         ]);
     }
 
@@ -94,25 +106,19 @@ class HotelController extends Controller
     }
 
 
-    public function update(Request $request, $id)
+    public function update(HotelRequest $request, $id)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string',
-            'wilayah' => 'required|string',
-            'bintang' => 'required|string',
-            // 'foto' => 'required',
-        ]);
+        $data = $request->all();
+
         $hotel = Hotel::findOrFail($id);
-        $wilayah = Wilayah::where('id', $validatedData['wilayah'])->first();
 
         $hotel->update([
-            'name' => $validatedData['name'],
-            'image' => 'nullable',
-            'wilayah_id' => $wilayah->id,
-            'bintang' => $validatedData['bintang'],
+            'name' => $data['name'],
+            'wilayah_id' => $data['desa'],
+            'bintang' => $data['bintang'],
         ]);
 
-        if (!is_null($request->image[0])) {
+        if (!is_null($request->image)) {
             foreach ($request->image as $img) {
                 $temporaryFile = TemporaryFile::where('folder', $img)->first();
     

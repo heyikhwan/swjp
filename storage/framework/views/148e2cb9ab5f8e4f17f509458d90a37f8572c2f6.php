@@ -106,15 +106,15 @@
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <div class="mb-4">
+                                                        <div class="mb-4 d-block">
                                                             <div class="d-flex gap-3 align-items-center">
                                                                 <img class="rounded-circle" width="80" src="<?php echo e($item->avatar ? asset('storage/avatar/' . $item->avatar) : asset('images/avatar-1.png')); ?>">
     
                                                                 <div class="d-flex flex-column">
-                                                                    <div class="d-flex gap-1">
-                                                                        <h5><?php echo e($item->name); ?></h5> - <i><?php echo e($item->username); ?></i>
+                                                                    <div>
+                                                                        <h5 class="m-0"><?php echo e($item->name); ?></h5><i><?php echo e($item->username); ?></i>
                                                                     </div>
-                                                                <a href="#" class="badge py-1
+                                                                <a href="#" class="badge mt-2 py-1
                                                                 <?php if($item->getRoleNames()[0] == 'admin'): ?> badge-soft-success <?php endif; ?>
                                                                 <?php if($item->getRoleNames()[0] == 'manager'): ?> badge-soft-primary <?php endif; ?>
                                                                 <?php if($item->getRoleNames()[0] == 'leader'): ?> badge-soft-danger <?php endif; ?>
@@ -182,6 +182,7 @@
                                     <?php if($item->getRoleNames()[0] == 'manager'): ?> <?php echo e(route('user.manager.edit', $item->id)); ?> <?php endif; ?>
                                     <?php if($item->getRoleNames()[0] == 'customer'): ?> <?php echo e(route('user.customer.edit', $item->id)); ?> <?php endif; ?>
                                     <?php if($item->getRoleNames()[0] == 'leader'): ?> <?php echo e(route('user.leader.edit', $item->id)); ?> <?php endif; ?>
+                                    <?php if($item->getRoleNames()[0] == 'guide'): ?> <?php echo e(route('user.guide.edit', $item->id)); ?> <?php endif; ?>
                                     " class="btn btn-soft-warning waves-effect waves-light">
                                         <i class="fas fa-edit"></i>
                                     </a>

@@ -43,6 +43,13 @@
                 </li>
 
                 <li>
+                    <a href="<?php echo e(route('paket-wisata.index')); ?>">
+                        <i class="bx bx-bookmarks"></i>
+                        <span data-key="t-chat">Paket Wisata</span>
+                    </a>
+                </li>
+
+                <li>
                     <a href="<?php echo e(route('kendaraan.index')); ?>">
                         <i class="bx bx-car"></i>
                         <span data-key="t-chat">Data Kendaraan</span>

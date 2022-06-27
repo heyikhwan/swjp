@@ -105,15 +105,15 @@
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <div class="mb-4">
+                                                        <div class="mb-4 d-block">
                                                             <div class="d-flex gap-3 align-items-center">
                                                                 <img class="rounded-circle" width="80" src="{{ $item->avatar ? asset('storage/avatar/' . $item->avatar) : asset('images/avatar-1.png') }}">
     
                                                                 <div class="d-flex flex-column">
-                                                                    <div class="d-flex gap-1">
-                                                                        <h5>{{ $item->name }}</h5> - <i>{{ $item->username }}</i>
+                                                                    <div>
+                                                                        <h5 class="m-0">{{ $item->name }}</h5><i>{{ $item->username }}</i>
                                                                     </div>
-                                                                <a href="#" class="badge py-1
+                                                                <a href="#" class="badge mt-2 py-1
                                                                 @if($item->getRoleNames()[0] == 'admin') badge-soft-success @endif
                                                                 @if($item->getRoleNames()[0] == 'manager') badge-soft-primary @endif
                                                                 @if($item->getRoleNames()[0] == 'leader') badge-soft-danger @endif
@@ -181,6 +181,7 @@
                                     @if($item->getRoleNames()[0] == 'manager') {{ route('user.manager.edit', $item->id) }} @endif
                                     @if($item->getRoleNames()[0] == 'customer') {{ route('user.customer.edit', $item->id) }} @endif
                                     @if($item->getRoleNames()[0] == 'leader') {{ route('user.leader.edit', $item->id) }} @endif
+                                    @if($item->getRoleNames()[0] == 'guide') {{ route('user.guide.edit', $item->id) }} @endif
                                     " class="btn btn-soft-warning waves-effect waves-light">
                                         <i class="fas fa-edit"></i>
                                     </a>

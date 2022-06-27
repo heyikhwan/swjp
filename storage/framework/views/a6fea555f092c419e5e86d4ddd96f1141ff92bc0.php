@@ -1,5 +1,5 @@
 
-<?php $__env->startSection('title'); ?> Data Kendaraan <?php $__env->stopSection(); ?>
+<?php $__env->startSection('title'); ?> Paket Wisata <?php $__env->stopSection(); ?>
 <?php $__env->startSection('css'); ?>
 <link href="<?php echo e(URL::asset('/assets/libs/datatables.net-bs4/datatables.net-bs4.min.css')); ?>" rel="stylesheet">
 <link href="<?php echo e(URL::asset('assets/libs/datatables.net-responsive-bs4/datatables.net-responsive-bs4.min.css')); ?>"
@@ -9,7 +9,7 @@
 <?php $__env->startSection('content'); ?>
 <?php $__env->startComponent('components.breadcrumb'); ?>
 <?php $__env->slot('li_1'); ?> Home <?php $__env->endSlot(); ?>
-<?php $__env->slot('title'); ?> Data Kendaraan <?php $__env->endSlot(); ?>
+<?php $__env->slot('title'); ?> Paket Wisata <?php $__env->endSlot(); ?>
 <?php echo $__env->renderComponent(); ?>
 
 <?php if($message = Session::get('success')): ?>
@@ -37,8 +37,8 @@
 
                     <div class="col-md-6">
                         <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
-                            <a href="<?php echo e(route('kendaraan.create')); ?>" class="btn btn-light shadow-none">
-                                <i class="bx bx-plus me-1"></i> Tambah Kendaraan
+                            <a href="<?php echo e(route('paket-wisata.create')); ?>" class="btn btn-light shadow-none">
+                                <i class="bx bx-plus me-1"></i> Tambah Paket
                             </a>
                         </div>
 
@@ -53,53 +53,41 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Nama</th>
-                                <th scope="col">Jenis Kendaraan</th>
-                                <th scope="col">Pemilik</th>
-                                <th scope="col">Rating</th>
+                                <th scope="col">Harga</th>
+                                <th scope="col">Populer</th>
                                 <th style="width: 80px; min-width: 80px;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $__currentLoopData = $kendaraan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php $__currentLoopData = $paket_wisata; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr>
                                 <td><?php echo e($loop->index + 1); ?></td>
                                 <td><?php echo e($item->nama); ?></td>
-                                <td><?php echo e(Str::ucfirst($item->jenis_transport)); ?></td>
-                                <td><?php echo e($item->pemilik); ?></td>
-                                <td>
-                                    <div class="d-flex align-items-center gap-1">
-                                        <i class="mdi mdi-star text-warning"></i>
-                                        <span><?php echo e($item->rating); ?></span>
-                                    </div>
-                                </td>
+                                <td>Rp <?php echo e(number_format($item->harga,0,',','.')); ?></td>
+                                <td><span class="p-2 badge <?php echo e($item->is_popular ? 'badge-soft-primary' : 'badge-soft-secondary'); ?>"><?php echo e($item->is_popular ? 'Populer' : 'Tidak'); ?></span></td>
                                 <td class="d-flex gap-2 align-items-center">
                                     <div>
                                         <button type="button" class="btn btn-soft-secondary waves-effect waves-light"
                                             data-bs-toggle="modal" data-bs-target="#detail-<?php echo e($item->id); ?>">
-                                            <i class="fas fa-image"></i>
+                                            <i class="fas fa-eye"></i>
                                         </button>
 
-                                        <!-- Modal Galeri -->
+                                        <!-- Modal Deskripsi -->
                                         <div id="detail-<?php echo e($item->id); ?>" class="modal fade" tabindex="-1"
                                             aria-labelledby="detailLabel" aria-hidden="true" data-bs-scroll="true">
                                             <div class="modal-dialog modal-dialog-scrollable">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="detailLabel">Galeri</h5>
+                                                        <h5 class="modal-title" id="detailLabel">Deskripsi</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <div class="row">
-                                                            <?php $__currentLoopData = $galleries; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $gallery): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                            <?php if($gallery->kendaraan_id === $item->id): ?>
-                                                            <div class="col-6">
-                                                                <img src="<?php echo e(asset('storage/kendaraan/' . $gallery->image)); ?>"
-                                                                class="img-fluid img-thumbnail m-2">
-                                                            </div>
-                                                            <?php endif; ?>
+                                                        <ul>
+                                                            <?php $__currentLoopData = explode(',', $item->body); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $fitur): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                                <li><?php echo e($fitur); ?></li>
                                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                        </div>
+                                                        </ul>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary waves-effect"
@@ -110,7 +98,7 @@
                                         </div><!-- /.modal -->
                                     </div> <!-- end preview-->
 
-                                    <a href="<?php echo e(route('kendaraan.edit', $item->id)); ?>"
+                                    <a href="<?php echo e(route('paket-wisata.edit', $item->id)); ?>"
                                         class="btn btn-soft-warning waves-effect waves-light">
                                         <i class="fas fa-edit"></i>
                                     </a>
@@ -119,7 +107,7 @@
                                         id="sa-warning" onclick="swal(<?php echo e($item->id); ?>)">
                                         <i class="fas fa-trash"></i>
 
-                                        <form action="<?php echo e(route('kendaraan.destroy', $item->id)); ?>" method="post"
+                                        <form action="<?php echo e(route('paket-wisata.destroy', $item->id)); ?>" method="post"
                                             id="delete-<?php echo e($item->id); ?>">
                                             <?php echo csrf_field(); ?>
                                             <?php echo method_field('delete'); ?>
@@ -168,4 +156,4 @@
 <script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
 <script src="<?php echo e(URL::asset('assets/js/pages/datatable-pages.init.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Project\swjp\resources\views/backend/kendaraan/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Project\swjp\resources\views/backend/paket-wisata/index.blade.php ENDPATH**/ ?>

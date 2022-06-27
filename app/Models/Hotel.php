@@ -20,4 +20,9 @@ class Hotel extends Model
     {
         return $this->hasMany(HotelGallery::class, 'hotel_id', 'id');
     }
+
+    public function wilayah()
+    {
+        return $this->belongsTo(Wilayah::class, 'wilayah_id', 'id');
+    }
 }
