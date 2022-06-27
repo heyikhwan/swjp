@@ -160,6 +160,33 @@ class UserController extends Controller
         ]);
     }
 
+    public function editGuide($id)
+    {
+        $user = User::with('fasilitator')->findOrFail($id);
+
+        $kecamatanId = Wilayah::findOrFail($user->fasilitator->wilayah->induk);
+        $desa = Wilayah::where('level', 4)->where('induk', $kecamatanId->id)->get();
+
+        $kabupatenId = Wilayah::findOrFail($kecamatanId->induk);
+        $kecamatan = Wilayah::where('level', 3)->where('induk', $kabupatenId->id)->get();
+
+        $provinsiId = Wilayah::findOrFail($kabupatenId->induk);
+        $kabupaten = Wilayah::where('level', 2)->where('induk', $provinsiId->id)->get();
+
+        $provinsi = Wilayah::where('level', 1)->orderBy('nama', 'asc')->get();
+
+        return view('backend.user.guide.edit', [
+            'user' => $user,
+            'desa' => $desa,
+            'kecamatanId' => $kecamatanId,
+            'kecamatan' => $kecamatan,
+            'kabupaten' => $kabupaten,
+            'kabupatenId' => $kabupatenId,
+            'provinsi' => $provinsi,
+            'provinsiId' => $provinsiId,
+        ]);
+    }
+
     public function updateUser(UserRequest $request, $id)
     {
         $data = $request->all();

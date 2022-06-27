@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title') Data Kendaraan @endsection
+@section('title') Paket Wisata @endsection
 @section('css')
 <link href="{{ URL::asset('/assets/libs/datatables.net-bs4/datatables.net-bs4.min.css') }}" rel="stylesheet">
 <link href="{{ URL::asset('assets/libs/datatables.net-responsive-bs4/datatables.net-responsive-bs4.min.css') }}"
@@ -9,7 +9,7 @@
 @section('content')
 @component('components.breadcrumb')
 @slot('li_1') Home @endslot
-@slot('title') Data Kendaraan @endslot
+@slot('title') Paket Wisata @endslot
 @endcomponent
 
 @if ($message = Session::get('success'))
@@ -36,8 +36,8 @@
 
                     <div class="col-md-6">
                         <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
-                            <a href="{{ route('kendaraan.create') }}" class="btn btn-light shadow-none">
-                                <i class="bx bx-plus me-1"></i> Tambah Kendaraan
+                            <a href="{{ route('paket-wisata.create') }}" class="btn btn-light shadow-none">
+                                <i class="bx bx-plus me-1"></i> Tambah Paket
                             </a>
                         </div>
 
@@ -52,53 +52,41 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Nama</th>
-                                <th scope="col">Jenis Kendaraan</th>
-                                <th scope="col">Pemilik</th>
-                                <th scope="col">Rating</th>
+                                <th scope="col">Harga</th>
+                                <th scope="col">Populer</th>
                                 <th style="width: 80px; min-width: 80px;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($kendaraan as $item)
+                            @foreach ($paket_wisata as $item)
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $item->nama }}</td>
-                                <td>{{ Str::ucfirst($item->jenis_transport) }}</td>
-                                <td>{{ $item->pemilik }}</td>
-                                <td>
-                                    <div class="d-flex align-items-center gap-1">
-                                        <i class="mdi mdi-star text-warning"></i>
-                                        <span>{{ $item->rating }}</span>
-                                    </div>
-                                </td>
+                                <td>Rp {{ number_format($item->harga,0,',','.') }}</td>
+                                <td><span class="p-2 badge {{ $item->is_popular ? 'badge-soft-primary' : 'badge-soft-secondary' }}">{{ $item->is_popular ? 'Populer' : 'Tidak' }}</span></td>
                                 <td class="d-flex gap-2 align-items-center">
                                     <div>
                                         <button type="button" class="btn btn-soft-secondary waves-effect waves-light"
                                             data-bs-toggle="modal" data-bs-target="#detail-{{ $item->id }}">
-                                            <i class="fas fa-image"></i>
+                                            <i class="fas fa-eye"></i>
                                         </button>
 
-                                        <!-- Modal Galeri -->
+                                        <!-- Modal Deskripsi -->
                                         <div id="detail-{{ $item->id }}" class="modal fade" tabindex="-1"
                                             aria-labelledby="detailLabel" aria-hidden="true" data-bs-scroll="true">
                                             <div class="modal-dialog modal-dialog-scrollable">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="detailLabel">Galeri</h5>
+                                                        <h5 class="modal-title" id="detailLabel">Deskripsi</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <div class="row">
-                                                            @foreach ($galleries as $gallery)
-                                                            @if ($gallery->kendaraan_id === $item->id)
-                                                            <div class="col-6">
-                                                                <img src="{{ asset('storage/kendaraan/' . $gallery->image) }}"
-                                                                class="img-fluid img-thumbnail m-2">
-                                                            </div>
-                                                            @endif
+                                                        <ul>
+                                                            @foreach (explode(',', $item->body) as $fitur)
+                                                                <li>{{ $fitur }}</li>
                                                             @endforeach
-                                                        </div>
+                                                        </ul>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary waves-effect"
@@ -109,7 +97,7 @@
                                         </div><!-- /.modal -->
                                     </div> <!-- end preview-->
 
-                                    <a href="{{ route('kendaraan.edit', $item->id) }}"
+                                    <a href="{{ route('paket-wisata.edit', $item->id) }}"
                                         class="btn btn-soft-warning waves-effect waves-light">
                                         <i class="fas fa-edit"></i>
                                     </a>
@@ -118,7 +106,7 @@
                                         id="sa-warning" onclick="swal({{ $item->id }})">
                                         <i class="fas fa-trash"></i>
 
-                                        <form action="{{ route('kendaraan.destroy', $item->id) }}" method="post"
+                                        <form action="{{ route('paket-wisata.destroy', $item->id) }}" method="post"
                                             id="delete-{{ $item->id }}">
                                             @csrf
                                             @method('delete')

@@ -1,15 +1,14 @@
 <?php
 
-use App\Models\Wilayah;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\HotelController;
 use App\Http\Controllers\Backend\UploadController;
 use App\Http\Controllers\Backend\WilayahController;
+use App\Http\Controllers\Backend\FeedbackController;
 use App\Http\Controllers\Backend\KendaraanController;
 use App\Http\Controllers\Backend\ReservasiController;
+use App\Http\Controllers\Backend\PaketWisataController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -27,6 +26,7 @@ Route::get('user/admin/edit/{user}', [UserController::class, 'editAdmin'])->name
 Route::get('user/manager/edit/{user}', [UserController::class, 'editManager'])->name('user.manager.edit');
 Route::get('user/customer/edit/{user}', [UserController::class, 'editCustomer'])->name('user.customer.edit');
 Route::get('user/leader/edit/{user}', [UserController::class, 'editLeader'])->name('user.leader.edit');
+Route::get('user/guide/edit/{user}', [UserController::class, 'editGuide'])->name('user.guide.edit');
 Route::put('user/admin-update/{user}', [UserController::class, 'updateUser'])->name('user.admin.update');
 Route::put('user/customer-update/{user}', [UserController::class, 'updateCustomer'])->name('user.customer.update');
 Route::put('user/leader-update/{user}', [UserController::class, 'updateLeader'])->name('user.leader.update');
@@ -61,6 +61,12 @@ Route::put('hotel/img-delete/{id}', [HotelController::class, 'imgDestroy']);
 // Kendaraan
 Route::resource('kendaraan', KendaraanController::class);
 Route::put('kendaraan/img-delete/{id}', [KendaraanController::class, 'imgDestroy']);
+
+// Paket Wisata
+Route::resource('paket-wisata', PaketWisataController::class);
+
+// Feedback
+Route::get('feedback/leader', [FeedbackController::class, 'leader'])->name('feedback.leader');
 
 // Reservasi
 Route::get('reservasi/data', [ReservasiController::class, 'data'])->name('reservasi.data');

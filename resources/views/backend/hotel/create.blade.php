@@ -14,7 +14,7 @@
     <div class="col">
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="{{ route('hotel.store') }}" class="needs-validation" novalidate
+                <form method="POST" action="{{ route('hotel.store') }}" class="needs-validation"
                     enctype="multipart/form-data">
                     @csrf
 
@@ -23,8 +23,8 @@
                             <div class="mb-3">
                                 <label class="form-label" for="name">Nama Hotel</label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
-                                    name="name" placeholder="Nama Hotel" required>
-                                @error('nama')
+                                    name="name" placeholder="Nama Hotel" value="{{ old('name') }}" required>
+                                @error('name')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -41,7 +41,7 @@
                                 </div>
                                 <input type="text" class="form-control @error('bintang') is-invalid @enderror"
                                     id="bintang" placeholder="Bintang" aria-describedby="inputGroupPrepend"
-                                    name="bintang" required>
+                                    name="bintang" value="{{ old('bintang') }}" required>
                                 @error('bintang')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -57,40 +57,63 @@
                             <div class="col-12 col-md-6 col-lg-3">
                                 <div class="mb-3">
                                     <label for="provinsi" class="form-label font-size-13 text-muted">Provinsi</label>
-                                    <select class="form-select" name="provinsi" id="provinsi" placeholder="Provinsi">
+                                    <select class="form-select @error('provinsi') is-invalid @enderror" name="provinsi" id="provinsi"
+                                        placeholder="Provinsi" required>
                                         <option value="">Pilih Provinsi</option>
                                         @foreach ($provinsi as $item)
-                                        <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                        <option value="{{ $item->id }}" {{ old('provinsi') == $item->id ? 'selected' : '' }}>{{ $item->nama }}</option>
                                         @endforeach
                                     </select>
+                                    @error('provinsi')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
-
+    
                             <div class="col-12 col-md-6 col-lg-3">
                                 <div class="mb-3">
-                                    <label for="kabupaten"
-                                        class="form-label font-size-13 text-muted">Kabupaten/Kota</label>
-                                    <select class="form-select" name="kabupaten" id="kabupaten" placeholder="Kab/Kota">
+                                    <label for="kabupaten" class="form-label font-size-13 text-muted">Kabupaten/Kota</label>
+                                    <select class="form-select @error('kabupaten') is-invalid @enderror" name="kabupaten" id="kabupaten"
+                                        placeholder="Kab/Kota" required>
                                         <option value="">Pilih Kabupaten/Kota</option>
                                     </select>
+                                    @error('kabupaten')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
-
+    
                             <div class="col-12 col-md-6 col-lg-3">
                                 <div class="mb-3">
                                     <label for="kecamatan" class="form-label font-size-13 text-muted">Kecamatan</label>
-                                    <select class="form-select" name="kecamatan" id="kecamatan" placeholder="Kecamatan">
+                                    <select class="form-select @error('kecamatan') is-invalid @enderror" name="kecamatan" id="kecamatan"
+                                        placeholder="Kecamatan" required>
                                         <option value="">Pilih Kecamatan</option>
                                     </select>
+                                    @error('kecamatan')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
-
+    
                             <div class="col-12 col-md-6 col-lg-3">
                                 <div class="mb-3">
                                     <label for="desa" class="form-label font-size-13 text-muted">Desa</label>
-                                    <select class="form-select" name="desa" id="desa" placeholder="Desa">
+                                    <select class="form-select @error('desa') is-invalid @enderror" name="desa" id="desa"
+                                        placeholder="Desa" required>
                                         <option value="">Pilih Desa</option>
                                     </select>
+                                    @error('desa')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>

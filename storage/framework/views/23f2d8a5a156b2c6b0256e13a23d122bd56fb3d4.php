@@ -21,8 +21,8 @@
 
                 <li>
                     <a href="<?php echo e(route('reservasi.data')); ?>">
-                        <i class=" bx bx-file"></i>
-                        <span data-key="t-chat">Daftar Reservasi</span>
+                        <i class="bx bx-file"></i>
+                        <span data-key="t-reservasi">Daftar Reservasi</span>
                     </a>
                 </li>
 
@@ -31,29 +31,50 @@
                 <li>
                     <a href="<?php echo e(route('wilayah.index')); ?>">
                         <i class="bx bx-map"></i>
-                        <span data-key="t-chat">Data Wilayah</span>
+                        <span data-key="t-wilayah">Data Wilayah</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="<?php echo e(route('user.index')); ?>">
                         <i data-feather="users"></i>
-                        <span data-key="t-chat">Data User</span>
+                        <span data-key="t-user">Data User</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="<?php echo e(route('paket-wisata.index')); ?>">
+                        <i class="bx bx-bookmarks"></i>
+                        <span data-key="t-paket-wisata">Paket Wisata</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="<?php echo e(route('kendaraan.index')); ?>">
                         <i class="bx bx-car"></i>
-                        <span data-key="t-chat">Data Kendaraan</span>
+                        <span data-key="t-kendaraan">Data Kendaraan</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="<?php echo e(route('hotel.index')); ?>">
                         <i class=" bx bx-building-house"></i>
-                        <span data-key="t-chat">Data Hotel</span>
+                        <span data-key="t-hotel">Data Hotel</span>
                     </a>
+                </li>
+
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i class="bx bx-comment-dots"></i>
+                        <span data-key="t-feedback">Feedback</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="<?php echo e(route('feedback.leader')); ?>" data-key="t-leader">Leader</a></li>
+                        <li><a href="#" data-key="t-guide">Guide</a></li>
+                        <li><a href="#" data-key="t-hotel">Hotel</a></li>
+                        <li><a href="#" data-key="t-kendaraan">Kendaraan</a></li>
+                        <li><a href="#" data-key="t-perusahaan">Perusahaan</a></li>
+                    </ul>
                 </li>
 
                 <li class="menu-title" data-key="t-menu">Customer</li>

@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('hotels', function (Blueprint $table) {
+        Schema::create('paket_wisatas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('wilayah_id')->constrained()->onDelete('cascade');
-            $table->string('name');
-            $table->integer('bintang');
-            $table->float('rating')->default(0);
+            $table->string('nama');
+            $table->integer('harga');
+            $table->text('body');
+            $table->boolean('is_popular')->default(0);
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hotels');
+        Schema::dropIfExists('paket_wisatas');
     }
 };

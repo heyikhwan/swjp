@@ -14,7 +14,7 @@ class HotelController extends Controller
 {
     public function index()
     {
-        $hotel = Hotel::with('galleries')->latest()->get();
+        $hotel = Hotel::with(['galleries', 'wilayah'])->latest()->get();
         $galleries = HotelGallery::all();
 
         return view('backend.hotel.index', [
@@ -41,21 +41,19 @@ class HotelController extends Controller
     public function store(HotelRequest $request)
     {
         $data = $request->all();
-        // dd($data);
 
         Hotel::create([
-            'name' => $data['name'],
             'wilayah_id' => $data['desa'],
+            'name' => $data['name'],
             'bintang' => $data['bintang'],
         ]);
 
         $hotel = Hotel::latest()->first();
 
-        if (!is_null($request->image[0])) {
+        if (!is_null($request->image)) {
             foreach ($request->image as $img) {
                 $temporaryFile = TemporaryFile::where('folder', $img)->first();
-
-                // dd($temporaryFile);
+    
                 HotelGallery::create([
                     'hotel_id' => $hotel->id,
                     'image' => $temporaryFile->filename
@@ -75,18 +73,28 @@ class HotelController extends Controller
 
     public function edit($id)
     {
-        $hotel = Hotel::with('galleries')->findOrFail($id);
+        $hotel = Hotel::with(['galleries', 'wilayah'])->findOrFail($id);
+
+        $kecamatanId = Wilayah::findOrFail($hotel->wilayah->induk);
+        $desa = Wilayah::where('level', 4)->where('induk', $kecamatanId->id)->get();
+
+        $kabupatenId = Wilayah::findOrFail($kecamatanId->induk);
+        $kecamatan = Wilayah::where('level', 3)->where('induk', $kabupatenId->id)->get();
+
+        $provinsiId = Wilayah::findOrFail($kabupatenId->induk);
+        $kabupaten = Wilayah::where('level', 2)->where('induk', $provinsiId->id)->get();
+
         $provinsi = Wilayah::where('level', 1)->orderBy('nama', 'asc')->get();
-        $kota = Wilayah::where('level', 2)->get();
-        $kecamatan = Wilayah::where('level', 3)->get();
-        $desa = Wilayah::where('level', 4)->get();
 
         return view('backend.hotel.edit', [
             'hotel' => $hotel,
-            'provinsi' => $provinsi,
-            'kota' => $kota,
-            'kecamatan' => $kecamatan,
             'desa' => $desa,
+            'kecamatanId' => $kecamatanId,
+            'kecamatan' => $kecamatan,
+            'kabupaten' => $kabupaten,
+            'kabupatenId' => $kabupatenId,
+            'provinsi' => $provinsi,
+            'provinsiId' => $provinsiId,
         ]);
     }
 
@@ -111,12 +119,11 @@ class HotelController extends Controller
 
         $hotel->update([
             'name' => $data['name'],
-            'image' => 'nullable',
             'wilayah_id' => $data['desa'],
             'bintang' => $data['bintang'],
         ]);
 
-        if (!is_null($request->image[0])) {
+        if (!is_null($request->image)) {
             foreach ($request->image as $img) {
                 $temporaryFile = TemporaryFile::where('folder', $img)->first();
 

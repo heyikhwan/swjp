@@ -23,6 +23,6 @@ class Hotel extends Model
 
     public function wilayah()
     {
-        return $this->hasOne(Wilayah::class, 'id', 'wilayah_id');
+        return $this->belongsTo(Wilayah::class, 'wilayah_id', 'id');
     }
 }

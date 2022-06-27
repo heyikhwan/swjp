@@ -14,89 +14,114 @@
     <div class="col">
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="{{ route('hotel.udpate', $hotel->id) }}" class="needs-validation" novalidate
+                <form method="POST" action="{{ route('hotel.update', $hotel->id) }}" class="needs-validation"
                     enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
 
                     <div class="row">
                         <div class="col">
                             <div class="mb-3">
                                 <label class="form-label" for="name">Nama Hotel</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Nama Hotel" value="{{ old('name') ?? $hotel->nama }}"
-                                    required>
-                                    @error('nama')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
+                                    name="name" placeholder="Nama Hotel" value="{{ old('name') ?? $hotel->name }}" required>
+                                @error('name')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
                                 </div>
-                            </div>
-                            <div class="invalid-feedback">
-                                Please choose a username.
+                                @enderror
                             </div>
                         </div>
 
                         <div class="col-3">
                             <label for="bintang">Bintang</label>
                             <div class="input-group mb-3">
-                              <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroupPrepend"><i class="bx bxs-star font-size-20 text-warning"></i></span>
-                              </div>
-                              <input type="text" class="form-control @error('bintang') is-invalid @enderror" id="bintang" placeholder="Bintang" aria-describedby="inputGroupPrepend" name="bintang"  value="{{ old('bintang') ?? $hotel->bintang }}"required>
-                              @error('bintang')
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupPrepend"><i
+                                            class="bx bxs-star font-size-20 text-warning"></i></span>
+                                </div>
+                                <input type="text" class="form-control @error('bintang') is-invalid @enderror"
+                                    id="bintang" placeholder="Bintang" aria-describedby="inputGroupPrepend"
+                                    name="bintang" value="{{ old('bintang') ?? $hotel->bintang }}" required>
+                                @error('bintang')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="mb-3">
+                                <label for="provinsi" class="form-label font-size-13 text-muted">Provinsi</label>
+                                <select class="form-select @error('provinsi') is-invalid @enderror" name="provinsi" id="provinsi"
+                                    placeholder="Provinsi" required>
+                                    <option value="">Pilih Provinsi</option>
+                                    @foreach ($provinsi as $item)
+                                    <option value="{{ $item->id }}" {{ old('provinsi') == $item->id || $provinsiId->id == $item->id ? 'selected' : '' }}>{{ $item->nama }}</option>
+                                    @endforeach
+                                </select>
+                                @error('provinsi')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
-                                    @enderror
-                                </div>
-                              <div class="invalid-feedback">
-                                Masukkan bintang hotel
-                              </div>
+                                @enderror
                             </div>
-                          </div>
-                    </div>
+                        </div>
 
-                    <div>
-                        <label>Wilayah</label>
-                        <div class="row">
-                            <div class="col-12 col-md-6 col-lg-3">
-                                <div class="mb-3">
-                                    <label for="provinsi" class="form-label font-size-13 text-muted">Provinsi</label>
-                                    <select class="form-select" name="provinsi" id="provinsi" placeholder="Provinsi">
-                                        <option value="">Pilih Provinsi</option>
-                                        @foreach ($provinsi as $item)
-                                        <option value="{{ $item->id }}">{{ $item->nama }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="mb-3">
+                                <label for="kabupaten" class="form-label font-size-13 text-muted">Kabupaten/Kota</label>
+                                <select class="form-select @error('kabupaten') is-invalid @enderror" name="kabupaten" id="kabupaten"
+                                    placeholder="Kab/Kota" required>
+                                    <option value="">Pilih Kabupaten/Kota</option>
+                                    @foreach ($kabupaten as $item)
+                                    <option value="{{ $item->id }}" {{ old('kabupaten') == $item->id || $kabupatenId->id == $item->id ? 'selected' : '' }}>{{ $item->nama }}</option>
+                                    @endforeach
+                                </select>
+                                @error('kabupaten')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
+                        </div>
 
-                            <div class="col-12 col-md-6 col-lg-3">
-                                <div class="mb-3">
-                                    <label for="kabupaten"
-                                        class="form-label font-size-13 text-muted">Kabupaten/Kota</label>
-                                    <select class="form-select" name="kabupaten" id="kabupaten" placeholder="Kab/Kota">
-                                        <option value="">Pilih Kabupaten/Kota</option>
-                                    </select>
-                                </div>
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="mb-3">
+                                <label for="kecamatan" class="form-label font-size-13 text-muted">Kecamatan</label>
+                                <select class="form-select @error('kecamatan') is-invalid @enderror" name="kecamatan" id="kecamatan"
+                                    placeholder="Kecamatan" required>
+                                    <option value="">Pilih Kecamatan</option>
+                                    @foreach ($kecamatan as $item)
+                                    <option value="{{ $item->id }}" {{ old('kecamatan') == $item->id || $kecamatanId->id == $item->id ? 'selected' : '' }}>{{ $item->nama }}</option>
+                                    @endforeach
+                                </select>
+                                @error('kecamatan')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
+                        </div>
 
-                            <div class="col-12 col-md-6 col-lg-3">
-                                <div class="mb-3">
-                                    <label for="kecamatan" class="form-label font-size-13 text-muted">Kecamatan</label>
-                                    <select class="form-select" name="kecamatan" id="kecamatan" placeholder="Kecamatan">
-                                        <option value="">Pilih Kecamatan</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-12 col-md-6 col-lg-3">
-                                <div class="mb-3">
-                                    <label for="desa" class="form-label font-size-13 text-muted">Desa</label>
-                                    <select class="form-select" name="desa" id="desa" placeholder="Desa">
-                                        <option value="">Pilih Desa</option>
-                                    </select>
-                                </div>
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="mb-3">
+                                <label for="desa" class="form-label font-size-13 text-muted">Desa</label>
+                                <select class="form-select @error('desa') is-invalid @enderror" name="desa" id="desa"
+                                    placeholder="Desa" required>
+                                    <option value="">Pilih Desa</option>
+                                    @foreach ($desa as $item)
+                                    <option value="{{ $item->id }}" {{ old('desa') == $item->id || $hotel->wilayah_id == $item->id ? 'selected' : '' }}>{{ $item->nama }}</option>
+                                    @endforeach
+                                </select>
+                                @error('desa')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -106,9 +131,29 @@
                             <div class="mb-3">
                                 <div class="form-group">
                                     <label for="image">Gambar</label>
-                                    <input type="file" id="image" name="image[]" accept=".svg, image/png,image/jpg,image/jpeg" multiple />
             
-                                    <small class="form-text text-muted">only allowed
+                                    <div class="mb-3">
+                                        <div class="row d-flex align-items-end">
+                                            @foreach ($hotel->galleries as $gallery)
+                                            <div class="col-lg-2 my-1" id="image-container-{{ $gallery->id }}">
+                                                <img class="{{ $gallery->image ? '' : 'd-none' }} border p-1 rounded img-fluid"
+                                                    src="{{ $gallery->image ? url('storage/hotel/', $gallery->image) : '#' }}" width="200">
+            
+                                                @if ($gallery->image)
+                                                <div class="text-center">
+                                                    <a href="javascript:void(0)" class="btn btn-link btn-sm text-danger"
+                                                        onclick="event.preventDefault();imgDestroy({{ $gallery->id }}, 'image');">[Hapus]</a>
+                                                </div>
+                                                @endif
+                                            </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+            
+                                    <input type="file" id="image" name="image[]" accept=".svg, image/png,image/jpg,image/jpeg"
+                                        multiple />
+            
+                                    <small class="form-text text-muted">recommended size is 800 x 600px or 800 x 800px. only allowed
                                         jpg/jpeg/png/svg file and smaller than 2MB</small>
                                 </div>
                             </div>
