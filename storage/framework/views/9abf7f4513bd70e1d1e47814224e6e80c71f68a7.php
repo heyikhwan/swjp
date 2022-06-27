@@ -48,7 +48,7 @@ unset($__errorArgs, $__bag); ?>
                                     <option value="1">Provinsi</option>
                                     <option value="2">Kabupaten/Kota</option>
                                     <option value="3">Kecamatan</option>
-                                    <option value="3">Desa</option>
+                                    <option value="4">Desa</option>
                                 </select>
                             </div>
                         </div>

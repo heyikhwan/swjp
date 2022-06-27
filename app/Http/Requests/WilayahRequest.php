@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class HotelRequest extends FormRequest
+class WilayahRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,12 +24,9 @@ class HotelRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'min:3'],
-            'bintang' => ['required', 'numeric', 'digits_between:1,5'],
-            'provinsi' => ['sometimes', 'required'],
-            'kabupaten' => ['sometimes', 'required'],
-            'kecamatan' => ['sometimes', 'required'],
-            'desa' => ['sometimes', 'required'],
+            'name' => ['required', 'string', 'max:255'],
+            'level' => ['required','integer'],
+            'induk' => '',
         ];
     }
 }

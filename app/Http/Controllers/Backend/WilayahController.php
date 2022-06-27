@@ -6,6 +6,7 @@ use App\Models\Wilayah;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\WilayahRequest;
 
 class WilayahController extends Controller
 {
@@ -43,18 +44,14 @@ class WilayahController extends Controller
         return view('backend.wilayah.create');
     }
 
-    public function store(Request $request)
+    public function store(WilayahRequest $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string',
-            'level' => 'required|string',
-            'induk' => '',
-        ]);
+        $data = $request->all();
 
         Wilayah::create([
-            'nama' => $validatedData['name'],
-            'level' => $validatedData['level'],
-            'induk' => $validatedData['induk'],
+            'nama' => $data['name'],
+            'level' => $data['level'],
+            'induk' => $data['induk'],
         ]);
 
         return redirect()->route('wilayah.index')->with('success', 'Data berhasil ditambahkan');
@@ -69,20 +66,16 @@ class WilayahController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(WilayahRequest $request, $id)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string',
-            'level' => 'required|string',
-            'induk' => '',
-        ]);
+        $data = $request->all();
 
         $wilayah = Wilayah::findOrFail($id);
 
         $wilayah->update([
-            'nama' => $validatedData['name'],
-            'level' => $validatedData['level'],
-            'induk' => $validatedData['induk'],
+            'nama' => $data['name'],
+            'level' => $data['level'],
+            'induk' => $data['induk'],
         ]);
 
 

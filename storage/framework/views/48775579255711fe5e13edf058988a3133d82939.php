@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title'); ?>
     <?php echo app('translator')->get('translation.Data_Tables'); ?>
 <?php $__env->stopSection(); ?>
@@ -17,6 +16,18 @@
             Data Hotel
         <?php $__env->endSlot(); ?>
     <?php echo $__env->renderComponent(); ?>
+
+    <?php if($message = Session::get('success')): ?>
+    <div class="row">
+        <div class="col">
+            <div class="alert alert-success alert-border-left alert-dismissible fade show" role="alert">
+                <i class="mdi mdi-check-all me-3 align-middle"></i><strong>Success</strong> - <?php echo e($message); ?>
+
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    <?php endif; ?>
 
     <div class="row">
         <div class="col-12">
@@ -51,7 +62,7 @@
                                     <tr>
                                         <td><?php echo e($loop->index + 1); ?></td>
                                         <td><?php echo e($item->name); ?></td>
-                                        <td><?php echo e($item->wilayah); ?></td>
+                                        <td><?php echo e($item->wilayah->nama); ?></td>
                                         <td>
                                             <div class="d-flex align-items-center gap-1">
                                                 <i class="mdi mdi-star text-warning"></i>
