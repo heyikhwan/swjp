@@ -74,18 +74,7 @@ Route::group(['middleware' => ['role:admin|guide|manager|leader']], function () 
     Route::get('reservasi/data', [ReservasiController::class, 'data'])->name('reservasi.data');
     Route::get('reservasi/riwayat', [ReservasiController::class, 'riwayat'])->name('reservasi.riwayat');
 
-<<<<<<< HEAD
     // Temporary Upload
     Route::post('image-upload', [UploadController::class, 'store'])->name('upload');
     });
 });
-=======
-        // Temporary Upload
-        Route::post('image-upload', [UploadController::class, 'store'])->name('upload');
-        
-});
-
-Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
-
-
->>>>>>> 21bb6ae1376e98fbc125240fdf591840d70b1c56
