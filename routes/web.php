@@ -78,3 +78,5 @@ Route::group(['middleware' => ['role:admin|guide|manager|leader']], function () 
     Route::post('image-upload', [UploadController::class, 'store'])->name('upload');
     });
 });
+
+Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');

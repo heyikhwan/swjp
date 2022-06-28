@@ -15,7 +15,19 @@ return new class extends Migration
     {
         Schema::create('reservasis', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('leader_id');
+            $table->unsignedBigInteger('guide_id');
+            $table->string('judul');
+            $table->string('jenis_perjalanan');
+            $table->string('durasi_perjalanan');
+            $table->string('keberangkatan');
+            $table->string('status');
             $table->timestamps();
+
+            $table->foreign('customer_id')->references('id')->on('users')->onDelete('restrict');
+            $table->foreign('leader_id')->references('id')->on('users')->onDelete('restrict');
+            $table->foreign('guide_id')->references('id')->on('users')->onDelete('restrict');
         });
     }
 

@@ -198,26 +198,7 @@
 			</div>
 
 		</header>
-
-		<!-- Search wrapper -->
-		<div class="search-wrapper">
-
-			<!-- Search form -->
-			<form role="search" method="get" class="search-form" action="#">
-				<input type="search" name="s" id="s"
-					   placeholder="Search Keyword"
-					   class="searchbox-input" autocomplete="off" required />
-
-				<span>Input your search keywords and press Enter.</span>
-			</form>
-
-			<!-- Close button -->
-			<div class="search-wrapper-close">
-				<span class="search-close-btn"></span>
-			</div>
-
-		</div>
-
+		
 		<!-- Banner -->
 		<section id="home" class="banner image-bg">
 
