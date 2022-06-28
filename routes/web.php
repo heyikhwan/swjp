@@ -8,11 +8,13 @@ use App\Http\Controllers\Backend\WilayahController;
 use App\Http\Controllers\Backend\FeedbackController;
 use App\Http\Controllers\Backend\KendaraanController;
 use App\Http\Controllers\Backend\ReservasiController;
+use App\Http\Controllers\Frontend\ReservasiController as FrontendReservasiController;
 use App\Http\Controllers\Backend\PaketWisataController;
 use App\Models\Wilayah;
 
 //FRONTEND
 Route::get('/', [HomeController::class, 'home'])->name('home');
+Route::resource('reservasi', FrontendReservasiController::class);
 
 Auth::routes();
 
@@ -39,7 +41,7 @@ Route::group(['middleware' => ['role:admin|guide|manager|leader']], function () 
         // Wilayah
         Route::resource('wilayah', WilayahController::class);
         Route::get('wilayah-data', [WilayahController::class, 'data'])->name('wilayah.data');
-        Route::get('wilayah/{id}/tambah', [WilayahController::class, 'tambah'])->name('wilayah.tambah');
+        Route::get('wilayah/{id}/tambah', [WilayahController::class, 'createAnak'])->name('wilayah.tambah');
 
     Route::get('data/kota/{id}', function ($id) {
         $kota = Wilayah::where('induk', $id)->get();
@@ -77,4 +79,5 @@ Route::group(['middleware' => ['role:admin|guide|manager|leader']], function () 
     // Temporary Upload
     Route::post('image-upload', [UploadController::class, 'store'])->name('upload');
     });
+    Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 });

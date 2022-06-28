@@ -29,7 +29,7 @@ class WilayahController extends Controller
             // $button = '<button type="button" class="btn btn-soft-secondary waves-effect waves-light me-2" onclick="hai(' . $data->id . ')" data-bs-toggle="modal" data-bs-target="#detail-'.$data->id.'"><i class="fas fa-eye"></i></button>';
             if($data->level != 4) {
             $button = '<a href="'.route('wilayah.tambah', $data->id) . '" class="btn btn-soft-secondary waves-effect waves-light me-2"><span class="icon"><i class="fas fa-plus"></i></span></a>';
-        
+
             $button .= '<a href="' . route('wilayah.edit', $data->id) . '" class="btn btn-soft-warning waves-effect waves-light me-2"><span class="icon"><i class="fas fa-edit"></i></span></a>';
             } else {
             $button = '<a href="' . route('wilayah.edit', $data->id) . '" class="btn btn-soft-warning waves-effect waves-light ms-5 me-2"><span class="icon"><i class="fas fa-edit"></i></span></a>';
@@ -51,13 +51,18 @@ class WilayahController extends Controller
         return view('backend.wilayah.create');
     }
 
-    public function tambah($id)
+    public function createAnak($id)
     {
         $wilayah = Wilayah::findOrFail($id);
 
         return view('backend.wilayah.tambah', [
             'wilayah' => $wilayah
         ]);
+    }
+
+    public function storeAnak($id)
+    {
+
     }
 
     public function store(WilayahRequest $request)
