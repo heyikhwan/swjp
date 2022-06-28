@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('title'); ?> <?php echo app('translator')->get('translation.Horizontal'); ?>  <?php $__env->stopSection(); ?>
 <?php $__env->startSection('css'); ?>
 <link href="<?php echo e(URL::asset('assets/libs/jsvectormap/css/jsvectormap.min.css')); ?>" rel="stylesheet">

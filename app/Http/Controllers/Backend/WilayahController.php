@@ -25,8 +25,15 @@ class WilayahController extends Controller
 
         return DataTables::of($data)
         ->addColumn('aksi', function ($data) {
-            $button = '<a href="' . route('wilayah.edit', $data->id) . '" class="btn btn-soft-warning waves-effect waves-light"><span class="icon"><i class="fas fa-edit"></i></span></a>';
 
+            // $button = '<button type="button" class="btn btn-soft-secondary waves-effect waves-light me-2" onclick="hai(' . $data->id . ')" data-bs-toggle="modal" data-bs-target="#detail-'.$data->id.'"><i class="fas fa-eye"></i></button>';
+            if($data->level != 4) {
+            $button = '<a href="'.route('wilayah.tambah', $data->id) . '" class="btn btn-soft-secondary waves-effect waves-light me-2"><span class="icon"><i class="fas fa-plus"></i></span></a>';
+        
+            $button .= '<a href="' . route('wilayah.edit', $data->id) . '" class="btn btn-soft-warning waves-effect waves-light me-2"><span class="icon"><i class="fas fa-edit"></i></span></a>';
+            } else {
+            $button = '<a href="' . route('wilayah.edit', $data->id) . '" class="btn btn-soft-warning waves-effect waves-light ms-5 me-2"><span class="icon"><i class="fas fa-edit"></i></span></a>';
+            }
             $button .= '<button type="submit" class="btn btn-soft-danger waves-effect waves-light" onclick="swal(' . $data->id . ' )"><span class="icon"><i class="fas fa-trash"></i></span><form id="delete-' . $data->id . '" action="' . route('wilayah.destroy', $data->id) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '" /><input type="hidden" name="_method" value="delete" /></form></button>';
 
             return $button;
@@ -42,6 +49,15 @@ class WilayahController extends Controller
     public function create()
     {
         return view('backend.wilayah.create');
+    }
+
+    public function tambah($id)
+    {
+        $wilayah = Wilayah::findOrFail($id);
+
+        return view('backend.wilayah.tambah', [
+            'wilayah' => $wilayah
+        ]);
     }
 
     public function store(WilayahRequest $request)

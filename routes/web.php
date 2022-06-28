@@ -11,7 +11,7 @@ use App\Http\Controllers\Backend\ReservasiController;
 use App\Http\Controllers\Backend\PaketWisataController;
 
 //FRONTEND
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'home'])->name('home');
 
 Auth::routes();
 
@@ -37,6 +37,7 @@ Auth::routes();
         // Wilayah
         Route::resource('wilayah', WilayahController::class);
         Route::get('wilayah-data', [WilayahController::class, 'data'])->name('wilayah.data');
+        Route::get('wilayah/{id}/tambah', [WilayahController::class, 'tambah'])->name('wilayah.tambah');
 
         Route::get('data/kota/{id}', function ($id)
         {
@@ -76,5 +77,9 @@ Auth::routes();
 
         // Temporary Upload
         Route::post('image-upload', [UploadController::class, 'store'])->name('upload');
+        
 });
+
+Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+
 

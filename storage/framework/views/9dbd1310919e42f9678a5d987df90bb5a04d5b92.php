@@ -67,6 +67,40 @@
         </div>
     </div>
 </div>
+
+    <!-- Modal Detail user -->
+    <div id="detailwilayah" class="modal fade" tabindex="-1" aria-labelledby="detailLabel" aria-hidden="true" data-bs-scroll="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailLabel">Detail Wilayah</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>Level</th>
+                                    <th>Desa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>
 <script src="<?php echo e(URL::asset('assets/libs/datatables.net/datatables.net.min.js')); ?>"></script>
@@ -117,6 +151,11 @@
                     Swal.fire("Deleted!", "Your file has been deleted.", "success");
                 }
             });
+    }
+</script>
+<script>
+    function hai(id) {
+        console.log(id)
     }
 </script>
 <?php $__env->stopSection(); ?>

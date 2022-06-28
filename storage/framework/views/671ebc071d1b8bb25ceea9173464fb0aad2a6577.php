@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('title'); ?> Tambah Hotel <?php $__env->stopSection(); ?>
 <?php $__env->startSection('css'); ?>
 <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
@@ -13,7 +14,8 @@
     <div class="col">
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="<?php echo e(route('hotel.store')); ?>" class="needs-validation" novalidate>
+                <form method="POST" action="<?php echo e(route('hotel.store')); ?>" class="needs-validation"
+                    enctype="multipart/form-data">
                     <?php echo csrf_field(); ?>
 
                     <div class="row">
@@ -28,14 +30,15 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" id="name"
-                                    name="name" placeholder="Nama Hotel" required>
+                                    name="name" placeholder="Nama Hotel" value="<?php echo e(old('name')); ?>" required>
                                 <?php $__errorArgs = ['name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
                                 <div class="invalid-feedback">
-                                    <strong><?php echo e($message); ?></strong>
+                                    <?php echo e($message); ?>
+
                                 </div>
                                 <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
@@ -60,14 +63,15 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
                                     id="bintang" placeholder="Bintang" aria-describedby="inputGroupPrepend"
-                                    name="bintang" required>
+                                    name="bintang" value="<?php echo e(old('bintang')); ?>" required>
                                 <?php $__errorArgs = ['bintang'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
                                 <div class="invalid-feedback">
-                                    <strong><?php echo e($message); ?></strong>
+                                    <?php echo e($message); ?>
+
                                 </div>
                                 <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
@@ -90,10 +94,11 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" name="provinsi" id="provinsi" placeholder="Provinsi">
+unset($__errorArgs, $__bag); ?>" name="provinsi" id="provinsi"
+                                        placeholder="Provinsi" required>
                                         <option value="">Pilih Provinsi</option>
                                         <?php $__currentLoopData = $provinsi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <option value="<?php echo e($item->id); ?>"><?php echo e($item->nama); ?></option>
+                                        <option value="<?php echo e($item->id); ?>" <?php echo e(old('provinsi') == $item->id ? 'selected' : ''); ?>><?php echo e($item->nama); ?></option>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </select>
                                     <?php $__errorArgs = ['provinsi'];
@@ -101,20 +106,20 @@ $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong><?php echo e($message); ?></strong>
-                                    </span>
-                                <?php unset($message);
+                                        <div class="invalid-feedback">
+                                            <?php echo e($message); ?>
+
+                                        </div>
+                                    <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                                 </div>
                             </div>
-
+    
                             <div class="col-12 col-md-6 col-lg-3">
                                 <div class="mb-3">
-                                    <label for="kabupaten"
-                                        class="form-label font-size-13 text-muted">Kabupaten/Kota</label>
+                                    <label for="kabupaten" class="form-label font-size-13 text-muted">Kabupaten/Kota</label>
                                     <select class="form-select <?php $__errorArgs = ['kabupaten'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -122,7 +127,8 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" name="kabupaten" id="kabupaten" placeholder="Kab/Kota">
+unset($__errorArgs, $__bag); ?>" name="kabupaten" id="kabupaten"
+                                        placeholder="Kab/Kota" required>
                                         <option value="">Pilih Kabupaten/Kota</option>
                                     </select>
                                     <?php $__errorArgs = ['kabupaten'];
@@ -130,16 +136,17 @@ $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong><?php echo e($message); ?></strong>
-                                    </span>
-                                <?php unset($message);
+                                        <div class="invalid-feedback">
+                                            <?php echo e($message); ?>
+
+                                        </div>
+                                    <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                                 </div>
                             </div>
-
+    
                             <div class="col-12 col-md-6 col-lg-3">
                                 <div class="mb-3">
                                     <label for="kecamatan" class="form-label font-size-13 text-muted">Kecamatan</label>
@@ -150,7 +157,8 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" name="kecamatan" id="kecamatan" placeholder="Kecamatan">
+unset($__errorArgs, $__bag); ?>" name="kecamatan" id="kecamatan"
+                                        placeholder="Kecamatan" required>
                                         <option value="">Pilih Kecamatan</option>
                                     </select>
                                     <?php $__errorArgs = ['kecamatan'];
@@ -158,16 +166,17 @@ $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong><?php echo e($message); ?></strong>
-                                    </span>
-                                <?php unset($message);
+                                        <div class="invalid-feedback">
+                                            <?php echo e($message); ?>
+
+                                        </div>
+                                    <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                                 </div>
                             </div>
-
+    
                             <div class="col-12 col-md-6 col-lg-3">
                                 <div class="mb-3">
                                     <label for="desa" class="form-label font-size-13 text-muted">Desa</label>
@@ -178,7 +187,8 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" name="desa" id="desa" placeholder="Desa">
+unset($__errorArgs, $__bag); ?>" name="desa" id="desa"
+                                        placeholder="Desa" required>
                                         <option value="">Pilih Desa</option>
                                     </select>
                                     <?php $__errorArgs = ['desa'];
@@ -186,10 +196,11 @@ $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong><?php echo e($message); ?></strong>
-                                    </span>
-                                <?php unset($message);
+                                        <div class="invalid-feedback">
+                                            <?php echo e($message); ?>
+
+                                        </div>
+                                    <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
@@ -237,17 +248,11 @@ unset($__errorArgs, $__bag); ?>
     let kabupatenId;
     let kecamatanId;
 
-    provinsi.addEventListener('change', () => {
-        provinsiId = provinsi.options[provinsi.selectedIndex].value;
+    const provinsiValue = provinsi.options[provinsi.selectedIndex].value;
+    const kabupatenValue = kabupaten.options[kabupaten.selectedIndex].value;
+    const kecamatanValue = kecamatan.options[kecamatan.selectedIndex].value;
 
-        const url = '/data/kota/' + provinsiId;
-
-        const lastOpt = kabupaten.children;
-
-        for (let i = lastOpt.length - 1; i >= 1; --i) {
-            lastOpt[i].remove();
-        }
-
+    const fetchData = (level, url) => {
         let fetchRes = fetch(url);
         fetchRes.then(res =>
         res.json()).then(d => {
@@ -255,9 +260,37 @@ unset($__errorArgs, $__bag); ?>
                 var option = document.createElement("option");
                 option.text = e.nama;
                 option.value = e.id;
-                kabupaten.add(option);
+                level.add(option);
             });
         });
+    }
+
+    const removeChildren = (child) => {
+        for (let i = child.length - 1; i >= 1; --i) {
+            child[i].remove();
+        }
+    }
+
+    if (provinsiValue) {
+        const url = '/data/kota/' + provinsiValue;
+
+        fetchData(kabupaten, url);
+    }
+    
+    provinsi.addEventListener('change', () => {
+        provinsiId = provinsi.options[provinsi.selectedIndex].value;
+
+        const url = '/data/kota/' + provinsiId;
+
+        const lastOptKabupaten = kabupaten.children;
+        const lastOptKecamatan = kecamatan.children;
+        const lastOptDesa = desa.children;
+
+        removeChildren(lastOptKabupaten);
+        removeChildren(lastOptKecamatan);
+        removeChildren(lastOptDesa);
+
+        fetchData(kabupaten, url);
     });
 
     kabupaten.addEventListener('change', () => {
@@ -265,22 +298,13 @@ unset($__errorArgs, $__bag); ?>
 
         const url = '/data/kecamatan/' + kabupatenId;
 
-        const lastOpt = kecamatan.children;
+        const lastOptKecamatan = kecamatan.children;
+        const lastOptDesa = desa.children;
 
-        for (let i = lastOpt.length - 1; i >= 1; --i) {
-            lastOpt[i].remove();
-        }
+        removeChildren(lastOptKecamatan);
+        removeChildren(lastOptDesa);
 
-        let fetchRes = fetch(url);
-        fetchRes.then(res =>
-        res.json()).then(d => {
-            d.forEach(e => {
-                var option = document.createElement("option");
-                option.text = e.nama;
-                option.value = e.id;
-                kecamatan.add(option);
-            });
-        });
+        fetchData(kecamatan, url);
     });
 
     kecamatan.addEventListener('change', () => {
@@ -288,22 +312,11 @@ unset($__errorArgs, $__bag); ?>
 
         const url = '/data/desa/' + kecamatanId;
 
-        const lastOpt = desa.children;
+        const lastOptDesa = desa.children;
 
-        for (let i = lastOpt.length - 1; i >= 1; --i) {
-            lastOpt[i].remove();
-        }
+        removeChildren(lastOptDesa);
 
-        let fetchRes = fetch(url);
-        fetchRes.then(res =>
-        res.json()).then(d => {
-            d.forEach(e => {
-                var option = document.createElement("option");
-                option.text = e.nama;
-                option.value = e.id;
-                desa.add(option);
-            });
-        });
+        fetchData(desa, url);
     });
 </script>
 
@@ -338,7 +351,7 @@ unset($__errorArgs, $__bag); ?>
         FilePondPluginImagePreview,
         FilePondPluginFileValidateSize
     );
-
+    
     FilePond.setOptions({
         server: {
             url: '<?php echo e(route("upload")); ?>',
@@ -354,6 +367,4 @@ unset($__errorArgs, $__bag); ?>
     });
 </script>
 <?php $__env->stopSection(); ?>
-
-
 <?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\swjp\resources\views/backend/hotel/create.blade.php ENDPATH**/ ?>
