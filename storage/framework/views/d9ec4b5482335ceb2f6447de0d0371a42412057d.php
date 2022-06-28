@@ -14,7 +14,7 @@
     <div class="col">
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="<?php echo e(route('hotel.update', $hotel->id)); ?>" class="needs-validation" novalidate
+                <form method="POST" action="<?php echo e(route('hotel.update', $hotel->id)); ?>" class="needs-validation"
                     enctype="multipart/form-data">
                     <?php echo csrf_field(); ?>
                     <?php echo method_field('PUT'); ?>
@@ -221,14 +221,14 @@ unset($__errorArgs, $__bag); ?>
                             <div class="mb-3">
                                 <div class="form-group">
                                     <label for="image">Gambar</label>
-            
+
                                     <div class="mb-3">
                                         <div class="row d-flex align-items-end">
                                             <?php $__currentLoopData = $hotel->galleries; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $gallery): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <div class="col-lg-2 my-1" id="image-container-<?php echo e($gallery->id); ?>">
                                                 <img class="<?php echo e($gallery->image ? '' : 'd-none'); ?> border p-1 rounded img-fluid"
                                                     src="<?php echo e($gallery->image ? url('storage/hotel/', $gallery->image) : '#'); ?>" width="200">
-            
+
                                                 <?php if($gallery->image): ?>
                                                 <div class="text-center">
                                                     <a href="javascript:void(0)" class="btn btn-link btn-sm text-danger"
@@ -239,10 +239,10 @@ unset($__errorArgs, $__bag); ?>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </div>
                                     </div>
-            
+
                                     <input type="file" id="image" name="image[]" accept=".svg, image/png,image/jpg,image/jpeg"
                                         multiple />
-            
+
                                     <small class="form-text text-muted">recommended size is 800 x 600px or 800 x 800px. only allowed
                                         jpg/jpeg/png/svg file and smaller than 2MB</small>
                                 </div>
@@ -303,15 +303,15 @@ unset($__errorArgs, $__bag); ?>
     }
 
     if (provinsiValue) {
-        const url = '/data/kota/' + provinsiValue;
+        const url = '/admin/data/kota/' + provinsiValue;
 
         fetchData(kabupaten, url);
     }
-    
+
     provinsi.addEventListener('change', () => {
         provinsiId = provinsi.options[provinsi.selectedIndex].value;
 
-        const url = '/data/kota/' + provinsiId;
+        const url = '/admin/data/kota/' + provinsiId;
 
         const lastOptKabupaten = kabupaten.children;
         const lastOptKecamatan = kecamatan.children;
@@ -327,7 +327,7 @@ unset($__errorArgs, $__bag); ?>
     kabupaten.addEventListener('change', () => {
         kabupatenId = kabupaten.options[kabupaten.selectedIndex].value;
 
-        const url = '/data/kecamatan/' + kabupatenId;
+        const url = '/admin/data/kecamatan/' + kabupatenId;
 
         const lastOptKecamatan = kecamatan.children;
         const lastOptDesa = desa.children;
@@ -341,7 +341,7 @@ unset($__errorArgs, $__bag); ?>
     kecamatan.addEventListener('change', () => {
         kecamatanId = kecamatan.options[kecamatan.selectedIndex].value;
 
-        const url = '/data/desa/' + kecamatanId;
+        const url = '/admin/data/desa/' + kecamatanId;
 
         const lastOptDesa = desa.children;
 
@@ -375,7 +375,7 @@ unset($__errorArgs, $__bag); ?>
         FilePondPluginImagePreview,
         FilePondPluginFileValidateSize
     );
-    
+
     FilePond.setOptions({
         server: {
             url: '<?php echo e(route("upload")); ?>',
@@ -389,6 +389,23 @@ unset($__errorArgs, $__bag); ?>
     const pond = FilePond.create(inputElement, {
         maxFileSize: '2MB',
     });
+</script>
+<script>
+    function imgDestroy(id, type) {
+        if(confirm('Anda yakin ingin menghapus?'))
+        {
+            $.ajax({
+                url: '/admin/hotel/img-delete/' + id,
+                method: 'put',
+                data: {
+                    _token: '<?php echo e(csrf_token()); ?>',
+                },
+                success: function(data) {
+                    document.querySelector('#image-container-' + id).remove();
+                }
+            })
+        }
+    }
 </script>
 <?php $__env->stopSection(); ?>
 

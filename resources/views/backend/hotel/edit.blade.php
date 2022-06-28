@@ -300,4 +300,21 @@
         maxFileSize: '2MB',
     });
 </script>
+<script>
+    function imgDestroy(id, type) {
+        if(confirm('Anda yakin ingin menghapus?'))
+        {
+            $.ajax({
+                url: '/admin/hotel/img-delete/' + id,
+                method: 'put',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                },
+                success: function(data) {
+                    document.querySelector('#image-container-' + id).remove();
+                }
+            })
+        }
+    }
+</script>
 @endsection
