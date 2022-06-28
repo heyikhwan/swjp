@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html class="no-js" lang="en-US">
 
@@ -1626,3 +1627,18 @@
 	</body>
 
 </html>
+=======
+@extends('frontend.layouts.master')
+@section('content')
+@include('frontend.layouts.banner')
+@include('frontend.layouts.pricing')
+@include('frontend.layouts.keuntungan')
+@include('frontend.layouts.testimoni')
+@include('frontend.layouts.counters')
+@include('frontend.layouts.tour-guide')
+@include('frontend.layouts.destinasi')
+@include('frontend.layouts.faq')
+@include('frontend.layouts.contacts')
+@include('frontend.layouts.footer')
+@endsection
+>>>>>>> f8775e2fe23f6bee4b4dc132c436db9dc3aab498
