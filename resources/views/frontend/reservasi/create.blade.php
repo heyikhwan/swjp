@@ -1,80 +1,148 @@
 @extends('frontend.layouts.master')
 @section('content')
-<section id="reservasi" class="banner">
-<div class="container vh-100">
-<div class="row">
-    <div class="col">
-        <div class="card w-75 mx-auto">
-            <div class="card-header">
-                <h5 class="p-2 ms-1 text-center">Custom Paket</h5>
-            </div>
-                <div class="card-body">
-                <form method="POST" action="#" class="needs-validation p-3">
-                    @csrf
-                    <div class="row">
-                        <div class="col">
-                            <div class="mb-3">
-                                <label for="" class="">Level</label>
-                                <select class="form-control js-example-basic-multiple" multiple="multiple"
-                                    placeholder="This is a search placeholder">
-                                    <option value="">Pilih Level</option>
-                                    <option value="1">Provinsi</option>
-                                    <option value="2">Kabupaten/Kota</option>
-                                    <option value="3">Kecamatan</option>
-                                    <option value="4">Desa</option>
-                                </select>
-                            </div>
+    <section id="reservasi" class="banner vh-100">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="card w-75 mx-auto">
+                        <div class="card-header">
+                            <h5 class="p-2 ms-1 text-center">Custom Paket</h5>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="mb-3">
-                                <label class="form-label" for="harga">Pilih Kendaraan</label>
-                                <input type="text" class="form-control @error('harga') is-invalid @enderror" id="harga" name="harga" placeholder="Harga Paket" required>
-                                @error('harga')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
+                        <div class="card-body">
+                            <form method="post" action="#">
+                                @csrf
+                                <div class="row mb-3">
+                                    <div class="col-11"><label for="Durasi">Durasi Perjalanan</label>
+                                        <input type="text" name="durasi" class="form-control" id="durasi"
+                                            placeholder="Pilih durasi perjalanan" style="max-width:828px;"/>
+                                            
+                                    </div>
                                 </div>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
+                                <div class="form-group hotel">
+                                    <div class="row">
+                                        <div class="col"><label for="Hotel">Hotel</label></div>
+                                    </div>
+                                    <div class="input-group">
+                                        <select class="form-select mb-3 me-3"
+                                        name="hotel[]" id="hotel"
+                                        placeholder="This is a placeholder" style="height: 50px;">
+                                        <option value="Choice 1" >Choice 1</option>
+                                        <option value="Choice 2">Choice 2</option>
+                                        <option value="Choice 3">Choice 3</option>
+                                        <option value="Choice 4" >Choice 4</option>
+                                    </select>
+                                        <div class="input-group-addon me-3">
+                                            <button type="button" class="btn btn-success addMoreHotel"><i
+                                                    class="fas fa-plus"></i></button>
+                                        </div>
 
-                    <div class="row">
-                        <div class="col">
-                            <div class="mb-3">
-                                <label class="form-label" for="body">Fitur</label>
-                                <input class="form-control @error('body') is-invalid @enderror" id="body" name="body" type="text" placeholder="Masukkan Fitur" required />
-                                @error('body')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
+                                    </div>
                                 </div>
-                                @enderror
+                                <div class="form-group kendaraan">
+                                    <div class="row mt-3">
+                                        <div class="col"><label for="Hotel">Kendaraan</label></div>
+                                    </div>
+                                    <div class="input-group">
+                                        <select class="form-select mb-3 me-3"
+                                        name="kendaraan[]" id=""
+                                        placeholder="This is a placeholder" style="height: 50px;">
+                                        <option value="Choice 1" >Choice 1</option>
+                                        <option value="Choice 2">Choice 2</option>
+                                        <option value="Choice 3">Choice 3</option>
+                                        <option value="Choice 4" >Choice 4</option>
+                                    </select>
+                                        <div class="input-group-addon me-3">
+                                            <button type="button" class="btn btn-success addMoreKendaraan"><i
+                                                    class="fas fa-plus"></i></button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row mt-3 text-center">
+                                    <div class="col">
+                                        <button type="submit" name="submit" class="btn btn-primary btn-sm">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="form-group hotelCopy" style="display: none;">
+                                <div class="input-group">
+                                    <select class="form-select mb-3 me-3"
+                                        name="hotel[]" id="hotel"
+                                        placeholder="This is a placeholder" style="height: 50px;">
+                                        <option value="Choice 1" >Choice 1</option>
+                                        <option value="Choice 2">Choice 2</option>
+                                        <option value="Choice 3">Choice 3</option>
+                                        <option value="Choice 4" >Choice 4</option>
+                                    </select>
+                                    <div class="input-group-addon">
+                                        <a href="javascript:void(0)" class="btn btn-danger remove me-3"><i
+                                                class="fas fa-trash"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group kendaraanCopy" style="display: none;">
+                                <div class="input-group">
+                                    <select class="form-select mb-3 me-3"
+                                        name="kendaraan[]" id=""
+                                        placeholder="This is a placeholder" style="height: 50px;">
+                                        <option value="Choice 1" >Choice 1</option>
+                                        <option value="Choice 2">Choice 2</option>
+                                        <option value="Choice 3">Choice 3</option>
+                                        <option value="Choice 4" >Choice 4</option>
+                                    </select>
+                                    <div class="input-group-addon">
+                                        <a href="javascript:void(0)" class="btn btn-danger remove me-3"><i
+                                                class="fas fa-trash"></i></a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="d-flex justify-content-end gap-2">
-                        <a class="btn btn-secondary" href="{{ route('home') }}">Kembali</a>
-                        <button class="btn btn-primary" type="submit">Submit</button>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-</div>
-</section>
+    </section>
 @endsection
 
 @push('styles')
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endpush
 @push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script>
-    $(document).ready(function() {
-    $('.js-example-basic-multiple').select2();
-});
-</script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // membatasi jumlah inputan
+            var maxGroup =  3;
+
+            //melakukan proses multiple input 
+            $(".addMoreHotel").click(function() {
+                if ($('body').find('.hotel').length < maxGroup) {
+                    var fieldHTML = '<div class="form-group hotel">' + $(".hotelCopy").html() + '</div>';
+                    $('body').find('.hotel:last').after(fieldHTML);
+                } else {
+                    alert('Maximum ' + maxGroup + ' groups are allowed.');
+                }
+            });
+
+            $(".addMoreKendaraan").click(function() {
+                if ($('body').find('.kendaraan').length < maxGroup) {
+                    var fieldHTML = '<div class="form-group kendaraan">' + $(".kendaraanCopy").html() +
+                        '</div>';
+                    $('body').find('.kendaraan:last').after(fieldHTML);
+                } else {
+                    alert('Maximum ' + maxGroup + ' groups are allowed.');
+                }
+            });
+
+            //remove fields group
+            $("body").on("click", ".remove", function() {
+                $(this).parents(".kendaraan").remove();
+            });
+            //remove fields group
+            $("body").on("click", ".remove", function() {
+                $(this).parents(".hotel").remove();
+            });
+        });
+    </script>
+    
+    
 @endpush
