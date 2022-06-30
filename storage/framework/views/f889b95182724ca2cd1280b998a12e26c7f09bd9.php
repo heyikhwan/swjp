@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('content'); ?>
 <?php echo $__env->make('frontend.layouts.banner', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php echo $__env->make('frontend.layouts.pricing', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

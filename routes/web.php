@@ -14,7 +14,12 @@ use App\Models\Wilayah;
 
 //FRONTEND
 Route::get('/', [HomeController::class, 'home'])->name('home');
-Route::resource('reservasi', FrontendReservasiController::class);
+
+Route::middleware('auth')->group(function() {
+    Route::resource('reservasi', FrontendReservasiController::class);
+    Route::get('reservasi/create/destinasi', [FrontendReservasiController::class, 'createDestinasi'])->name('reservasi.createDestinasi');
+    Route::post('reservasi/create/destinasi/store', [FrontendReservasiController::class, 'storeDestinasi'])->name('reservasi.storeDestinasi');
+});
 
 Auth::routes();
 

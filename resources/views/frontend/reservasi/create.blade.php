@@ -11,7 +11,7 @@
                         <div class="card-body">
                             <form method="post" action="{{ route('reservasi.store') }}">
                                 @csrf
-                                <div class="row mb-3 me-1">
+                                <div class="row mb-3 mx-1">
                                     <div class="col-6"><label for="tgl_mulai">Tanggal Mulai</label>
                                         <input type="date" name="tgl_mulai" class="form-control"/>
 
@@ -20,82 +20,73 @@
                                         <input type="date" name="tgl_akhir" class="form-control"/>
                                     </div>
                                 </div>
-                                <div class="form-group hotel">
+                                <div class="form-group mx-3">
                                     <div class="row">
-                                        <div class="col"><label for="Hotel">Hotel</label></div>
+                                        <div class="col"><label for="Leader">Pilih Leader</label></div>
                                     </div>
                                     <div class="input-group">
-                                        <select class="form-select mb-3 me-3"
-                                        name="hotel[]" id="hotel"
+                                        <select class="form-select mb-3"
+                                        name="leader" id="leader"
                                         placeholder="This is a placeholder" style="height: 50px;">
-                                        @foreach ($hotel as $data )
+                                        @foreach ($leader as $data )
                                         <option value="{{ $data->id }}">{{ $data->name }}</option>
                                         @endforeach
                                     </select>
-                                        <div class="input-group-addon me-3">
-                                            <button type="button" class="btn btn-success addMoreHotel"  ><i
-                                                    class="fas fa-plus"></i></button>
-                                        </div>
-
                                     </div>
                                 </div>
-                                <div class="form-group kendaraan">
+                                <div class="form-group mx-3">
                                     <div class="row mt-3">
-                                        <div class="col"><label for="Kendaraan">Kendaraan</label></div>
+                                        <div class="col"><label for="Kendaraan">Pilih Guide</label></div>
                                     </div>
                                     <div class="input-group">
-                                        <select class="form-select mb-3 me-3"
-                                        name="kendaraan[]" id=""
+                                        <select class="form-select mb-3"
+                                        name="guide" id=""
                                         placeholder="This is a placeholder" style="height: 50px;">
-                                        @foreach ($kendaraan as $data )
-                                        <option value="{{ $data->id }}">{{ $data->nama }}</option>
+                                        @foreach ($guide as $data )
+                                        <option value="{{ $data->id }}">{{ $data->name }}</option>
                                         @endforeach
                                     </select>
-                                        <div class="input-group-addon me-3">
-                                            <button type="button" class="btn btn-success addMoreKendaraan"><i
-                                                    class="fas fa-plus"></i></button>
-                                        </div>
-
                                     </div>
                                 </div>
-                                <div class="row mt-3 float-end">
+                                <div class="form-group mx-3">
+                                    <div class="row mt-3">
+                                        <div class="col"><label for="Kendaraan">Nama Paket</label></div>
+                                    </div>
+                                    <div class="input-group">
+                                       <input type="text" name="name" class="form-control" placeholder="Isi nama paket">
+                                    </div>
+                                </div>
+                                <div class="form-group mx-3">
+                                    <div class="row mt-3">
+                                        <div class="col"><label for="Kendaraan">Jenis Perjalanan</label></div>
+                                    </div>
+                                    <div class="input-group">
+                                        <select class="form-select mb-3"
+                                        name="jenis" id=""
+                                        placeholder="This is a placeholder" style="height: 50px;">
+                                        <option value="Darat">Darat</option>
+                                        <option value="Laut">Laut</option>
+                                        <option value="Udara">Udara</option>
+                                    </select>
+                                    </div>
+                                </div>
+                                <div class="form-group mx-3">
+                                    <div class="row mt-3">
+                                        <div class="col"><label for="Kendaraan">Keberangkatan</label></div>
+                                    </div>
+                                    <div class="input-group">
+                                       <input type="text" name="keberangkatan" class="form-control" placeholder="Isi keberangkatan">
+                                    </div>
+                                </div>
+                                <div class="row mt-5 float-end">
                                     <div class="col">
+                                        <button type="submit" name="submit" class="btn btn-primary btn-sm me-2" style="background-color: rgb(98, 95, 110);"">Batal</button>
                                         <button type="submit" name="submit" class="btn btn-primary btn-sm">Submit</button>
                                     </div>
                                 </div>
                             </form>
-                            <div class="form-group hotelCopy" style="display: none;">
-                                <div class="input-group">
-                                    <select class="form-select mb-3 me-3"
-                                        name="hotel[]" id="hotel"
-                                        placeholder="This is a placeholder" style="height: 50px;">
-                                        @foreach ($hotel as $data )
-                                        <option value="{{ $data->id }}">{{ $data->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    <div class="input-group-addon">
-                                        <a href="javascript:void(0)" class="btn remove me-3" style="background-color: rgb(245, 0, 0);"><i
-                                                class="fas fa-trash"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group kendaraanCopy" style="display: none;">
-                                <div class="input-group">
-                                    <select class="form-select mb-3 me-3"
-                                        name="kendaraan[]" id=""
-                                        placeholder="This is a placeholder" style="height: 50px;">
-                                        @foreach ($kendaraan as $data )
-                                        <option value="{{ $data->id }}">{{ $data->nama }}</option>
-                                        @endforeach
-                                    </select>
-                                    <div class="input-group-addon">
-                                        <a href="javascript:void(0)" class="btn btn-danger remove me-3" style="background-color: rgb(245, 0, 0);"><i
-                                                class="fas fa-trash"></i></a>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-                    </div>
+                    {{-- </div> --}}
                 </div>
             </div>
         </div>

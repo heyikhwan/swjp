@@ -26,8 +26,6 @@ class ReservasiRequest extends FormRequest
         return [
             'tgl_mulai' => ['required'],
             'tgl_akhir' => ['required'],
-            'hotel' => ['required'],
-            'kendaraan' => ['required'],
         ];
     }
 }

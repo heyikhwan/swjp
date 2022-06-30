@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('destinasis', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('hotel_id');
-            $table->unsignedBigInteger('kendaraan_id');
-            $table->unsignedBigInteger('reservasi_id');
+            $table->unsignedBigInteger('hotel_id')->nullable();
+            $table->unsignedBigInteger('kendaraan_id')->nullable();
+            $table->unsignedBigInteger('reservasi_id')->nullable();
             $table->timestamps();
 
             $table->foreign('hotel_id')->references('id')->on('hotels')->onDelete('restrict');
