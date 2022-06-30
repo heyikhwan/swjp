@@ -2,7 +2,7 @@
  <footer>
 
     <!-- Widgets -->
-    <div class="footer-widgets">
+    <div style="" class="footer-widgets">
         <div class="container">
 
             <div class="row">

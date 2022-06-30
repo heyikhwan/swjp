@@ -272,7 +272,7 @@ unset($__errorArgs, $__bag); ?>
     }
 
     if (provinsiValue) {
-        const url = '/data/kota/' + provinsiValue;
+        const url = '/admin/data/kota/' + provinsiValue;
 
         fetchData(kabupaten, url);
     }
@@ -280,7 +280,7 @@ unset($__errorArgs, $__bag); ?>
     provinsi.addEventListener('change', () => {
         provinsiId = provinsi.options[provinsi.selectedIndex].value;
 
-        const url = '/data/kota/' + provinsiId;
+        const url = '/admin/data/kota/' + provinsiId;
 
         const lastOptKabupaten = kabupaten.children;
         const lastOptKecamatan = kecamatan.children;
@@ -296,7 +296,7 @@ unset($__errorArgs, $__bag); ?>
     kabupaten.addEventListener('change', () => {
         kabupatenId = kabupaten.options[kabupaten.selectedIndex].value;
 
-        const url = '/data/kecamatan/' + kabupatenId;
+        const url = '/admin/data/kecamatan/' + kabupatenId;
 
         const lastOptKecamatan = kecamatan.children;
         const lastOptDesa = desa.children;
@@ -310,7 +310,7 @@ unset($__errorArgs, $__bag); ?>
     kecamatan.addEventListener('change', () => {
         kecamatanId = kecamatan.options[kecamatan.selectedIndex].value;
 
-        const url = '/data/desa/' + kecamatanId;
+        const url = '/admin/data/desa/' + kecamatanId;
 
         const lastOptDesa = desa.children;
 

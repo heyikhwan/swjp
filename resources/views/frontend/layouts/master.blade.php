@@ -30,6 +30,7 @@
 		<a href="#top-page" class="to-top">
 			<div class="icon icon-arrows-up"></div>
 		</a>
+        @include('frontend.layouts.footer')
 
         @include('frontend.partials.scripts')
 

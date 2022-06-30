@@ -18,11 +18,12 @@ return new class extends Migration
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('leader_id');
             $table->unsignedBigInteger('guide_id');
-            $table->string('judul');
-            $table->string('jenis_perjalanan');
-            $table->string('durasi_perjalanan');
-            $table->string('keberangkatan');
-            $table->string('status');
+            $table->string('judul')->nullable();
+            $table->string('jenis_perjalanan')->nullable();
+            $table->string('keberangkatan')->nullable();
+            $table->string('status')->nullable();
+            $table->date('tgl_mulai')->nullable();
+            $table->date('tgl_akhir')->nullable();
             $table->timestamps();
 
             $table->foreign('customer_id')->references('id')->on('users')->onDelete('restrict');

@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use App\Models\PaketWisata;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
@@ -14,7 +15,10 @@ class HomeController extends Controller
 
     public function home()
     {
-        return view('frontend.index');
+        $paket = PaketWisata::get();
+        return view('frontend.index',[
+            'paket' => $paket,
+        ]);
     }
 
     public function index(Request $request)

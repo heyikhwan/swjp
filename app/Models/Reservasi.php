@@ -18,5 +18,14 @@ class Reservasi extends Model
         'durasi_perjalanan',
         'keberangkatan',
         'status',
+        'tgl_mulai',
+        'tgl_akhir',
+        'hotel',
+        'kendaraan',
     ];
+
+    public function destinasi()
+    {
+        return $this->hasMany(Destinasi::class, 'reservasi_id', 'id');
+    }
 }
