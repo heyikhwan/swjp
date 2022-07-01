@@ -18,7 +18,13 @@ class ReservasiController extends Controller
 
     public function index()
     {
-        return view('frontend.reservasi.index');
+        $user = Auth::user();
+        $reservasi = Reservasi::with('customer')->where('customer_id', $user->id)->get();
+        $destinasi = Destinasi::with('reservasi')->get();
+        return view('frontend.reservasi.index', [
+            'reservasi' => $reservasi,
+            'destinasi' => $destinasi
+        ]);
     }
 
     public function create()
@@ -123,5 +129,21 @@ class ReservasiController extends Controller
             $reservasi->update(['status' => 'Menunggu Konfirmasi']);
 
         return to_route('reservasi.create');
+    }
+
+    public function pembayaran(Request $request, $id)
+    {
+        $reservasi = Reservasi::findorFail($id);
+        $file = $request->file('bukti');
+        $nama_file = time()."_".$file->getClientOriginalName();
+        $tujuan_upload = 'storage/bukti-pembayaran';
+        $file->move($tujuan_upload,$nama_file);
+
+        $reservasi->update([
+            'bukti_pembayaran' => $nama_file,
+            'status' => 'Menunggu Konfirmasi Pembayaran'
+        ]);
+
+        return redirect()->back();
     }
 }

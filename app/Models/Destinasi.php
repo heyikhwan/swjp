@@ -19,4 +19,14 @@ class Destinasi extends Model
     {
         return $this->belongsTo(Reservasi::class, 'reservasi_id', 'id');
     }
+
+    public function hotel()
+    {
+        return $this->belongsTo(Hotel::class, 'hotel_id', 'id');
+    }
+
+    public function kendaraan()
+    {
+        return $this->belongsTo(Kendaraan::class, 'kendaraan_id', 'id');
+    }
 }

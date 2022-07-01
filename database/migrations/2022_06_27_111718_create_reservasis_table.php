@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->date('tgl_mulai')->nullable();
             $table->date('tgl_akhir')->nullable();
+            $table->string('bukti_pembayaran')->nullable();
             $table->timestamps();
 
             $table->foreign('customer_id')->references('id')->on('users')->onDelete('restrict');

@@ -95,35 +95,62 @@
             <div class="col-12">
 
                 <!-- Carousel -->
-                <div class="owl-carousel owl-theme screenshot-slider zoom-screenshot">
+                <div class="owl-carousel owl-theme screenshot-slider">
 
+                    @foreach ($paket as $data)
                     <div class="item">
-                         <div class="col-md-4 res-margin mx-3">
-                            <div class="price-table plan-popular mb-4 mb-sm-5 mb-lg-0">
-                                <div class="icon icon-basic-heart"></div>
-                                <h3 class="plan-type">Paket Dumai-Malaka</h3>
-                                <h2 class="plan-price">Rp. 2.900.000</h2>
-                                <ul class="list-unstyled plan-list">
-                                    <li>Bus Pariwisata</li>
-                                    <li>Hotel 2 Malam di KL</li>
-                                    <li>Makan Sesuai Jadwal</li>
-                                    <li>Guide and Tour Travel</li>
-                                    <li>Tiket Cabel Car</li>
-                                    <li>Tiket Ferry PP dan Boarding Pass</li>
-                                </ul>
-                                @auth
-                                    <a class="btn" href="#">Pilih Paket</a>
-                                @else
-                                    <a class="btn" href="{{ route('login') }}">Pilih Paket</a>
-                                @endauth
-                                <div class="card-ribbon">
-                                    <span>Popular</span>
-                                </div>
+                        <div class="col-md-4 res-margin mx-3">
+                           <div class="price-table {{ $data->is_popular ? 'plan-popular' : ''}} mb-4 mb-sm-5 mb-lg-0">
+                               <div class="icon icon-basic-heart"></div>
+                               <h3 class="plan-type">{{ $data->nama }}</h3>
+                               <h2 class="plan-price">Rp.{{ $data->harga }}</h2>
+                               <ul class="list-unstyled plan-list">
+                                @foreach (explode(',',$data->body) as $fitur)
+                                <li>{{ $fitur }}</li>
+                                @endforeach
+                               </ul>
+                               @auth
+                                   <a class="btn" href="#">Pilih Paket</a>
+                               @else
+                                   <a class="btn" href="{{ route('login') }}">Pilih Paket</a>
+                               @endauth
+                               @if ($data->is_popular)
+                               <div class="card-ribbon">
+                                <span>Popular</span>
                             </div>
-                        </div>
-                    </div>
+                               @endif
+                           </div>
+                       </div>
+                   </div>
+                    @endforeach
 
-                </div>
+                    {{-- <div class="item">
+                        <div class="col-md-4 res-margin mx-3">
+                           <div class="price-table plan-popular mb-4 mb-sm-5 mb-lg-0">
+                               <div class="icon icon-basic-heart"></div>
+                               <h3 class="plan-type">Paket Dumai-Malaka</h3>
+                               <h2 class="plan-price">Rp. 2.900.000</h2>
+                               <ul class="list-unstyled plan-list">
+                                   <li>Bus Pariwisata</li>
+                                   <li>Hotel 2 Malam di KL</li>
+                                   <li>Makan Sesuai Jadwal</li>
+                                   <li>Guide and Tour Travel</li>
+                                   <li>Tiket Cabel Car</li>
+                                   <li>Tiket Ferry PP dan Boarding Pass</li>
+                               </ul>
+                               @auth
+                                   <a class="btn" href="#">Pilih Paket</a>
+                               @else
+                                   <a class="btn" href="{{ route('login') }}">Pilih Paket</a>
+                               @endauth
+                               <div class="card-ribbon">
+                                   <span>Popular</span>
+                               </div>
+                           </div>
+                       </div>
+                   </div> --}}
+
+              </div>
 
             </div>
 

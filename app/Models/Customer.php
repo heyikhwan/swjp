@@ -16,4 +16,9 @@ class Customer extends Model
         'tanggal_lahir',
         'no_passport',
     ];
+
+    public function reservasi()
+    {
+        return $this->hasMany(Reservasi::class, 'customer_id', 'id');
+    }
 }

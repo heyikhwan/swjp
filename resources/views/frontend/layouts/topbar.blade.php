@@ -92,6 +92,12 @@
                             </a>
                         </li>
 
+                        <li class="nav-item">
+                            <a href="{{ route('reservasi.index') }}" class="nav-link js-scroll-trigger">
+                                <span>Riwayat Reservasi</span>
+                            </a>
+                        </li>
+
                         <li>
                             <a href="#" class="nav-link js-scroll-trigger" onclick="event.preventDefault(); document.getElementById('logout-form').submit()">Log Out</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none">

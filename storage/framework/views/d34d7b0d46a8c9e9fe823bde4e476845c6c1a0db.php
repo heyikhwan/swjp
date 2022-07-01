@@ -33,35 +33,38 @@
             <div class="col-12">
 
                 <!-- Carousel -->
-                <div class="owl-carousel owl-theme screenshot-slider zoom-screenshot">
+                <div class="owl-carousel owl-theme screenshot-slider">
 
+                    <?php $__currentLoopData = $paket; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="item">
-                         <div class="col-md-4 res-margin mx-3">
-                            <div class="price-table plan-popular mb-4 mb-sm-5 mb-lg-0">
-                                <div class="icon icon-basic-heart"></div>
-                                <h3 class="plan-type">Paket Dumai-Malaka</h3>
-                                <h2 class="plan-price">Rp. 2.900.000</h2>
-                                <ul class="list-unstyled plan-list">
-                                    <li>Bus Pariwisata</li>
-                                    <li>Hotel 2 Malam di KL</li>
-                                    <li>Makan Sesuai Jadwal</li>
-                                    <li>Guide and Tour Travel</li>
-                                    <li>Tiket Cabel Car</li>
-                                    <li>Tiket Ferry PP dan Boarding Pass</li>
-                                </ul>
-                                <?php if(auth()->guard()->check()): ?>
-                                    <a class="btn" href="#">Pilih Paket</a>
-                                <?php else: ?>
-                                    <a class="btn" href="<?php echo e(route('login')); ?>">Pilih Paket</a>
-                                <?php endif; ?>
-                                <div class="card-ribbon">
-                                    <span>Popular</span>
-                                </div>
+                        <div class="col-md-4 res-margin mx-3">
+                           <div class="price-table <?php echo e($data->is_popular ? 'plan-popular' : ''); ?> mb-4 mb-sm-5 mb-lg-0">
+                               <div class="icon icon-basic-heart"></div>
+                               <h3 class="plan-type"><?php echo e($data->nama); ?></h3>
+                               <h2 class="plan-price">Rp.<?php echo e($data->harga); ?></h2>
+                               <ul class="list-unstyled plan-list">
+                                <?php $__currentLoopData = explode(',',$data->body); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $fitur): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <li><?php echo e($fitur); ?></li>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                               </ul>
+                               <?php if(auth()->guard()->check()): ?>
+                                   <a class="btn" href="#">Pilih Paket</a>
+                               <?php else: ?>
+                                   <a class="btn" href="<?php echo e(route('login')); ?>">Pilih Paket</a>
+                               <?php endif; ?>
+                               <?php if($data->is_popular): ?>
+                               <div class="card-ribbon">
+                                <span>Popular</span>
                             </div>
-                        </div>
-                    </div>
+                               <?php endif; ?>
+                           </div>
+                       </div>
+                   </div>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-                </div>
+                    
+
+              </div>
 
             </div>
 

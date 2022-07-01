@@ -20,12 +20,26 @@ class Reservasi extends Model
         'status',
         'tgl_mulai',
         'tgl_akhir',
-        'hotel',
-        'kendaraan',
+        'bukti_pembayaran',
     ];
 
     public function destinasi()
     {
         return $this->hasMany(Destinasi::class, 'reservasi_id', 'id');
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'customer_id', 'id');
+    }
+
+    public function leader()
+    {
+        return $this->belongsTo(User::class, 'leader_id', 'id');
+    }
+
+    public function guide()
+    {
+        return $this->belongsTo(User::class, 'guide_id', 'id');
     }
 }

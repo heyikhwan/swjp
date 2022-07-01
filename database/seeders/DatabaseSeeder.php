@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             WilayahSeeder::class,
             KendaraanSeeder::class,
             HotelSeeder::class,
+            PaketSeeder::class,
         ]);
     }
 }
