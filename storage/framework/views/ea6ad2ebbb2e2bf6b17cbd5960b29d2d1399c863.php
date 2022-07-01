@@ -17,9 +17,16 @@
                                         <div class="col"><label for="Hotel">Hotel</label></div>
                                     </div>
                                     <div class="input-group">
-                                        <select class="form-select mb-3 me-3"
+                                        <select class="form-select mb-3 me-3 <?php $__errorArgs = ['hotel'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
                                         name="hotel[]" id="hotel"
-                                        placeholder="This is a placeholder" style="height: 50px;">
+                                        placeholder="This is a placeholder" style="height: 50px;" value="<?php echo e(old('hotel')); ?>">
                                         <?php $__currentLoopData = $hotel; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <option value="<?php echo e($data->id); ?>"><?php echo e($data->name); ?></option>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -28,7 +35,19 @@
                                             <button type="button" class="btn btn-success addMoreHotel"  ><i
                                                     class="fas fa-plus"></i></button>
                                         </div>
+                                        <?php $__errorArgs = ['hotel'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                <div class="invalid-feedback">
+                                    <?php echo e($message); ?>
 
+                                </div>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                     </div>
                                 </div>
                                 <div class="form-group kendaraan mx-3">
@@ -36,9 +55,16 @@
                                         <div class="col"><label for="Kendaraan">Kendaraan</label></div>
                                     </div>
                                     <div class="input-group">
-                                        <select class="form-select mb-3 me-3"
+                                        <select class="form-select mb-3 me-3 <?php $__errorArgs = ['kendaraan'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
                                         name="kendaraan[]" id=""
-                                        placeholder="This is a placeholder" style="height: 50px;">
+                                        placeholder="This is a placeholder" style="height: 50px;" value="<?php echo e(old('kendaraan')); ?>">
                                         <?php $__currentLoopData = $kendaraan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <option value="<?php echo e($data->id); ?>"><?php echo e($data->nama); ?></option>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -47,7 +73,19 @@
                                             <button type="button" class="btn btn-success addMoreKendaraan"><i
                                                     class="fas fa-plus"></i></button>
                                         </div>
+                                        <?php $__errorArgs = ['kendaraan'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                <div class="invalid-feedback">
+                                    <?php echo e($message); ?>
 
+                                </div>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                     </div>
                                 </div>
                                 <div class="row mt-5 float-end mx-3">
@@ -61,7 +99,7 @@
                                 <div class="input-group">
                                     <select class="form-select mb-3 me-3"
                                         name="destinasi[]" id="destinasi"
-                                        placeholder="This is a placeholder" style="height: 50px;">
+                                        placeholder="This is a placeholder" style="height: 50px;" value="<?php echo e(old('destinasi')); ?>">
                                         <?php $__currentLoopData = $hotel; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <option value="<?php echo e($data->id); ?>"><?php echo e($data->name); ?></option>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -74,9 +112,16 @@
                             </div>
                             <div class="form-group hotelCopy" style="display: none;">
                                 <div class="input-group">
-                                    <select class="form-select mb-3 me-3"
+                                    <select class="form-select mb-3 me-3 <?php $__errorArgs = ['hotel'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
                                         name="hotel[]" id="hotel"
-                                        placeholder="This is a placeholder" style="height: 50px;">
+                                        placeholder="This is a placeholder" style="height: 50px;" value="<?php echo e(old('hotel')); ?>">
                                         <?php $__currentLoopData = $hotel; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <option value="<?php echo e($data->id); ?>"><?php echo e($data->name); ?></option>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -85,13 +130,33 @@
                                         <a href="javascript:void(0)" class="btn remove me-3" style="background-color: rgb(245, 0, 0);"><i
                                                 class="fas fa-trash"></i></a>
                                     </div>
+                                    <?php $__errorArgs = ['hotel'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                <div class="invalid-feedback">
+                                    <?php echo e($message); ?>
+
+                                </div>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                 </div>
                             </div>
                             <div class="form-group kendaraanCopy" style="display: none;">
                                 <div class="input-group">
-                                    <select class="form-select mb-3 me-3"
+                                    <select class="form-select mb-3 me-3 <?php $__errorArgs = ['kendaraan'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
                                         name="kendaraan[]" id=""
-                                        placeholder="This is a placeholder" style="height: 50px;">
+                                        placeholder="This is a placeholder" style="height: 50px;" value="<?php echo e(old('kendaraan')); ?>">
                                         <?php $__currentLoopData = $kendaraan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <option value="<?php echo e($data->id); ?>"><?php echo e($data->nama); ?></option>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -100,6 +165,19 @@
                                         <a href="javascript:void(0)" class="btn btn-danger remove me-3" style="background-color: rgb(245, 0, 0);"><i
                                                 class="fas fa-trash"></i></a>
                                     </div>
+                                    <?php $__errorArgs = ['kendaraan'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                <div class="invalid-feedback">
+                                    <?php echo e($message); ?>
+
+                                </div>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                 </div>
                             </div>
                         </div>
@@ -125,7 +203,7 @@
             //melakukan proses multiple input
             $(".addMoreHotel").click(function() {
                 if ($('body').find('.hotel').length < maxGroup) {
-                    var fieldHTML = '<div class="form-group hotel">' + $(".hotelCopy").html() + '</div>';
+                    var fieldHTML = '<div class="form-group hotel mx-3">' + $(".hotelCopy").html() + '</div>';
                     $('body').find('.hotel:last').after(fieldHTML);
                 } else {
                     alert('Maximum ' + maxGroup + ' groups are allowed.');
@@ -134,7 +212,7 @@
 
             $(".addMoreKendaraan").click(function() {
                 if ($('body').find('.kendaraan').length < maxGroup) {
-                    var fieldHTML = '<div class="form-group kendaraan">' + $(".kendaraanCopy").html() +
+                    var fieldHTML = '<div class="form-group kendaraan mx-3">' + $(".kendaraanCopy").html() +
                         '</div>';
                     $('body').find('.kendaraan:last').after(fieldHTML);
                 } else {

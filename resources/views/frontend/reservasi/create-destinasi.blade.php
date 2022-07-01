@@ -35,9 +35,9 @@
                                         <div class="col"><label for="Hotel">Hotel</label></div>
                                     </div>
                                     <div class="input-group">
-                                        <select class="form-select mb-3 me-3"
+                                        <select class="form-select mb-3 me-3 @error('hotel') is-invalid @enderror"
                                         name="hotel[]" id="hotel"
-                                        placeholder="This is a placeholder" style="height: 50px;">
+                                        placeholder="This is a placeholder" style="height: 50px;" value="{{ old('hotel') }}">
                                         @foreach ($hotel as $data )
                                         <option value="{{ $data->id }}">{{ $data->name }}</option>
                                         @endforeach
@@ -46,7 +46,11 @@
                                             <button type="button" class="btn btn-success addMoreHotel"  ><i
                                                     class="fas fa-plus"></i></button>
                                         </div>
-
+                                        @error('hotel')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                                     </div>
                                 </div>
                                 <div class="form-group kendaraan mx-3">
@@ -54,9 +58,9 @@
                                         <div class="col"><label for="Kendaraan">Kendaraan</label></div>
                                     </div>
                                     <div class="input-group">
-                                        <select class="form-select mb-3 me-3"
+                                        <select class="form-select mb-3 me-3 @error('kendaraan') is-invalid @enderror"
                                         name="kendaraan[]" id=""
-                                        placeholder="This is a placeholder" style="height: 50px;">
+                                        placeholder="This is a placeholder" style="height: 50px;" value="{{ old('kendaraan') }}">
                                         @foreach ($kendaraan as $data )
                                         <option value="{{ $data->id }}">{{ $data->nama }}</option>
                                         @endforeach
@@ -65,7 +69,11 @@
                                             <button type="button" class="btn btn-success addMoreKendaraan"><i
                                                     class="fas fa-plus"></i></button>
                                         </div>
-
+                                        @error('kendaraan')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                                     </div>
                                 </div>
                                 <div class="row mt-5 float-end mx-3">
@@ -79,7 +87,7 @@
                                 <div class="input-group">
                                     <select class="form-select mb-3 me-3"
                                         name="destinasi[]" id="destinasi"
-                                        placeholder="This is a placeholder" style="height: 50px;">
+                                        placeholder="This is a placeholder" style="height: 50px;" value="{{ old('destinasi') }}">
                                         @foreach ($hotel as $data )
                                         <option value="{{ $data->id }}">{{ $data->name }}</option>
                                         @endforeach
@@ -92,9 +100,9 @@
                             </div>
                             <div class="form-group hotelCopy" style="display: none;">
                                 <div class="input-group">
-                                    <select class="form-select mb-3 me-3"
+                                    <select class="form-select mb-3 me-3 @error('hotel') is-invalid @enderror"
                                         name="hotel[]" id="hotel"
-                                        placeholder="This is a placeholder" style="height: 50px;">
+                                        placeholder="This is a placeholder" style="height: 50px;" value="{{ old('hotel') }}">
                                         @foreach ($hotel as $data )
                                         <option value="{{ $data->id }}">{{ $data->name }}</option>
                                         @endforeach
@@ -103,13 +111,18 @@
                                         <a href="javascript:void(0)" class="btn remove me-3" style="background-color: rgb(245, 0, 0);"><i
                                                 class="fas fa-trash"></i></a>
                                     </div>
+                                    @error('hotel')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                                 </div>
                             </div>
                             <div class="form-group kendaraanCopy" style="display: none;">
                                 <div class="input-group">
-                                    <select class="form-select mb-3 me-3"
+                                    <select class="form-select mb-3 me-3 @error('kendaraan') is-invalid @enderror"
                                         name="kendaraan[]" id=""
-                                        placeholder="This is a placeholder" style="height: 50px;">
+                                        placeholder="This is a placeholder" style="height: 50px;" value="{{ old('kendaraan') }}">
                                         @foreach ($kendaraan as $data )
                                         <option value="{{ $data->id }}">{{ $data->nama }}</option>
                                         @endforeach
@@ -118,6 +131,11 @@
                                         <a href="javascript:void(0)" class="btn btn-danger remove me-3" style="background-color: rgb(245, 0, 0);"><i
                                                 class="fas fa-trash"></i></a>
                                     </div>
+                                    @error('kendaraan')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                                 </div>
                             </div>
                         </div>
@@ -143,7 +161,7 @@
             //melakukan proses multiple input
             $(".addMoreHotel").click(function() {
                 if ($('body').find('.hotel').length < maxGroup) {
-                    var fieldHTML = '<div class="form-group hotel">' + $(".hotelCopy").html() + '</div>';
+                    var fieldHTML = '<div class="form-group hotel mx-3">' + $(".hotelCopy").html() + '</div>';
                     $('body').find('.hotel:last').after(fieldHTML);
                 } else {
                     alert('Maximum ' + maxGroup + ' groups are allowed.');
@@ -152,7 +170,7 @@
 
             $(".addMoreKendaraan").click(function() {
                 if ($('body').find('.kendaraan').length < maxGroup) {
-                    var fieldHTML = '<div class="form-group kendaraan">' + $(".kendaraanCopy").html() +
+                    var fieldHTML = '<div class="form-group kendaraan mx-3">' + $(".kendaraanCopy").html() +
                         '</div>';
                     $('body').find('.kendaraan:last').after(fieldHTML);
                 } else {
