@@ -57,8 +57,22 @@
             <!-- Contact form -->
             <div class="col-12 col-lg-8">
 
-                <form id="contact-form" action="php/contact.php" method="post">
+                @if ($message = Session::get('success'))
+                    <div class="row">
+                        <div class="col">
+                            <div class="alert alert-success alert-border-left alert-dismissible fade show"
+                                role="alert">
+                                <i class="mdi mdi-check-all me-3 align-middle"></i><strong>Success</strong> -
+                                {{ $message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        </div>
+                    </div>
+                @endif
 
+                <form id="" action="{{ route('contact.sendMail') }}" method="POST">
+                    @csrf
                     <div class="row">
                         <div class="col-12 col-lg-6">
                             <div class="form-group mt-2 mb-3">
@@ -67,7 +81,8 @@
                         </div>
                         <div class="col-12 col-lg-6">
                             <div class="form-group mt-2 mb-3">
-                                <input type="email" name="email" class="form-control field-email" placeholder="Email">
+                                <input type="email" name="email" class="form-control field-email"
+                                    placeholder="Email">
                             </div>
                         </div>
                     </div>
@@ -75,7 +90,8 @@
                     <div class="row">
                         <div class="col-12 col-lg-12">
                             <div class="form-group mt-2 mb-3">
-                                <input type="text" name="subject" class="form-control field-subject" placeholder="Subject">
+                                <input type="text" name="subject" class="form-control field-subject"
+                                    placeholder="Subject">
                             </div>
                         </div>
                     </div>
@@ -90,17 +106,18 @@
 
                     <div class="row">
                         <div class="col-12 col-lg-12 mt-2">
-                            <button type="submit" id="contact-submit" name="send" class="btn">Kirim Email</button>
+                            <button type="submit" id="contact-submit" name="send" class="btn">Kirim
+                                Email</button>
                         </div>
                     </div>
 
                 </form>
 
-                <!-- Submit Results -->
+                {{-- <!-- Submit Results -->
                 <div class="contact-form-result">
                     <h4>Thank you for the e-mail!</h4>
                     <p>Your message has already arrived! We'll contact you shortly.</p>
-                </div>
+                </div> --}}
 
             </div>
 

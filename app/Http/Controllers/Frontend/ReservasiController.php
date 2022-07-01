@@ -45,7 +45,11 @@ class ReservasiController extends Controller
     {
        $data = $request->all();
 
+       $mulai = strtotime($data['tgl_mulai']);
+       $akhir = strtotime($data['tgl_akhir']);
     //    dd($data);
+        $jarak = $akhir - $mulai;
+        $durasi = ($jarak / 60 / 60 / 24) + 1;
 
        Reservasi::create([
         'customer_id' => Auth::id(),
@@ -69,55 +73,54 @@ class ReservasiController extends Controller
         $kendaraan = $request->kendaraan;
         $reservasi = Reservasi::latest()->first();
 
-        if(count(max($hotel,$kendaraan)) === count($hotel)){
-            for ($i=0; $i < count($hotel); $i++) {
+        // if(count(max($hotel,$kendaraan)) === count($hotel)){
+        //     for ($i=0; $i < count($hotel); $i++) {
             
-                $data = [
-                    'reservasi_id' => $reservasi->id,
-                    'hotel_id' =>$hotel[$i],
-                ];
-                Destinasi::create($data);
-            }
-            $destinasi = Destinasi::latest()->first();
+        //         $data = [
+        //             'reservasi_id' => $reservasi->id,
+        //             'hotel_id' =>$hotel[$i],
+        //         ];
+        //         Destinasi::create($data);
+        //     }
+        //     $destinasi = Destinasi::latest()->first();
 
-            for ($i=0; $i < count($kendaraan); $i++) {
+        //     for ($i=0; $i < count($kendaraan); $i++) {
             
-                $data = [
-                    'kendaraan_id' =>$kendaraan[$i],
-                ];
-                $destinasi->fill($data)->save();
-                $reservasi->update(['status' => 'Menunggu Konfirmasi']);
-            }
-        } elseif (count(max($hotel,$kendaraan)) === count($kendaraan)){
-            for ($i=0; $i < count($kendaraan); $i++) {
+        //         $data = [
+        //             'kendaraan_id' =>$kendaraan[$i],
+        //         ];
+        //         $destinasi->fill($data)->save();
+        //         $reservasi->update(['status' => 'Menunggu Konfirmasi']);
+        //     }
+        // } elseif (count(max($hotel,$kendaraan)) === count($kendaraan)){
+        //     for ($i=0; $i < count($kendaraan); $i++) {
             
-                $data = [
-                    'reservasi_id' => $reservasi->id,
-                    'kendaraan_id' =>$kendaraan[$i],
-                ];
-                Destinasi::create($data);
-            }
-            $destinasi = Destinasi::latest()->first();
+        //         $data = [
+        //             'reservasi_id' => $reservasi->id,
+        //             'kendaraan_id' =>$kendaraan[$i],
+        //         ];
+        //         Destinasi::create($data);
+        //     }
+        //     $destinasi = Destinasi::latest()->first();
 
-            for ($i=0; $i < count($hotel); $i++) {
+        //     for ($i=0; $i < count($hotel); $i++) {
             
-                $data = [
-                    'hotel_id' =>$hotel[$i],
-                ];
-                $destinasi->fill($data)->save();
-                $reservasi->update(['status' => 'Menunggu Konfirmasi']);
-            }
-        } else {
-            for ($i=0; $i < count(max($hotel,$kendaraan)); $i++) {
+        //         $data = [
+        //             'hotel_id' =>$hotel[$i],
+        //         ];
+        //         $destinasi->fill($data)->save();
+        //         $reservasi->update(['status' => 'Menunggu Konfirmasi']);
+        //     }
+        // } else {
+            for ($i=0; $i < count($hotel); $i++) {
                 $data = [
                     'reservasi_id' => $reservasi->id,
                     'hotel_id' =>$hotel[$i],
                     'kendaraan_id' => $kendaraan[$i],
                 ];
                 Destinasi::create($data);
-                $reservasi->update(['status' => 'Menunggu Konfirmasi']);
             }
-        }
+            $reservasi->update(['status' => 'Menunggu Konfirmasi']);
 
         return to_route('reservasi.create');
     }

@@ -26,42 +26,49 @@
                         <a href="{{ asset('frontend/images/destinasi/bali.png') }}">
                             <img src="{{ asset('frontend/images/destinasi/bali.png') }}" alt="" />
                         </a>
+                        <h5 class="text-center title mt-4">Bali</h5>
                     </div>
 
                     <div class="item">
                         <a href="{{ asset('frontend/images/destinasi/monas.png') }}">
                             <img src="{{ asset('frontend/images/destinasi/monas.png') }}" alt="" />
                         </a>
+                        <h5 class="text-center title mt-4">Jakarta</h5>
                     </div>
 
                     <div class="item">
                         <a href="{{ asset('frontend/images/destinasi/sumbar.png') }}">
                             <img src="{{ asset('frontend/images/destinasi/sumbar.png') }}" alt="" />
                         </a>
+                        <h5 class="text-center title mt-4">Sumatera Barat</h5>
                     </div>
 
                     <div class="item">
                         <a href="{{ asset('frontend/images/destinasi/surabaya.png') }}">
                             <img src="{{ asset('frontend/images/destinasi/surabaya.png') }}" alt="" />
                         </a>
+                        <h5 class="text-center title mt-4">Surabaya</h5>
                     </div>
 
                     <div class="item">
                         <a href="{{ asset('frontend/images/destinasi/danautoba.png') }}">
                             <img src="{{ asset('frontend/images/destinasi/danautoba.png') }}" alt="" />
                         </a>
+                        <h5 class="text-center title mt-4">Danau Toba</h5>
                     </div>
 
                     <div class="item">
                         <a href="{{ asset('frontend/images/destinasi/perambanan.png') }}">
                             <img src="{{ asset('frontend/images/destinasi/perambanan.png') }}" alt="" />
                         </a>
+                        <h5 class="text-center title mt-4">Candi Prambanan</h5>
                     </div>
 
                     <div class="item">
                         <a href="{{ asset('frontend/images/destinasi/lombok.png') }}">
                             <img src="{{ asset('frontend/images/destinasi/lombok.png') }}" alt="" />
                         </a>
+                        <h5 class="text-center title mt-4">Lombok</h5>
                     </div>
 
                     {{-- <div class="item">

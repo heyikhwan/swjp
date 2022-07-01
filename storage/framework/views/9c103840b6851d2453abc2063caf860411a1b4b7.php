@@ -49,7 +49,7 @@
                     <ul class="nav-menu d-lg-flex flex-wrap list-unstyled justify-content-center">
 
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger active" href="#top-page">
+                            <a class="nav-link js-scroll-trigger active" href="<?php echo e(route('home')); ?>">
                                 <span>Home</span>
                             </a>
                         </li>

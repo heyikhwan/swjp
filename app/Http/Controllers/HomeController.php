@@ -16,8 +16,14 @@ class HomeController extends Controller
     public function home()
     {
         $paket = PaketWisata::get();
+        $karyawan = User::role(['guide','leader'])->get();
+        $jmlhGuide = User::role('guide')->count();
+        $jmlhLeader = User::role('leader')->count();
         return view('frontend.index',[
             'paket' => $paket,
+            'karyawan' => $karyawan,
+            'jmlhGuide' => $jmlhGuide,
+            'jmlhLeader' => $jmlhLeader,
         ]);
     }
 

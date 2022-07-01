@@ -1,19 +1,21 @@
 <?php
 
+use App\Models\Wilayah;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\HotelController;
 use App\Http\Controllers\Backend\UploadController;
 use App\Http\Controllers\Backend\WilayahController;
 use App\Http\Controllers\Backend\FeedbackController;
+use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Backend\KendaraanController;
 use App\Http\Controllers\Backend\ReservasiController;
-use App\Http\Controllers\Frontend\ReservasiController as FrontendReservasiController;
 use App\Http\Controllers\Backend\PaketWisataController;
-use App\Models\Wilayah;
+use App\Http\Controllers\Frontend\ReservasiController as FrontendReservasiController;
 
 //FRONTEND
 Route::get('/', [HomeController::class, 'home'])->name('home');
+Route::post('contact', [ContactController::class, 'sendMail'])->name('contact.sendMail');
 
 Route::middleware('auth')->group(function() {
     Route::resource('reservasi', FrontendReservasiController::class);

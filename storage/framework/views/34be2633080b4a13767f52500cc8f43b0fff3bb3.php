@@ -28,7 +28,7 @@
                     <div class="icon icon-ecommerce-bag-plus"></div>
                     <div class="counter-content res-margin">
                         <h5>
-                            <span class="number-count">982</span>
+                            <span class="number-count"><?php echo e($jmlhGuide); ?></span>
                         </h5>
                         <p>Tour Guide</p>
                     </div>
@@ -41,7 +41,7 @@
                     <div class="icon icon-basic-tablet"></div>
                     <div class="counter-content res-margin">
                         <h5>
-                            <span class="number-count">890</span>
+                            <span class="number-count"><?php echo e($jmlhLeader); ?></span>
                         </h5>
                         <p>Leaders</p>
                     </div>
