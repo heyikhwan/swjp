@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function() {
     Route::resource('reservasi', FrontendReservasiController::class);
     Route::get('reservasi/create/destinasi', [FrontendReservasiController::class, 'createDestinasi'])->name('reservasi.createDestinasi');
     Route::post('reservasi/create/destinasi/store', [FrontendReservasiController::class, 'storeDestinasi'])->name('reservasi.storeDestinasi');
+    Route::get('reservasi/success', [FrontendReservasiController::class, 'success'])->name('reservasi.success');
     Route::post('reservasi/pembayaran/{id}', [FrontendReservasiController::class, 'pembayaran'])->name('reservasi.pembayaran');
 });
 

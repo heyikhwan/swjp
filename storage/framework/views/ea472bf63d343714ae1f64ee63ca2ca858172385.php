@@ -14,7 +14,7 @@
                             <img src="<?php echo e(asset('frontend/images/logo-white.png')); ?>" alt="Naxos" data-rjs="2">
                         </p>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis non, fugit totam vel laboriosam vitae.
+                            Partner Perjalanan Terbaik Anda
                         </p>
 
                         <!-- Social links -->
@@ -90,7 +90,7 @@
 
                     <!-- Text -->
                     <p class="copyright text-center">
-                        Copyright © 2022 <a href="#" target="_blank">Naxos</a>. All Rights Reserved.
+                        Copyright © 2022 <a href="#" target="_blank">SWJP</a>. All Rights Reserved.
                     </p>
 
                 </div>

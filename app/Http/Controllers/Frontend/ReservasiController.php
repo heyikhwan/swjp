@@ -47,6 +47,11 @@ class ReservasiController extends Controller
         ]);
     }
 
+    public function show()
+    {
+        return view('frontend.reservasi.success');
+    }
+
     public function store(ReservasiRequest $request)
     {
        $data = $request->all();
@@ -128,7 +133,7 @@ class ReservasiController extends Controller
             }
             $reservasi->update(['status' => 'Menunggu Konfirmasi']);
 
-        return to_route('reservasi.create');
+        return to_route('reservasi.show');
     }
 
     public function pembayaran(Request $request, $id)

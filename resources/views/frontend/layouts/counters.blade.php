@@ -1,5 +1,5 @@
 <!-- Counters -->
-<section id="counters" class="parallax" data-image="images/parallax/counters.jpg">
+<section id="counters" class="parallax" data-image="{{ asset('frontend/images/wp.jpg') }}">
 
     <!-- Overlay -->
     <div class="overlay"></div>
